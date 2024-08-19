@@ -17,7 +17,7 @@ export interface PostTypes {
 }
 
 export interface StateDataTypes {
-  data: {
+  root: {
     data: DataTypes[];
     loading: boolean;
     error: undefined;
