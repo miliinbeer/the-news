@@ -35,6 +35,15 @@
       "link": "https://example.com/news3",
       "source": "Industry Events Magazine",
       "id": "4"
+    },
+    {
+      "id": 1724071544284,
+      "title": "Заголовок",
+      "image": "https://cdn.forbes.ru/forbes-static/new/2024/07/1a97fec5-d64b-47a2-8a18-df96b9cc13c3-668e4b6f8568e.jpg",
+      "content": "Шрек, несмотря на свою устрашающую внешность, оказывается душевным и ранимым героем, который вынужден скрывать свою истинную натуру под маской отшельника.",
+      "date": "2024-08-19",
+      "link": "https://cdn.forbes.ru/forbes-static/new/2024/07/1a97fec5-d64b-47a2-8a18-df96b9cc13c3-668e4b6f8568e.jpg",
+      "source": "cdn.forbes.ru"
     }
   ]
 }
