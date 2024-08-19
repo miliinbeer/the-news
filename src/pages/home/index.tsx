@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../app/api/index";
+import { AppDispatch, DataTypes, StateDataTypes } from "../../shared/types";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
-import { AppDispatch, DataTypes, StateDataTypes } from "../../shared/types";
+import { Loader } from "../../shared/ui/loader";
 import { Container } from "reactstrap";
-import { Cards } from "./styles";
+import { Cards, ErrorContainer, Error } from "./styles";
 
 export const Home: FunctionComponent = () => {
   const { loading, data, error } = useSelector(
@@ -18,8 +19,12 @@ export const Home: FunctionComponent = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  if (loading) return <></>;
-  if (error) return <div>Ошибка... {error}</div>;
+  if (loading) return <Loader/>;
+  if (error) return (
+    <ErrorContainer>
+      <Error>{error}</Error>
+    </ErrorContainer>
+  );
 
   return (
     <>

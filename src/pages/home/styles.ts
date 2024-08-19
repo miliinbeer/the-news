@@ -12,3 +12,19 @@ export const Cards = styled.div`
     row-gap: 10px;
   }
 `;
+
+export const ErrorContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+`;
+
+export const Error = styled.div`
+  padding: 20px;
+  border: 4px red solid;
+`;
