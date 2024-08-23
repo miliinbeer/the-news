@@ -25,7 +25,7 @@ npm install
 3. Запустите JSON Server:
 
 ```bash
-npx json-server db.json
+npm run server
 ```
 
 (Убедитесь, что файл db.json существует и содержит начальные данные.) 
