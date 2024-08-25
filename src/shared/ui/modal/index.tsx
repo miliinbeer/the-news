@@ -20,7 +20,6 @@ export const ModalWindow: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const { modal } = useSelector((state: StateDataTypes) => state.root);
-  
 
   const {
     register,
@@ -37,11 +36,11 @@ export const ModalWindow: FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <>
       <Button color="primary" onClick={() => dispatch(toggleModal(reset()))}>
         Добавить новость
       </Button>
-      <Modal isOpen={modal} toggle={() => dispatch(toggleModal())}>
+      <Modal style={{height: "90vh", display: "flex", alignItems: "center"}} isOpen={modal} toggle={() => dispatch(toggleModal())}>
         <ModalHeader toggle={() => dispatch(toggleModal())}>
           Добавить новую новость
         </ModalHeader>
@@ -74,6 +73,6 @@ export const ModalWindow: FunctionComponent = () => {
           </Form>
         </ModalBody>
       </Modal>
-    </div>
+    </>
   );
 };
