@@ -12,3 +12,13 @@ export const Image = styled.img`
   width: 50px;
   height: 50px;
 `;
+
+export const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  a {
+    text-decoration: none;
+  }
+`;
