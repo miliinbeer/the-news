@@ -6,10 +6,10 @@ import icon from "../../shared/icons/favicon.webp";
 export const HeaderWidget: FunctionComponent = () => {
   return (
     <Root>
-      <a href="/">
-        <Image src={icon} alt="icon" />
-      </a>
-      <ModalWindow />
+        <a href="/">
+          <Image src={icon} alt="icon" />
+        </a>
+        <ModalWindow />
     </Root>
   );
 };
