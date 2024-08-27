@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Root = styled.div`
-  margin: 2%;
+  padding: 1%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px rgba(0, 0, 0, 0.175) solid;
 `;
 
 export const Image = styled.img`
