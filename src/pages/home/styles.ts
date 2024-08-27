@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
+export const Main = styled.div`
+  max-width: 940px;
+  margin: 0 auto;
+`;
+
 export const Cards = styled.div`
-  margin: 25px 0;
+  margin: 20px 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 0));
-  row-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(298px, 0));
+  row-gap: 20px;
   justify-content: space-between;
-  @media (max-width: 1000px) {
+  @media (max-width: 910px) {
     justify-content: center;
     gap: 10px;
-    row-gap: 10px;
   }
 `;
 
