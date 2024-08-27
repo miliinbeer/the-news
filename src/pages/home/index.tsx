@@ -6,8 +6,7 @@ import { AppDispatch, DataTypes, StateDataTypes } from "../../shared/types";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
 import { Loader } from "../../shared/ui/loader";
-import { Container } from "reactstrap";
-import { Cards, ErrorContainer, Error } from "./styles";
+import { Main, Cards, ErrorContainer, Error } from "./styles";
 
 export const Home: FunctionComponent = () => {
   const { loading, data, error } = useSelector(
@@ -19,17 +18,18 @@ export const Home: FunctionComponent = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  if (loading) return <Loader/>;
-  if (error) return (
-    <ErrorContainer>
-      <Error>{error}</Error>
-    </ErrorContainer>
-  );
+  if (loading) return <Loader />;
+  if (error)
+    return (
+      <ErrorContainer>
+        <Error>{error}</Error>
+      </ErrorContainer>
+    );
 
   return (
     <>
       <HeaderWidget />
-      <Container className="bg-light border">
+      <Main>
         <Cards>
           {data.map((el: DataTypes) => (
             <CardWidget
@@ -44,7 +44,7 @@ export const Home: FunctionComponent = () => {
             />
           ))}
         </Cards>
-      </Container>
+      </Main>
     </>
   );
 };
