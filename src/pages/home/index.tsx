@@ -5,6 +5,7 @@ import { fetchData } from "../../app/api/index";
 import { AppDispatch, DataTypes, StateDataTypes } from "../../shared/types";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
+import { ModalWindow } from "../../shared/ui/modal";
 import { Loader } from "../../shared/ui/loader";
 import { Main, Cards, ErrorContainer, Error } from "./styles";
 
@@ -30,6 +31,7 @@ export const Home: FunctionComponent = () => {
     <>
       <HeaderWidget />
       <Main>
+        <ModalWindow />
         <Cards>
           {data.map((el: DataTypes) => (
             <CardWidget
