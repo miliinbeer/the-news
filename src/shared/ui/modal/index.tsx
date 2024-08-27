@@ -14,7 +14,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import { Inputs, Input, Errors } from "./styles";
+import { Inputs, Input, Errors, Error, Description } from "./styles";
 
 export const ModalWindow: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -38,29 +38,59 @@ export const ModalWindow: FunctionComponent = () => {
   return (
     <>
       <Button color="primary" onClick={() => dispatch(toggleModal(reset()))}>
-        Добавить новость
+        + Добавить новость
       </Button>
-      <Modal style={{height: "90vh", display: "flex", alignItems: "center"}} isOpen={modal} toggle={() => dispatch(toggleModal())}>
+      <Modal
+        style={{ height: "90vh", display: "flex", alignItems: "center" }}
+        isOpen={modal}
+        toggle={() => dispatch(toggleModal())}
+      >
         <ModalHeader toggle={() => dispatch(toggleModal())}>
           Добавить новую новость
         </ModalHeader>
         <ModalBody>
           <Form onSubmit={handleSubmit(newPost)}>
             <Inputs>
-              <Input placeholder="Заголовок" {...register("title")} />
-              <Errors>
-                {errors?.title && errors.title.message?.toString()}
-              </Errors>
-              <Input placeholder="Изображение" {...register("image")} />
-              <Errors>
-                {errors.image && errors.image.message?.toString()}
-              </Errors>
-              <Input placeholder="Контент" {...register("content")} />
-              <Errors>
-                {errors.content && errors.content.message?.toString()}
-              </Errors>
-              <Input placeholder="Ссылка" {...register("link")} />
-              <Errors>{errors.link && errors.link.message?.toString()}</Errors>
+              <div>
+                <Input placeholder="Заголовок" {...register("title")} />
+                <Errors>
+                  {errors?.title ? (
+                    <Error>{errors.title.message?.toString()}</Error>
+                  ) : (
+                    <Description>Укажите название вашей новости</Description>
+                  )}
+                </Errors>
+              </div>
+              <div>
+                <Input placeholder="Изображение" {...register("image")} />
+                <Errors>
+                  {errors.image ? (
+                    <Error>{errors.image.message?.toString()}</Error>
+                  ) : (
+                    <Description>Добавьте URL изображения</Description>
+                  )}
+                </Errors>
+              </div>
+              <div>
+                <Input placeholder="Контент" {...register("content")} />
+                <Errors>
+                  {errors.content ? (
+                    <Error>{errors.content.message?.toString()}</Error>
+                  ) : (
+                    <Description>Дайте краткое описание</Description>
+                  )}
+                </Errors>
+              </div>
+              <div>
+                <Input placeholder="Ссылка" {...register("link")} />
+                <Errors>
+                  {errors.link ? (
+                    <Error>{errors.link.message?.toString()}</Error>
+                  ) : (
+                    <Description>Укажите ссылку на новость</Description>
+                  )}
+                </Errors>
+              </div>
             </Inputs>
             <ModalFooter style={{ marginTop: "10px" }}>
               <Button color="primary" onClick={handleSubmit(newPost)}>
