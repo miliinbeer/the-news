@@ -7,7 +7,7 @@ export const GlobalStyles = styled.div`
 `;
 
 export const Container = styled.div`
-  max-width: 940px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 auto;
 `;
