@@ -33,3 +33,9 @@ export const Error = styled.div`
   padding: 20px;
   border: 4px red solid;
 `;
+
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;

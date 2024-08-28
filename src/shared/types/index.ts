@@ -1,4 +1,5 @@
-import { FieldError } from "react-hook-form";
+import { ReactElement } from "react";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { store } from "../../app/store";
 
 export type AppDispatch = typeof store.dispatch;
@@ -46,4 +47,21 @@ export interface InputProps {
   error: FieldError | undefined;
   message: string | undefined;
   description: string;
+}
+
+export interface InputTypes {
+  placeholder: string;
+  register: UseFormRegisterReturn<string>;
+  error: FieldError | undefined;
+  message: string | undefined;
+  description: string;
+}
+
+export interface ModalProps {
+  handlerModalOpen: () => void;
+  modalButtonName: string;
+  toggleModal: () => void;
+  modalTitle: string;
+  handlerAdd: () => void;
+  form: ReactElement;
 }
