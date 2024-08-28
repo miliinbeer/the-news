@@ -17,8 +17,11 @@ export const Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 5px;
+`;
+
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  a {
-    text-decoration: none;
-  }
 `;
