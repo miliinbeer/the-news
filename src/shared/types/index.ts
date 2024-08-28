@@ -1,3 +1,4 @@
+import { FieldError } from "react-hook-form";
 import { store } from "../../app/store";
 
 export type AppDispatch = typeof store.dispatch;
@@ -33,4 +34,16 @@ export interface DataTypes {
   link: string;
   date: string;
   source: string;
+}
+
+export interface InputProps {
+  placeholder: string;
+  register: {
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+    ref: React.Ref<HTMLInputElement>;
+  };
+  error: FieldError | undefined;
+  message: string | undefined;
+  description: string;
 }
