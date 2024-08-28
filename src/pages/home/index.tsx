@@ -1,19 +1,39 @@
 import React, { useEffect } from "react";
 import { FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../app/api/index";
-import { AppDispatch, DataTypes, StateDataTypes } from "../../shared/types";
+import { useForm, SubmitHandler } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../../shared/ui/modal/schema/schema";
+import { fetchData, toggleModal, requestPost } from "../../app/api/index";
+import {
+  AppDispatch,
+  DataTypes,
+  StateDataTypes,
+  InputTypes,
+} from "../../shared/types";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Loader } from "../../shared/ui/loader";
-import { Main, Cards, ErrorContainer, Error } from "./styles";
+import { InputWidget } from "../../shared/ui/input";
+import { Main, Cards, ErrorContainer, Error, Inputs } from "./styles";
 
 export const Home: FunctionComponent = () => {
   const { loading, data, error } = useSelector(
     (state: StateDataTypes) => state.root
   );
+
   const dispatch: AppDispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<yup.InferType<typeof schema>>({
+    resolver: yupResolver(schema),
+  });
 
   useEffect(() => {
     dispatch(fetchData());
@@ -27,11 +47,66 @@ export const Home: FunctionComponent = () => {
       </ErrorContainer>
     );
 
+  const inputsItems: Array<InputTypes> = [
+    {
+      placeholder: "Заголовок",
+      register: register("title"),
+      error: errors.title,
+      message: errors.title?.message?.toString(),
+      description: "Укажите название вашей новости",
+    },
+    {
+      placeholder: "Изображение",
+      register: register("image"),
+      error: errors.image,
+      message: errors.image?.message?.toString(),
+      description: "Добавьте URL изображения",
+    },
+    {
+      placeholder: "Контент",
+      register: register("content"),
+      error: errors.content,
+      message: errors.content?.message?.toString(),
+      description: "Дайте краткое описание",
+    },
+    {
+      placeholder: "Ссылка",
+      register: register("link"),
+      error: errors.link,
+      message: errors.link?.message?.toString(),
+      description: "Укажите ссылку на новость",
+    },
+  ];
+
+  const newPost: SubmitHandler<yup.InferType<typeof schema>> = (el) => {
+    dispatch(toggleModal(reset()));
+    dispatch(requestPost(el));
+  };
+
   return (
     <>
       <HeaderWidget />
       <Main>
-        <ModalWindow />
+        <ModalWindow
+          modalButtonName="+ Добавить новость"
+          modalTitle="Добавить новую новость"
+          handlerAdd={handleSubmit(newPost)}
+          handlerModalOpen={() => dispatch(toggleModal(reset()))}
+          toggleModal={() => dispatch(toggleModal())}
+          form={
+            <Inputs>
+              {inputsItems.map((el) => (
+                <InputWidget
+                  placeholder={el.placeholder}
+                  register={el.register}
+                  error={el.error}
+                  message={el.message}
+                  description={el.description}
+                />
+              ))}
+            </Inputs>
+          }
+        />
         <Cards>
           {data.map((el: DataTypes) => (
             <CardWidget
