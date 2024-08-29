@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import { ModalWindow } from "../../shared/ui/modal";
-import { InputWidget } from "../../shared/ui/input";
+import { Input } from "../../shared/ui/input";
 import { Root, Image, Buttons, Inputs } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
@@ -41,12 +41,10 @@ export const HeaderWidget: FunctionComponent = () => {
           form={
             <Inputs>
               {testArray.map((el) => (
-                <InputWidget
+                <Input
                   placeholder={el.placeholder}
                   register={el.register}
-                  error={el.error}
-                  message={el.message}
-                  description={el.description}
+                  descriptions={<></>}
                 />
               ))}
             </Inputs>
@@ -61,12 +59,10 @@ export const HeaderWidget: FunctionComponent = () => {
           form={
             <Inputs>
               {testArray.map((el) => (
-                <InputWidget
+                <Input
                   placeholder={el.placeholder}
                   register={el.register}
-                  error={el.error}
-                  message={el.message}
-                  description={el.description}
+                  descriptions={<></>}
                 />
               ))}
             </Inputs>

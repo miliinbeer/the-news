@@ -16,8 +16,10 @@ import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Loader } from "../../shared/ui/loader";
-import { InputWidget } from "../../shared/ui/input";
+import { Input } from "../../shared/ui/input";
 import { Main, Cards, ErrorContainer, Error, Inputs } from "./styles";
+
+import { Description, Descriptions, ErrorMessage } from "../../shared/ui/input/styles";
 
 export const Home: FunctionComponent = () => {
   const { loading, data, error } = useSelector(
@@ -96,12 +98,18 @@ export const Home: FunctionComponent = () => {
           form={
             <Inputs>
               {inputsItems.map((el) => (
-                <InputWidget
+                <Input
                   placeholder={el.placeholder}
                   register={el.register}
-                  error={el.error}
-                  message={el.message}
-                  description={el.description}
+                  descriptions={
+                    <Descriptions>
+                      {el.error ? (
+                        <ErrorMessage>{el.message}</ErrorMessage>
+                      ) : (
+                        <Description>{el.description}</Description>
+                      )}
+                    </Descriptions>
+                  }
                 />
               ))}
             </Inputs>

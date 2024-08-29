@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
-  width: 100%;
+export const CustomInput = styled.input`
   padding: 10px 15px;
 `;
 
-export const Errors = styled.div`
-  margin: 5px 0 5px 10px;
+export const Descriptions = styled.div`
+  margin: -5px 0 10px 10px;
   font-size: 13px;
 `;
 
-export const Error = styled.div`
+export const ErrorMessage = styled.div`
   color: red;
 `;
 
