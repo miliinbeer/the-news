@@ -44,9 +44,7 @@ export interface InputProps {
     onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
     ref: React.Ref<HTMLInputElement>;
   };
-  error: FieldError | undefined;
-  message: string | undefined;
-  description: string;
+  descriptions: ReactElement
 }
 
 export interface InputTypes {

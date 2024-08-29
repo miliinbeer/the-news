@@ -1,24 +1,16 @@
 import React, { FunctionComponent } from "react";
-import { InputProps } from "reactstrap";
-import { Input, Errors, Error, Description } from "./styles";
+import { InputProps } from "../../types";
+import { CustomInput, Descriptions, ErrorMessage, Description } from "./styles";
 
-export const InputWidget: FunctionComponent<InputProps> = ({
+export const Input: FunctionComponent<InputProps> = ({
   placeholder,
   register,
-  error,
-  message,
-  description,
+  descriptions
 }) => {
   return (
-    <div>
-      <Input placeholder={placeholder} {...register} />
-      <Errors>
-        {error ? (
-          <Error>{message}</Error>
-        ) : (
-          <Description>{description}</Description>
-        )}
-      </Errors>
-    </div>
+    <>
+      <CustomInput placeholder={placeholder} {...register} />
+      {descriptions}
+    </>
   );
 };
