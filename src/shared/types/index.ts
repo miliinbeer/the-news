@@ -8,7 +8,6 @@ export interface StateTypes {
   data: Array<Object>;
   loading: boolean;
   error: undefined | string;
-  modal: boolean;
 }
 
 export interface PostTypes {
@@ -56,10 +55,13 @@ export interface InputTypes {
 }
 
 export interface ModalProps {
+  buttonVariant: string
   handlerModalOpen: () => void;
   modalButtonName: string;
+  isOpened: any
   toggleModal: () => void;
   modalTitle: string;
   handlerAdd: () => void;
-  form: ReactElement;
+  modalForm: ReactElement;
+  modalButtons: ReactElement
 }

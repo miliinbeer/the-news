@@ -37,5 +37,5 @@ export const Error = styled.div`
 export const Inputs = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 `;

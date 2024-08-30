@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { FunctionComponent } from "react";
+import React, { useEffect, useState, FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../shared/ui/modal/schema/schema";
-import { fetchData, toggleModal, requestPost } from "../../app/api/index";
+import { fetchData, requestPost } from "../../app/api/index";
 import {
   AppDispatch,
   DataTypes,
@@ -17,25 +16,41 @@ import { CardWidget } from "../../shared/ui/card";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Loader } from "../../shared/ui/loader";
 import { Input } from "../../shared/ui/input";
-import { Main, Cards, ErrorContainer, Error, Inputs } from "./styles";
-
-import { Description, Descriptions, ErrorMessage } from "../../shared/ui/input/styles";
+import { Button } from "reactstrap";
+import { Main, Cards, ErrorContainer, Error } from "./styles";
+import {
+  Description,
+  Descriptions,
+  ErrorMessage,
+} from "../../shared/ui/input/styles";
 
 export const Home: FunctionComponent = () => {
+  const [modal, setModal] = useState(false);
+
+  const dispatch: AppDispatch = useDispatch();
+
   const { loading, data, error } = useSelector(
     (state: StateDataTypes) => state.root
   );
 
-  const dispatch: AppDispatch = useDispatch();
-
   const {
+    reset,
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<yup.InferType<typeof schema>>({
     resolver: yupResolver(schema),
   });
+
+  const newPost: SubmitHandler<yup.InferType<typeof schema>> = (el) => {
+    dispatch(requestPost(el));
+    setModal(!modal);
+  };
+
+  const toggleModal = () => {
+    setModal(!modal);
+    reset();
+  };
 
   useEffect(() => {
     dispatch(fetchData());
@@ -80,23 +95,20 @@ export const Home: FunctionComponent = () => {
     },
   ];
 
-  const newPost: SubmitHandler<yup.InferType<typeof schema>> = (el) => {
-    dispatch(toggleModal(reset()));
-    dispatch(requestPost(el));
-  };
-
   return (
     <>
       <HeaderWidget />
       <Main>
         <ModalWindow
+          buttonVariant="primary"
+          handlerModalOpen={toggleModal}
           modalButtonName="+ Добавить новость"
+          isOpened={modal}
+          toggleModal={toggleModal}
           modalTitle="Добавить новую новость"
           handlerAdd={handleSubmit(newPost)}
-          handlerModalOpen={() => dispatch(toggleModal(reset()))}
-          toggleModal={() => dispatch(toggleModal())}
-          form={
-            <Inputs>
+          modalForm={
+            <>
               {inputsItems.map((el) => (
                 <Input
                   placeholder={el.placeholder}
@@ -112,7 +124,17 @@ export const Home: FunctionComponent = () => {
                   }
                 />
               ))}
-            </Inputs>
+            </>
+          }
+          modalButtons={
+            <>
+              <Button color="primary" onClick={handleSubmit(newPost)}>
+                Добавить
+              </Button>
+              <Button color="secondary" onClick={toggleModal}>
+                Отмена
+              </Button>
+            </>
           }
         />
         <Cards>

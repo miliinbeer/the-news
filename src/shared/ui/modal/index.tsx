@@ -1,48 +1,35 @@
 import React, { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
-import { StateDataTypes, ModalProps } from "../../types/index";
+import { ModalProps } from "../../types/index";
 import {
   Button,
-  Form,
   Modal,
   ModalHeader,
   ModalBody,
+  Form,
   ModalFooter,
 } from "reactstrap";
 
 export const ModalWindow: FunctionComponent<ModalProps> = ({
+  buttonVariant,
   handlerModalOpen,
   modalButtonName,
+  isOpened,
   toggleModal,
   modalTitle,
   handlerAdd,
-  form,
+  modalForm,
+  modalButtons,
 }) => {
-  const { modal } = useSelector((state: StateDataTypes) => state.root);
-
   return (
     <>
-      <Button color="primary" onClick={handlerModalOpen}>
+      <Button color={buttonVariant} onClick={handlerModalOpen}>
         {modalButtonName}
       </Button>
-      <Modal
-        style={{ height: "90vh", display: "flex", alignItems: "center" }}
-        isOpen={modal}
-        toggle={toggleModal}
-      >
+      <Modal isOpen={isOpened} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>
         <ModalBody>
-          <Form onSubmit={handlerAdd}>
-            {form}
-            <ModalFooter style={{ marginTop: "10px" }}>
-              <Button color="primary" onClick={handlerAdd}>
-                Добавить
-              </Button>
-              <Button color="secondary" onClick={toggleModal}>
-                Отмена
-              </Button>
-            </ModalFooter>
-          </Form>
+          <Form>{modalForm}</Form>
+          <ModalFooter>{modalButtons}</ModalFooter>
         </ModalBody>
       </Modal>
     </>

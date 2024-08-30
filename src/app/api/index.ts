@@ -35,13 +35,8 @@ export const rootReducer = createSlice({
     data: [],
     loading: false,
     error: undefined,
-    modal: false,
   },
-  reducers: {
-    toggleModal: (state: StateTypes) => {
-      state.modal = !state.modal;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -67,7 +62,7 @@ export const rootReducer = createSlice({
         state.error = action.error.message;
       });
   },
-})
+});
 
 export default rootReducer.reducer;
-export const { toggleModal } = rootReducer.actions;
+export const {} = rootReducer.actions;
