@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": 1725397608486,
+      "login": "miliinwine",
+      "password": "02022000",
+      "firstname": "Милена",
+      "lastname": "Сыдыкбекова"
+    }
+  ],
   "posts": [
     {
       "title": "Заголовок новости 1",
