@@ -8,6 +8,7 @@ import { fetchUsers, requestUsers } from "../../app/api";
 import { AppDispatch, InputTypes, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Input } from "../../shared/ui/input";
+import { Avatar } from "../../shared/ui/avatar";
 import { Button } from "reactstrap";
 import {
   Root,
@@ -19,7 +20,7 @@ import {
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
-export const HeaderWidget: FunctionComponent = ({ ...props }) => {
+export const HeaderWidget: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const { user } = useSelector((state: StatePostTypes) => state.root);
@@ -119,7 +120,7 @@ export const HeaderWidget: FunctionComponent = ({ ...props }) => {
         <Image src={icon} alt="icon" />
       </a>
       {user.length > 0 ? (
-        <></>
+        <Avatar/>
       ) : (
         <Buttons>
           <ModalWindow
