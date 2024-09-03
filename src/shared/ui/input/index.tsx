@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { InputProps } from "../../types";
-import { CustomInput, Descriptions, ErrorMessage, Description } from "./styles";
+import { CustomInput } from "./styles";
 
 export const Input: FunctionComponent<InputProps> = ({
   placeholder,
@@ -9,7 +9,7 @@ export const Input: FunctionComponent<InputProps> = ({
 }) => {
   return (
     <>
-      <CustomInput placeholder={placeholder} {...register} />
+      <CustomInput placeholder={placeholder} {...register}/>
       {descriptions}
     </>
   );

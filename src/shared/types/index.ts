@@ -5,35 +5,38 @@ import { store } from "../../app/store";
 export type AppDispatch = typeof store.dispatch;
 
 export interface StateTypes {
-  data: Array<Object>;
+  post: Array<Object>;
+  user: Array<Object>
   loading: boolean;
   error: undefined | string;
 }
 
-export interface PostTypes {
-  title: string;
-  image: string;
-  content: string;
-  link: string;
-}
-
-export interface StateDataTypes {
+export interface StatePostTypes {
   root: {
-    data: DataTypes[];
+    post: PostTypes[];
+    user: UserTypes[]
     loading: boolean;
     error: undefined;
     modal: boolean;
   };
 }
 
-export interface DataTypes {
-  id: string;
+export interface PostTypes {
+  id?: string;
   image: string;
   title: string;
   content: string;
   link: string;
-  date: string;
-  source: string;
+  date?: string;
+  source?: string;
+}
+
+export interface UserTypes {
+  id?: string
+  login: string
+  password: string
+  firstname?: string
+  lastname?: string
 }
 
 export interface InputProps {
@@ -61,7 +64,6 @@ export interface ModalProps {
   isOpened: any
   toggleModal: () => void;
   modalTitle: string;
-  handlerAdd: () => void;
   modalForm: ReactElement;
-  modalButtons: ReactElement
+  modalButtons: any
 }

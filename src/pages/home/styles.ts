@@ -39,3 +39,16 @@ export const Inputs = styled.div`
   flex-direction: column;
   gap: 5px;
 `;
+
+export const Descriptions = styled.div`
+  margin: 5px 0 15px 10px;
+  font-size: 13px;
+`;
+
+export const ErrorMessage = styled.div`
+  color: red;
+`;
+
+export const Description = styled.div`
+  color: #0d6efd;
+`;

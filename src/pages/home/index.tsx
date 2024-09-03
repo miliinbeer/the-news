@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../shared/ui/modal/schema/schema";
-import { fetchData, requestPost } from "../../app/api/index";
+import { schemaPost } from "../../shared/ui/modal/schema/schema";
+import { fetchPosts, requestPosts } from "../../app/api/index";
 import {
   AppDispatch,
-  DataTypes,
-  StateDataTypes,
+  PostTypes,
+  StatePostTypes,
   InputTypes,
 } from "../../shared/types";
 import { HeaderWidget } from "../../widgets/header-widget";
@@ -17,20 +17,23 @@ import { ModalWindow } from "../../shared/ui/modal";
 import { Loader } from "../../shared/ui/loader";
 import { Input } from "../../shared/ui/input";
 import { Button } from "reactstrap";
-import { Main, Cards, ErrorContainer, Error } from "./styles";
 import {
+  Main,
+  Cards,
+  ErrorContainer,
+  Error,
   Description,
   Descriptions,
   ErrorMessage,
-} from "../../shared/ui/input/styles";
+} from "./styles";
 
 export const Home: FunctionComponent = () => {
-  const [modal, setModal] = useState(false);
+  const [addPostModal, setAddPostModal] = useState(false);
 
   const dispatch: AppDispatch = useDispatch();
 
-  const { loading, data, error } = useSelector(
-    (state: StateDataTypes) => state.root
+  const { post, loading, error } = useSelector(
+    (state: StatePostTypes) => state.root
   );
 
   const {
@@ -38,22 +41,22 @@ export const Home: FunctionComponent = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<yup.InferType<typeof schema>>({
-    resolver: yupResolver(schema),
+  } = useForm<yup.InferType<typeof schemaPost>>({
+    resolver: yupResolver(schemaPost),
   });
 
-  const newPost: SubmitHandler<yup.InferType<typeof schema>> = (el) => {
-    dispatch(requestPost(el));
-    setModal(!modal);
-  };
-
   const toggleModal = () => {
-    setModal(!modal);
+    setAddPostModal(!addPostModal);
     reset();
   };
 
+  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = (el) => {
+    dispatch(requestPosts(el));
+    setAddPostModal(!addPostModal);
+  };
+
   useEffect(() => {
-    dispatch(fetchData());
+    dispatch(fetchPosts());
   }, [dispatch]);
 
   if (loading) return <Loader />;
@@ -70,7 +73,7 @@ export const Home: FunctionComponent = () => {
       register: register("title"),
       error: errors.title,
       message: errors.title?.message?.toString(),
-      description: "Укажите название вашей новости",
+      description: "Ввведите название вашей новости",
     },
     {
       placeholder: "Изображение",
@@ -84,14 +87,14 @@ export const Home: FunctionComponent = () => {
       register: register("content"),
       error: errors.content,
       message: errors.content?.message?.toString(),
-      description: "Дайте краткое описание",
+      description: "Введите краткое описание новости",
     },
     {
       placeholder: "Ссылка",
       register: register("link"),
       error: errors.link,
       message: errors.link?.message?.toString(),
-      description: "Укажите ссылку на новость",
+      description: "Добавьте ссылку на новость",
     },
   ];
 
@@ -103,10 +106,9 @@ export const Home: FunctionComponent = () => {
           buttonVariant="primary"
           handlerModalOpen={toggleModal}
           modalButtonName="+ Добавить новость"
-          isOpened={modal}
+          isOpened={addPostModal}
           toggleModal={toggleModal}
           modalTitle="Добавить новую новость"
-          handlerAdd={handleSubmit(newPost)}
           modalForm={
             <>
               {inputsItems.map((el) => (
@@ -128,7 +130,7 @@ export const Home: FunctionComponent = () => {
           }
           modalButtons={
             <>
-              <Button color="primary" onClick={handleSubmit(newPost)}>
+              <Button color="primary" onClick={handleSubmit(addPost)}>
                 Добавить
               </Button>
               <Button color="secondary" onClick={toggleModal}>
@@ -138,7 +140,7 @@ export const Home: FunctionComponent = () => {
           }
         />
         <Cards>
-          {data.map((el: DataTypes) => (
+          {post.map((el: PostTypes) => (
             <CardWidget
               key={el.id}
               id={el.id}

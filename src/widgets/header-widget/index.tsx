@@ -1,44 +1,117 @@
-import React, { FunctionComponent, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "./schema";
+import { schemaUser } from "../../shared/ui/modal/schema/schema";
+import { fetchUsers, requestUsers } from "../../app/api";
+import { AppDispatch, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Input } from "../../shared/ui/input";
 import { Button } from "reactstrap";
-import { Root, Image, Buttons, Inputs } from "./styles";
 import {
+  Root,
+  Image,
+  Buttons,
   Descriptions,
-  ErrorMessage,
   Description,
-} from "../../shared/ui/input/styles";
+  ErrorMessage,
+} from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
 export const HeaderWidget: FunctionComponent = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const { user } = useSelector((state: StatePostTypes) => state.root);
+
+  const [entranceModal, setEntranceModal] = useState(false);
+  const [registrationModal, setRegistartionModal] = useState(false);
+
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<yup.InferType<typeof schema>>({
-    resolver: yupResolver(schema),
+  } = useForm<yup.InferType<typeof schemaUser>>({
+    resolver: yupResolver(schemaUser),
   });
 
-  const testArray: Array<any> = [
-    {
-      placeholder: "Введите имя",
-      register: register("name"),
-      error: errors.name,
-      message: errors.name?.message?.toString(),
-      description: "Введите ваше имя",
-    },
-  ];
-  const [modal, setModal] = useState(false);
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const loginToAccount: SubmitHandler<yup.InferType<typeof schemaUser>> = (
+    el
+  ) => {
+    console.log(el);
+    dispatch(requestUsers(el));
+    setEntranceModal(!entranceModal);
+  };
+
+  const toggleRegistrationModal = () => {
+    setRegistartionModal(!registrationModal);
     reset();
   };
+
+  const toggleEntranceModal = () => {
+    setEntranceModal(!entranceModal);
+    reset();
+  };
+
+  const registrationToAccount: SubmitHandler<
+    yup.InferType<typeof schemaUser>
+  > = (el) => {
+    dispatch(requestUsers(el));
+    setRegistartionModal(!registrationModal);
+  };
+
+  const entranceArray: Array<any> = [
+    {
+      placeholder: "Логин",
+      register: register("login"),
+      error: errors.login,
+      message: errors.login?.message?.toString(),
+      description: "Введите ваш логин",
+    },
+    {
+      placeholder: "Пароль",
+      register: register("password"),
+      error: errors.password,
+      message: errors.password?.message?.toString(),
+      description: "Введите пароль",
+    },
+  ];
+
+  const registrationArray: Array<any> = [
+    {
+      placeholder: "Логин",
+      register: register("login"),
+      error: errors.login,
+      message: errors.login?.message?.toString(),
+      description: "Введите ваш логин",
+    },
+    {
+      placeholder: "Пароль",
+      register: register("password"),
+      error: errors.password,
+      message: errors.password?.message?.toString(),
+      description: "Введите пароль",
+    },
+    {
+      placeholder: "Имя",
+      register: register("firstname"),
+      error: errors.firstname,
+      message: errors.firstname?.message?.toString(),
+      description: "Введите ваше имя",
+    },
+    {
+      placeholder: "Фамилия",
+      register: register("lastname"),
+      error: errors.lastname,
+      message: errors.lastname?.message?.toString(),
+      description: "Введите вашу фамилию",
+    },
+  ];
 
   return (
     <Root>
@@ -48,15 +121,14 @@ export const HeaderWidget: FunctionComponent = () => {
       <Buttons>
         <ModalWindow
           buttonVariant="link"
-          handlerModalOpen={toggleModal}
+          handlerModalOpen={toggleEntranceModal}
           modalButtonName="Вход"
-          isOpened={modal}
-          toggleModal={toggleModal}
-          modalTitle="Укажите ваше имя"
-          handlerAdd={() => {}}
+          isOpened={entranceModal}
+          toggleModal={toggleEntranceModal}
+          modalTitle="Вход"
           modalForm={
             <>
-              {testArray.map((el) => (
+              {entranceArray.map((el) => (
                 <Input
                   placeholder={el.placeholder}
                   register={el.register}
@@ -75,10 +147,10 @@ export const HeaderWidget: FunctionComponent = () => {
           }
           modalButtons={
             <>
-              <Button color="primary" onClick={() => {}}>
+              <Button color="primary" onClick={handleSubmit(loginToAccount)}>
                 Добавить
               </Button>
-              <Button color="secondary" onClick={toggleModal}>
+              <Button color="secondary" onClick={toggleEntranceModal}>
                 Отмена
               </Button>
             </>
@@ -86,15 +158,14 @@ export const HeaderWidget: FunctionComponent = () => {
         />
         <ModalWindow
           buttonVariant="primary"
-          handlerModalOpen={toggleModal}
+          handlerModalOpen={toggleRegistrationModal}
           modalButtonName="Регистрация"
-          isOpened={modal}
-          toggleModal={toggleModal}
-          modalTitle="Укажите ваше имя"
-          handlerAdd={() => {}}
+          isOpened={registrationModal}
+          toggleModal={toggleRegistrationModal}
+          modalTitle="Регистрация"
           modalForm={
             <>
-              {testArray.map((el) => (
+              {registrationArray.map((el) => (
                 <Input
                   placeholder={el.placeholder}
                   register={el.register}
@@ -113,10 +184,13 @@ export const HeaderWidget: FunctionComponent = () => {
           }
           modalButtons={
             <>
-              <Button color="primary" onClick={() => {}}>
+              <Button
+                color="primary"
+                onClick={handleSubmit(registrationToAccount)}
+              >
                 Добавить
               </Button>
-              <Button color="secondary" onClick={toggleModal}>
+              <Button color="secondary" onClick={toggleRegistrationModal}>
                 Отмена
               </Button>
             </>

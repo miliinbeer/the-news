@@ -16,7 +16,6 @@ export const ModalWindow: FunctionComponent<ModalProps> = ({
   isOpened,
   toggleModal,
   modalTitle,
-  handlerAdd,
   modalForm,
   modalButtons,
 }) => {
@@ -28,7 +27,7 @@ export const ModalWindow: FunctionComponent<ModalProps> = ({
       <Modal isOpen={isOpened} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>
         <ModalBody>
-          <Form>{modalForm}</Form>
+          <>{modalForm}</>
           <ModalFooter>{modalButtons}</ModalFooter>
         </ModalBody>
       </Modal>
