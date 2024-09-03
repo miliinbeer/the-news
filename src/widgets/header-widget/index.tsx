@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaUser } from "../../shared/ui/modal/schema/schema";
 import { fetchUsers, requestUsers } from "../../app/api";
-import { AppDispatch, StatePostTypes } from "../../shared/types";
+import { AppDispatch, InputTypes, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Input } from "../../shared/ui/input";
 import { Button } from "reactstrap";
@@ -19,7 +19,7 @@ import {
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
-export const HeaderWidget: FunctionComponent = () => {
+export const HeaderWidget: FunctionComponent = ({ ...props }) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { user } = useSelector((state: StatePostTypes) => state.root);
@@ -65,7 +65,7 @@ export const HeaderWidget: FunctionComponent = () => {
     setRegistartionModal(!registrationModal);
   };
 
-  const entranceArray: Array<any> = [
+  const entranceArray: Array<InputTypes> = [
     {
       placeholder: "Логин",
       register: register("login"),
@@ -82,7 +82,7 @@ export const HeaderWidget: FunctionComponent = () => {
     },
   ];
 
-  const registrationArray: Array<any> = [
+  const registrationArray: Array<InputTypes> = [
     {
       placeholder: "Логин",
       register: register("login"),
@@ -118,85 +118,89 @@ export const HeaderWidget: FunctionComponent = () => {
       <a href="/">
         <Image src={icon} alt="icon" />
       </a>
-      <Buttons>
-        <ModalWindow
-          buttonVariant="link"
-          handlerModalOpen={toggleEntranceModal}
-          modalButtonName="Вход"
-          isOpened={entranceModal}
-          toggleModal={toggleEntranceModal}
-          modalTitle="Вход"
-          modalForm={
-            <>
-              {entranceArray.map((el) => (
-                <Input
-                  placeholder={el.placeholder}
-                  register={el.register}
-                  descriptions={
-                    <Descriptions>
-                      {el.error ? (
-                        <ErrorMessage>{el.message}</ErrorMessage>
-                      ) : (
-                        <Description>{el.description}</Description>
-                      )}
-                    </Descriptions>
-                  }
-                />
-              ))}
-            </>
-          }
-          modalButtons={
-            <>
-              <Button color="primary" onClick={handleSubmit(loginToAccount)}>
-                Добавить
-              </Button>
-              <Button color="secondary" onClick={toggleEntranceModal}>
-                Отмена
-              </Button>
-            </>
-          }
-        />
-        <ModalWindow
-          buttonVariant="primary"
-          handlerModalOpen={toggleRegistrationModal}
-          modalButtonName="Регистрация"
-          isOpened={registrationModal}
-          toggleModal={toggleRegistrationModal}
-          modalTitle="Регистрация"
-          modalForm={
-            <>
-              {registrationArray.map((el) => (
-                <Input
-                  placeholder={el.placeholder}
-                  register={el.register}
-                  descriptions={
-                    <Descriptions>
-                      {el.error ? (
-                        <ErrorMessage>{el.message}</ErrorMessage>
-                      ) : (
-                        <Description>{el.description}</Description>
-                      )}
-                    </Descriptions>
-                  }
-                />
-              ))}
-            </>
-          }
-          modalButtons={
-            <>
-              <Button
-                color="primary"
-                onClick={handleSubmit(registrationToAccount)}
-              >
-                Добавить
-              </Button>
-              <Button color="secondary" onClick={toggleRegistrationModal}>
-                Отмена
-              </Button>
-            </>
-          }
-        />
-      </Buttons>
+      {user.length > 0 ? (
+        <></>
+      ) : (
+        <Buttons>
+          <ModalWindow
+            buttonVariant="link"
+            handlerModalOpen={toggleEntranceModal}
+            modalButtonName="Вход"
+            isOpened={entranceModal}
+            toggleModal={toggleEntranceModal}
+            modalTitle="Вход"
+            modalForm={
+              <>
+                {entranceArray.map((el) => (
+                  <Input
+                    placeholder={el.placeholder}
+                    register={el.register}
+                    descriptions={
+                      <Descriptions>
+                        {el.error ? (
+                          <ErrorMessage>{el.message}</ErrorMessage>
+                        ) : (
+                          <Description>{el.description}</Description>
+                        )}
+                      </Descriptions>
+                    }
+                  />
+                ))}
+              </>
+            }
+            modalButtons={
+              <>
+                <Button color="primary" onClick={handleSubmit(loginToAccount)}>
+                  Добавить
+                </Button>
+                <Button color="secondary" onClick={toggleEntranceModal}>
+                  Отмена
+                </Button>
+              </>
+            }
+          />
+          <ModalWindow
+            buttonVariant="primary"
+            handlerModalOpen={toggleRegistrationModal}
+            modalButtonName="Регистрация"
+            isOpened={registrationModal}
+            toggleModal={toggleRegistrationModal}
+            modalTitle="Регистрация"
+            modalForm={
+              <>
+                {registrationArray.map((el) => (
+                  <Input
+                    placeholder={el.placeholder}
+                    register={el.register}
+                    descriptions={
+                      <Descriptions>
+                        {el.error ? (
+                          <ErrorMessage>{el.message}</ErrorMessage>
+                        ) : (
+                          <Description>{el.description}</Description>
+                        )}
+                      </Descriptions>
+                    }
+                  />
+                ))}
+              </>
+            }
+            modalButtons={
+              <>
+                <Button
+                  color="primary"
+                  onClick={handleSubmit(registrationToAccount)}
+                >
+                  Добавить
+                </Button>
+                <Button color="secondary" onClick={toggleRegistrationModal}>
+                  Отмена
+                </Button>
+              </>
+            }
+          />
+        </Buttons>
+      )}
     </Root>
   );
 };
