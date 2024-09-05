@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { store } from "../../app/store";
+import { OffcanvasPlacement } from "react-bootstrap/esm/Offcanvas";
 
 export type AppDispatch = typeof store.dispatch;
 
@@ -66,4 +67,15 @@ export interface ModalProps {
   modalTitle: string;
   modalForm: ReactElement;
   modalButtons: any
+}
+
+export interface CanvasProps{
+  showCanvas: boolean;
+  handlerHide: () => void;
+  placement: OffcanvasPlacement;
+  exitButton: ReactElement;
+}
+
+export interface AvatarProps{
+  handleAvatar?: () => void;
 }
