@@ -1,4 +1,8 @@
-import React, { useEffect, useState, FunctionComponent } from "react";
+import React, {
+  useEffect,
+  useState,
+  FunctionComponent,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
@@ -28,9 +32,9 @@ import {
 } from "./styles";
 
 export const Home: FunctionComponent = () => {
-  const [addPostModal, setAddPostModal] = useState(false);
-
   const dispatch: AppDispatch = useDispatch();
+
+  const [addPostModal, setAddPostModal] = useState(false);
 
   const { post, loading, error } = useSelector(
     (state: StatePostTypes) => state.root
@@ -45,19 +49,19 @@ export const Home: FunctionComponent = () => {
     resolver: yupResolver(schemaPost),
   });
 
-  const toggleModal = () => {
-    setAddPostModal(!addPostModal);
-    reset();
-  };
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
 
   const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = (el) => {
     dispatch(requestPosts(el));
     setAddPostModal(!addPostModal);
   };
 
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+  const toggleModal = () => {
+    setAddPostModal(!addPostModal);
+    reset();
+  };
 
   if (loading) return <Loader />;
   if (error)

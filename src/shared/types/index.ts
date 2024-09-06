@@ -7,7 +7,7 @@ export type AppDispatch = typeof store.dispatch;
 
 export interface StateTypes {
   post: Array<Object>;
-  user: Array<Object>
+  user: Array<Object>;
   loading: boolean;
   error: undefined | string;
 }
@@ -15,7 +15,7 @@ export interface StateTypes {
 export interface StatePostTypes {
   root: {
     post: PostTypes[];
-    user: UserTypes[]
+    user: UserTypes[];
     loading: boolean;
     error: undefined;
     modal: boolean;
@@ -33,11 +33,11 @@ export interface PostTypes {
 }
 
 export interface UserTypes {
-  id?: string
-  login: string
-  password: string
-  firstname?: string
-  lastname?: string
+  id?: string;
+  login: string;
+  password: string;
+  firstname?: string;
+  lastname?: string;
 }
 
 export interface InputProps {
@@ -47,7 +47,7 @@ export interface InputProps {
     onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
     ref: React.Ref<HTMLInputElement>;
   };
-  descriptions: ReactElement
+  descriptions: ReactElement;
 }
 
 export interface InputTypes {
@@ -59,23 +59,23 @@ export interface InputTypes {
 }
 
 export interface ModalProps {
-  buttonVariant: string
+  buttonVariant: string;
   handlerModalOpen: () => void;
   modalButtonName: string;
-  isOpened: any
+  isOpened: any;
   toggleModal: () => void;
   modalTitle: string;
   modalForm: ReactElement;
-  modalButtons: any
+  modalButtons: any;
 }
 
-export interface CanvasProps{
+export interface CanvasProps {
   showCanvas: boolean;
   handlerHide: () => void;
   placement: OffcanvasPlacement;
   exitButton: ReactElement;
 }
 
-export interface AvatarProps{
+export interface AvatarProps {
   handleAvatar?: () => void;
 }

@@ -9,6 +9,7 @@ import { AppDispatch, InputTypes, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Input } from "../../shared/ui/input";
 import { Avatar } from "../../shared/ui/avatar";
+import { Canvas } from "../../shared/ui/canvas";
 import { Button } from "reactstrap";
 import {
   Root,
@@ -19,7 +20,6 @@ import {
   ErrorMessage,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
-import { Canvas } from "../../shared/ui/canvas";
 
 export const HeaderWidget: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -29,7 +29,6 @@ export const HeaderWidget: FunctionComponent = () => {
   const [entranceModal, setEntranceModal] = useState(false);
   const [registrationModal, setRegistartionModal] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
-
   const [userPanel, setUserPanel] = useState(true);
 
   const {
@@ -48,9 +47,15 @@ export const HeaderWidget: FunctionComponent = () => {
   const loginToAccount: SubmitHandler<yup.InferType<typeof schemaUser>> = (
     el
   ) => {
-    console.log(el);
     dispatch(requestUsers(el));
     setEntranceModal(!entranceModal);
+  };
+
+  const registrationToAccount: SubmitHandler<
+    yup.InferType<typeof schemaUser>
+  > = (el) => {
+    dispatch(requestUsers(el));
+    setRegistartionModal(!registrationModal);
   };
 
   const toggleRegistrationModal = () => {
@@ -61,17 +66,6 @@ export const HeaderWidget: FunctionComponent = () => {
   const toggleEntranceModal = () => {
     setEntranceModal(!entranceModal);
     reset();
-  };
-
-  const toggleUserPanel = () => {
-    setUserPanel(!userPanel);
-  };
-
-  const registrationToAccount: SubmitHandler<
-    yup.InferType<typeof schemaUser>
-  > = (el) => {
-    dispatch(requestUsers(el));
-    setRegistartionModal(!registrationModal);
   };
 
   const entranceArray: Array<InputTypes> = [
@@ -137,7 +131,10 @@ export const HeaderWidget: FunctionComponent = () => {
                 handlerHide={() => setShowCanvas(false)}
                 placement="end"
                 exitButton={
-                  <Button color="primary" onClick={toggleUserPanel}>
+                  <Button
+                    color="primary"
+                    onClick={() => setUserPanel(!userPanel)}
+                  >
                     Выход
                   </Button>
                 }
