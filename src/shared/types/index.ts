@@ -40,19 +40,9 @@ export interface UserTypes {
   lastname?: string;
 }
 
-export interface InputProps {
-  placeholder: string;
-  register: {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-    ref: React.Ref<HTMLInputElement>;
-  };
-  descriptions: ReactElement;
-}
-
 export interface InputTypes {
   placeholder: string;
-  register: UseFormRegisterReturn<string>;
+  register: string
   error: FieldError | undefined;
   message: string | undefined;
   description: string;

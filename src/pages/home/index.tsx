@@ -1,8 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  FunctionComponent,
-} from "react";
+import React, { useEffect, useState, FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
@@ -19,7 +15,6 @@ import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
 import { ModalWindow } from "../../shared/ui/modal";
 import { Loader } from "../../shared/ui/loader";
-import { Input } from "../../shared/ui/input";
 import { Button } from "reactstrap";
 import {
   Main,
@@ -29,12 +24,14 @@ import {
   Description,
   Descriptions,
   ErrorMessage,
+  Input,
 } from "./styles";
 
 export const Home: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [addPostModal, setAddPostModal] = useState(false);
+  const [value, setValue] = useState<string[]>(Array(""));
 
   const { post, loading, error } = useSelector(
     (state: StatePostTypes) => state.root
@@ -74,33 +71,40 @@ export const Home: FunctionComponent = () => {
   const inputsItems: Array<InputTypes> = [
     {
       placeholder: "Заголовок",
-      register: register("title"),
+      register: "title",
       error: errors.title,
       message: errors.title?.message?.toString(),
       description: "Ввведите название вашей новости",
     },
     {
       placeholder: "Изображение",
-      register: register("image"),
+      register: "image",
       error: errors.image,
       message: errors.image?.message?.toString(),
       description: "Добавьте URL изображения",
     },
     {
       placeholder: "Контент",
-      register: register("content"),
+      register: "content",
       error: errors.content,
       message: errors.content?.message?.toString(),
       description: "Введите краткое описание новости",
     },
     {
       placeholder: "Ссылка",
-      register: register("link"),
+      register: "link",
       error: errors.link,
       message: errors.link?.message?.toString(),
       description: "Добавьте ссылку на новость",
     },
   ];
+
+  const handlerInput =
+    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValues = [...value];
+      newValues[index] = event.target.value.trim();
+      setValue(newValues);
+    };
 
   return (
     <>
@@ -115,20 +119,25 @@ export const Home: FunctionComponent = () => {
           modalTitle="Добавить новую новость"
           modalForm={
             <>
-              {inputsItems.map((el) => (
-                <Input
-                  placeholder={el.placeholder}
-                  register={el.register}
-                  descriptions={
-                    <Descriptions>
-                      {el.error ? (
-                        <ErrorMessage>{el.message}</ErrorMessage>
-                      ) : (
-                        <Description>{el.description}</Description>
-                      )}
-                    </Descriptions>
-                  }
-                />
+              {inputsItems.map((el: any, i) => (
+                <>
+                  <Input
+                    key={i}
+                    id={el.placeholder}
+                    value={value[i]}
+                    placeholder={el.placeholder}
+                    {...register(el.register, {
+                      onChange: handlerInput(i),
+                    })}
+                  />
+                  <Descriptions>
+                    {el.error ? (
+                      <ErrorMessage>{el.message}</ErrorMessage>
+                    ) : (
+                      <Description>{el.description}</Description>
+                    )}
+                  </Descriptions>
+                </>
               ))}
             </>
           }

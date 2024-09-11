@@ -38,3 +38,8 @@ export const ErrorMessage = styled.div`
 export const Description = styled.div`
   color: #0d6efd;
 `;
+
+export const Input = styled.input`
+  padding: 10px 15px;
+  width: 100%;
+`;

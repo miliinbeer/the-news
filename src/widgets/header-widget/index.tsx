@@ -1,4 +1,8 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, {
+  FunctionComponent,
+  useEffect,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -7,7 +11,6 @@ import { schemaUser } from "../../shared/ui/modal/schema/schema";
 import { fetchUsers, requestUsers } from "../../app/api";
 import { AppDispatch, InputTypes, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui/modal";
-import { Input } from "../../shared/ui/input";
 import { Avatar } from "../../shared/ui/avatar";
 import { Canvas } from "../../shared/ui/canvas";
 import { Button } from "reactstrap";
@@ -18,6 +21,7 @@ import {
   Descriptions,
   Description,
   ErrorMessage,
+  Input
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
@@ -30,6 +34,7 @@ export const HeaderWidget: FunctionComponent = () => {
   const [registrationModal, setRegistartionModal] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
   const [userPanel, setUserPanel] = useState(true);
+  const [value, setValue] = useState<string[]>(Array(""));
 
   const {
     reset,
@@ -68,17 +73,28 @@ export const HeaderWidget: FunctionComponent = () => {
     reset();
   };
 
+  const closeUserPanel = () => {
+    setUserPanel(!userPanel);
+  };
+
+  const handlerInput =
+    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = [...value];
+      newValue[index] = event.target.value.trim();
+      setValue(newValue);
+    };
+
   const entranceArray: Array<InputTypes> = [
     {
       placeholder: "Логин",
-      register: register("login"),
+      register: "login",
       error: errors.login,
       message: errors.login?.message?.toString(),
       description: "Введите ваш логин",
     },
     {
       placeholder: "Пароль",
-      register: register("password"),
+      register: "password",
       error: errors.password,
       message: errors.password?.message?.toString(),
       description: "Введите пароль",
@@ -88,28 +104,28 @@ export const HeaderWidget: FunctionComponent = () => {
   const registrationArray: Array<InputTypes> = [
     {
       placeholder: "Логин",
-      register: register("login"),
+      register: "login",
       error: errors.login,
       message: errors.login?.message?.toString(),
       description: "Введите ваш логин",
     },
     {
       placeholder: "Пароль",
-      register: register("password"),
+      register: "password",
       error: errors.password,
       message: errors.password?.message?.toString(),
       description: "Введите пароль",
     },
     {
       placeholder: "Имя",
-      register: register("firstname"),
+      register: "firstname",
       error: errors.firstname,
       message: errors.firstname?.message?.toString(),
       description: "Введите ваше имя",
     },
     {
       placeholder: "Фамилия",
-      register: register("lastname"),
+      register: "lastname",
       error: errors.lastname,
       message: errors.lastname?.message?.toString(),
       description: "Введите вашу фамилию",
@@ -131,10 +147,7 @@ export const HeaderWidget: FunctionComponent = () => {
                 handlerHide={() => setShowCanvas(false)}
                 placement="end"
                 exitButton={
-                  <Button
-                    color="primary"
-                    onClick={() => setUserPanel(!userPanel)}
-                  >
+                  <Button color="primary" onClick={closeUserPanel}>
                     Выход
                   </Button>
                 }
@@ -151,20 +164,25 @@ export const HeaderWidget: FunctionComponent = () => {
                 modalTitle="Вход"
                 modalForm={
                   <>
-                    {entranceArray.map((el) => (
-                      <Input
-                        placeholder={el.placeholder}
-                        register={el.register}
-                        descriptions={
-                          <Descriptions>
-                            {el.error ? (
-                              <ErrorMessage>{el.message}</ErrorMessage>
-                            ) : (
-                              <Description>{el.description}</Description>
-                            )}
-                          </Descriptions>
-                        }
-                      />
+                    {entranceArray.map((el: any, i) => (
+                      <>
+                        <Input
+                          key={i}
+                          id={el.placeholder}
+                          value={value[i]}
+                          placeholder={el.placeholder}
+                          {...register(el.register, {
+                            onChange: handlerInput(i),
+                          })}
+                        />
+                        <Descriptions>
+                          {el.error ? (
+                            <ErrorMessage>{el.message}</ErrorMessage>
+                          ) : (
+                            <Description>{el.description}</Description>
+                          )}
+                        </Descriptions>
+                      </>
                     ))}
                   </>
                 }
@@ -191,20 +209,25 @@ export const HeaderWidget: FunctionComponent = () => {
                 modalTitle="Регистрация"
                 modalForm={
                   <>
-                    {registrationArray.map((el) => (
-                      <Input
-                        placeholder={el.placeholder}
-                        register={el.register}
-                        descriptions={
-                          <Descriptions>
-                            {el.error ? (
-                              <ErrorMessage>{el.message}</ErrorMessage>
-                            ) : (
-                              <Description>{el.description}</Description>
-                            )}
-                          </Descriptions>
-                        }
-                      />
+                    {registrationArray.map((el: any, i) => (
+                      <>
+                        <Input
+                          key={i}
+                          id={el.placeholder}
+                          value={value[i]}
+                          placeholder={el.placeholder}
+                          {...register(el.register, {
+                            onChange: handlerInput(i),
+                          })}
+                        />
+                        <Descriptions>
+                          {el.error ? (
+                            <ErrorMessage>{el.message}</ErrorMessage>
+                          ) : (
+                            <Description>{el.description}</Description>
+                          )}
+                        </Descriptions>
+                      </>
                     ))}
                   </>
                 }
@@ -236,20 +259,25 @@ export const HeaderWidget: FunctionComponent = () => {
             modalTitle="Вход"
             modalForm={
               <>
-                {entranceArray.map((el) => (
-                  <Input
-                    placeholder={el.placeholder}
-                    register={el.register}
-                    descriptions={
-                      <Descriptions>
-                        {el.error ? (
-                          <ErrorMessage>{el.message}</ErrorMessage>
-                        ) : (
-                          <Description>{el.description}</Description>
-                        )}
-                      </Descriptions>
-                    }
-                  />
+                {entranceArray.map((el: any, i) => (
+                  <>
+                    <Input
+                      key={i}
+                      id={el.placeholder}
+                      value={value[i]}
+                      placeholder={el.placeholder}
+                      {...register(el.register, {
+                        onChange: handlerInput(i),
+                      })}
+                    />
+                    <Descriptions>
+                      {el.error ? (
+                        <ErrorMessage>{el.message}</ErrorMessage>
+                      ) : (
+                        <Description>{el.description}</Description>
+                      )}
+                    </Descriptions>
+                  </>
                 ))}
               </>
             }
@@ -273,20 +301,25 @@ export const HeaderWidget: FunctionComponent = () => {
             modalTitle="Регистрация"
             modalForm={
               <>
-                {registrationArray.map((el) => (
-                  <Input
-                    placeholder={el.placeholder}
-                    register={el.register}
-                    descriptions={
-                      <Descriptions>
-                        {el.error ? (
-                          <ErrorMessage>{el.message}</ErrorMessage>
-                        ) : (
-                          <Description>{el.description}</Description>
-                        )}
-                      </Descriptions>
-                    }
-                  />
+                {registrationArray.map((el: any, i) => (
+                  <>
+                    <Input
+                      key={i}
+                      id={el.placeholder}
+                      value={value[i]}
+                      placeholder={el.placeholder}
+                      {...register(el.register, {
+                        onChange: handlerInput(i),
+                      })}
+                    />
+                    <Descriptions>
+                      {el.error ? (
+                        <ErrorMessage>{el.message}</ErrorMessage>
+                      ) : (
+                        <Description>{el.description}</Description>
+                      )}
+                    </Descriptions>
+                  </>
                 ))}
               </>
             }
