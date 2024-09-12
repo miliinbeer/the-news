@@ -1,6 +1,6 @@
 import React, { useEffect, useState, FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaPost } from "../../shared/ui/modal/schema/schema";
@@ -31,7 +31,6 @@ export const Home: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [addPostModal, setAddPostModal] = useState(false);
-  const [value, setValue] = useState<string[]>(Array(""));
 
   const { post, loading, error } = useSelector(
     (state: StatePostTypes) => state.root
@@ -39,7 +38,7 @@ export const Home: FunctionComponent = () => {
 
   const {
     reset,
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<yup.InferType<typeof schemaPost>>({
@@ -68,44 +67,6 @@ export const Home: FunctionComponent = () => {
       </ErrorContainer>
     );
 
-  const inputsItems: Array<InputTypes> = [
-    {
-      placeholder: "Заголовок",
-      register: "title",
-      error: errors.title,
-      message: errors.title?.message?.toString(),
-      description: "Ввведите название вашей новости",
-    },
-    {
-      placeholder: "Изображение",
-      register: "image",
-      error: errors.image,
-      message: errors.image?.message?.toString(),
-      description: "Добавьте URL изображения",
-    },
-    {
-      placeholder: "Контент",
-      register: "content",
-      error: errors.content,
-      message: errors.content?.message?.toString(),
-      description: "Введите краткое описание новости",
-    },
-    {
-      placeholder: "Ссылка",
-      register: "link",
-      error: errors.link,
-      message: errors.link?.message?.toString(),
-      description: "Добавьте ссылку на новость",
-    },
-  ];
-
-  const handlerInput =
-    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newValues = [...value];
-      newValues[index] = event.target.value.trim();
-      setValue(newValues);
-    };
-
   return (
     <>
       <HeaderWidget />
@@ -119,26 +80,92 @@ export const Home: FunctionComponent = () => {
           modalTitle="Добавить новую новость"
           modalForm={
             <>
-              {inputsItems.map((el: any, i) => (
-                <>
-                  <Input
-                    key={i}
-                    id={el.placeholder}
-                    value={value[i]}
-                    placeholder={el.placeholder}
-                    {...register(el.register, {
-                      onChange: handlerInput(i),
-                    })}
-                  />
-                  <Descriptions>
-                    {el.error ? (
-                      <ErrorMessage>{el.message}</ErrorMessage>
-                    ) : (
-                      <Description>{el.description}</Description>
-                    )}
-                  </Descriptions>
-                </>
-              ))}
+              <Controller
+                control={control}
+                name="title"
+                render={({ field }) => {
+                  return (
+                    <Input
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Заголовок"
+                    />
+                  );
+                }}
+              />
+              <Descriptions>
+                {errors.title ? (
+                  <ErrorMessage>
+                    {errors.title.message?.toString()}
+                  </ErrorMessage>
+                ) : (
+                  <Description>Ввведите название вашей новости</Description>
+                )}
+              </Descriptions>
+              <Controller
+                control={control}
+                name="image"
+                render={({ field }) => {
+                  return (
+                    <Input
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Изображение"
+                    />
+                  );
+                }}
+              />
+              <Descriptions>
+                {errors.image ? (
+                  <ErrorMessage>
+                    {errors.image.message?.toString()}
+                  </ErrorMessage>
+                ) : (
+                  <Description>Добавьте URL изображения</Description>
+                )}
+              </Descriptions>
+              <Controller
+                control={control}
+                name="content"
+                render={({ field }) => {
+                  return (
+                    <Input
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Контент"
+                    />
+                  );
+                }}
+              />
+              <Descriptions>
+                {errors.content ? (
+                  <ErrorMessage>
+                    {errors.content.message?.toString()}
+                  </ErrorMessage>
+                ) : (
+                  <Description>Введите краткое описание новости</Description>
+                )}
+              </Descriptions>
+              <Controller
+                control={control}
+                name="link"
+                render={({ field }) => {
+                  return (
+                    <Input
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Ссылка"
+                    />
+                  );
+                }}
+              />
+              <Descriptions>
+                {errors.link ? (
+                  <ErrorMessage>{errors.link.message?.toString()}</ErrorMessage>
+                ) : (
+                  <Description>Добавьте ссылку на новость</Description>
+                )}
+              </Descriptions>
             </>
           }
           modalButtons={
