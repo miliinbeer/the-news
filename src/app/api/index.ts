@@ -7,6 +7,15 @@ export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
   );
 });
 
+// export const fetchPosts = createAsyncThunk(
+//   "post/fetchPosts",
+//   async (page: number) => {
+//     return await fetch(
+//       `http://localhost:3000/posts?_page=${page}&_limit=10`
+//     ).then((response) => response.json());
+//   }
+// );
+
 export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
   return await fetch("http://localhost:3000/users").then((response) =>
     response.json()
@@ -55,6 +64,21 @@ export const requestUsers = createAsyncThunk(
   }
 );
 
+export const searchUsers = createAsyncThunk(
+  "user/requestUsers",
+  async (searchCriteria: { login: string; password: string }) => {
+    const query = new URLSearchParams(searchCriteria).toString();
+    const response = await fetch(`http://localhost:3000/users?${query}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return await response.json();
+  }
+);
+
 export const rootReducer = createSlice({
   name: "data",
   initialState: {
@@ -62,6 +86,7 @@ export const rootReducer = createSlice({
     user: [],
     loading: false,
     error: undefined,
+    hasMore: true,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -69,9 +94,12 @@ export const rootReducer = createSlice({
       .addCase(fetchPosts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchPosts.fulfilled, (state: StateTypes, action) => {
-        state.loading = false;
+      .addCase(fetchPosts.fulfilled, (state: any, action) => {
         state.post = action.payload;
+        state.loading = false;
+        if (action.payload.length < 6) {
+          state.hasMore = false;
+        }
       })
       .addCase(fetchPosts.rejected, (state: StateTypes, action) => {
         state.loading = false;

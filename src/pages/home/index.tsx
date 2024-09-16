@@ -5,12 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaPost } from "../../shared/ui/modal/schema/schema";
 import { fetchPosts, requestPosts } from "../../app/api/index";
-import {
-  AppDispatch,
-  PostTypes,
-  StatePostTypes,
-  InputTypes,
-} from "../../shared/types";
+import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
 import { ModalWindow } from "../../shared/ui/modal";
@@ -30,34 +25,22 @@ import {
 export const Home: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const [addPostModal, setAddPostModal] = useState(false);
-
-  const { post, loading, error } = useSelector(
+  const { post, loading, error, hasMore } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
-  const {
-    reset,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<yup.InferType<typeof schemaPost>>({
-    resolver: yupResolver(schemaPost),
-  });
+  // const [infiniteRef] = useInfiniteScroll({
+  //   loading,
+  //   hasNextPage: hasMore,
+  //   onLoadMore: () => {
+  //     const nextPage = Math.ceil(post.length / 6) + 1;
+  //     dispatch(fetchPosts(nextPage));
+  //   },
+  // });
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
-
-  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = (el) => {
-    dispatch(requestPosts(el));
-    setAddPostModal(!addPostModal);
-  };
-
-  const toggleModal = () => {
-    setAddPostModal(!addPostModal);
-    reset();
-  };
 
   if (loading) return <Loader />;
   if (error)
@@ -71,114 +54,6 @@ export const Home: FunctionComponent = () => {
     <>
       <HeaderWidget />
       <Main>
-        <ModalWindow
-          buttonVariant="primary"
-          handlerModalOpen={toggleModal}
-          modalButtonName="+ Добавить новость"
-          isOpened={addPostModal}
-          toggleModal={toggleModal}
-          modalTitle="Добавить новую новость"
-          modalForm={
-            <>
-              <Controller
-                control={control}
-                name="title"
-                render={({ field }) => {
-                  return (
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                      placeholder="Заголовок"
-                    />
-                  );
-                }}
-              />
-              <Descriptions>
-                {errors.title ? (
-                  <ErrorMessage>
-                    {errors.title.message?.toString()}
-                  </ErrorMessage>
-                ) : (
-                  <Description>Ввведите название вашей новости</Description>
-                )}
-              </Descriptions>
-              <Controller
-                control={control}
-                name="image"
-                render={({ field }) => {
-                  return (
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                      placeholder="Изображение"
-                    />
-                  );
-                }}
-              />
-              <Descriptions>
-                {errors.image ? (
-                  <ErrorMessage>
-                    {errors.image.message?.toString()}
-                  </ErrorMessage>
-                ) : (
-                  <Description>Добавьте URL изображения</Description>
-                )}
-              </Descriptions>
-              <Controller
-                control={control}
-                name="content"
-                render={({ field }) => {
-                  return (
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                      placeholder="Контент"
-                    />
-                  );
-                }}
-              />
-              <Descriptions>
-                {errors.content ? (
-                  <ErrorMessage>
-                    {errors.content.message?.toString()}
-                  </ErrorMessage>
-                ) : (
-                  <Description>Введите краткое описание новости</Description>
-                )}
-              </Descriptions>
-              <Controller
-                control={control}
-                name="link"
-                render={({ field }) => {
-                  return (
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                      placeholder="Ссылка"
-                    />
-                  );
-                }}
-              />
-              <Descriptions>
-                {errors.link ? (
-                  <ErrorMessage>{errors.link.message?.toString()}</ErrorMessage>
-                ) : (
-                  <Description>Добавьте ссылку на новость</Description>
-                )}
-              </Descriptions>
-            </>
-          }
-          modalButtons={
-            <>
-              <Button color="primary" onClick={handleSubmit(addPost)}>
-                Добавить
-              </Button>
-              <Button color="secondary" onClick={toggleModal}>
-                Отмена
-              </Button>
-            </>
-          }
-        />
         <Cards>
           {post.map((el: PostTypes) => (
             <CardWidget

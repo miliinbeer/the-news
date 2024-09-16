@@ -36,6 +36,15 @@
       "link": "https://example.com/news3",
       "source": "Industry Events Magazine",
       "id": "4"
+    },
+    {
+      "id": 1726511966456,
+      "title": "title",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "content": "fdkvlkmfadlkmvkalmvlk",
+      "date": "2024-09-16",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "source": "encrypted-tbn0.gstatic.com"
     }
   ]
 }

@@ -19,6 +19,7 @@ export interface StatePostTypes {
     loading: boolean;
     error: undefined;
     modal: boolean;
+    hasMore: boolean
   };
 }
 
@@ -49,14 +50,12 @@ export interface InputTypes {
 }
 
 export interface ModalProps {
-  buttonVariant: string;
-  handlerModalOpen: () => void;
-  modalButtonName: string;
-  isOpened: any;
+  modalButton: ReactElement
+  isOpened: boolean;
   toggleModal: () => void;
   modalTitle: string;
   modalForm: ReactElement;
-  modalButtons: any;
+  modalButtons: ReactElement;
 }
 
 export interface CanvasProps {

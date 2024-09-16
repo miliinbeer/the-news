@@ -10,9 +10,7 @@ import {
 } from "reactstrap";
 
 export const ModalWindow: FunctionComponent<ModalProps> = ({
-  buttonVariant,
-  handlerModalOpen,
-  modalButtonName,
+  modalButton,
   isOpened,
   toggleModal,
   modalTitle,
@@ -21,9 +19,7 @@ export const ModalWindow: FunctionComponent<ModalProps> = ({
 }) => {
   return (
     <>
-      <Button color={buttonVariant} onClick={handlerModalOpen}>
-        {modalButtonName}
-      </Button>
+      {modalButton}
       <Modal isOpen={isOpened} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>
         <ModalBody>

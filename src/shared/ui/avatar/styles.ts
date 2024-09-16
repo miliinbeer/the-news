@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Root = styled.button`
   color: #fff;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;

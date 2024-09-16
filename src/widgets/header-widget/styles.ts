@@ -13,6 +13,12 @@ export const Image = styled.img`
   height: 50px;
 `;
 
+export const UserPanel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const Buttons = styled.div`
   display: flex;
   align-items: center;
@@ -42,4 +48,16 @@ export const Description = styled.div`
 export const Input = styled.input`
   padding: 10px 15px;
   width: 100%;
+`;
+
+export const Password = styled.div`
+  position: relative;
+  display: flex;
+`;
+
+export const Eye = styled.img`
+  cursor: pointer;
+  position: absolute;
+  top: 13px;
+  right: 20px;
 `;
