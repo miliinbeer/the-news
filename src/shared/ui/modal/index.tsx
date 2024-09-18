@@ -1,13 +1,11 @@
 import React, { FunctionComponent } from "react";
 import { ModalProps } from "../../types/index";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
-  ModalFooter,
 } from "reactstrap";
+import { ModalFooter } from "./styles";
 
 export const ModalWindow: FunctionComponent<ModalProps> = ({
   modalButton,
@@ -20,7 +18,7 @@ export const ModalWindow: FunctionComponent<ModalProps> = ({
   return (
     <>
       {modalButton}
-      <Modal isOpen={isOpened} toggle={toggleModal}>
+      <Modal style={{marginTop: "7rem"}} isOpen={isOpened} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>
         <ModalBody>
           <>{modalForm}</>

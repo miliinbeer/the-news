@@ -1,14 +1,21 @@
 import React, { FunctionComponent, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, searchUsers } from "../../../../app/api";
+import { fetchUsers, searchUsers, setUserLogged } from "../../../../app/api";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaEntrance } from "../../../../shared/ui/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
-import { Description, Descriptions, ErrorMessage, Eye, Input, Password } from "../../styles";
+import {
+  Description,
+  Descriptions,
+  ErrorMessage,
+  Eye,
+  Input,
+  Password,
+} from "../../styles";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 
@@ -17,6 +24,8 @@ export const EntranceModal: FunctionComponent = () => {
 
   const [entranceModal, setEntranceModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { user } = useSelector((state: StatePostTypes) => state.root);
 
@@ -53,22 +62,40 @@ export const EntranceModal: FunctionComponent = () => {
   > = async (el) => {
     await dispatch(fetchUsers());
 
-    const foundUser = user.find(
-      (user) => user.login === el.login && user.password === el.password
-    );
+    const foundLogin = user.find((user) => user.login === el.login);
+    const foundPassword = user.find((user) => user.password === el.password);
 
-    if (foundUser) {
-      dispatch(searchUsers(foundUser));
-      localStorage.setItem("token", encoded);
+    if (!foundLogin) {
       toggleEntranceModal();
+      setShowErrorPopup(true);
+      setErrorMessage("Такого пользователя нет");
     } else {
-      console.log("Ошибка");
-      toggleEntranceModal();
+      if (!foundPassword) {
+        toggleEntranceModal();
+        setShowErrorPopup(true);
+        setErrorMessage("Неверный пароль");
+      } else {
+        dispatch(searchUsers(foundLogin));
+        localStorage.setItem("token", encoded);
+        toggleEntranceModal();
+        dispatch(setUserLogged(foundLogin));
+      }
     }
   };
 
   return (
     <>
+      <ModalWindow
+        isOpened={showErrorPopup}
+        toggleModal={() => setShowErrorPopup(false)}
+        modalTitle="Ошибка"
+        modalForm={<p>{errorMessage}</p>}
+        modalButtons={
+          <Button color="primary" onClick={() => setShowErrorPopup(false)}>
+            Выход
+          </Button>
+        }
+      />
       <ModalWindow
         modalButton={
           <Button color="primary" outline onClick={toggleEntranceModal}>
@@ -83,17 +110,23 @@ export const EntranceModal: FunctionComponent = () => {
             <Controller
               control={control}
               name="login"
-              render={({ field }) => (
-                <Input
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Логин"
-                />
-              )}
+              render={({ field }) => {
+                return (
+                  <Input
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Логин"
+                  />
+                );
+              }}
             />
             <Descriptions>
               {errors.login ? (
-                <ErrorMessage>{errors.login.message?.toString()}</ErrorMessage>
+                <>
+                  <ErrorMessage>
+                    {errors.login.message?.toString()}
+                  </ErrorMessage>
+                </>
               ) : (
                 <Description>Введите логин</Description>
               )}

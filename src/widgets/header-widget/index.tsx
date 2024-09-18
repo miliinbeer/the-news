@@ -31,7 +31,7 @@ export const HeaderWidget: FunctionComponent = () => {
 
   const [showCanvas, setShowCanvas] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [addPostModal, setAddPostModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -47,8 +47,6 @@ export const HeaderWidget: FunctionComponent = () => {
     localStorage.removeItem("token");
     setIsLogged(false);
   };
-
-  const [addPostModal, setAddPostModal] = useState(false);
 
   const {
     reset,
@@ -206,6 +204,7 @@ export const HeaderWidget: FunctionComponent = () => {
                 showCanvas={showCanvas}
                 handlerHide={() => setShowCanvas(false)}
                 placement="end"
+                canvasItems={<></>}
                 exitButton={
                   <Button color="primary" onClick={handleLogout}>
                     Выход

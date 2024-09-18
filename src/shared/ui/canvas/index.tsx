@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
-import { StatePostTypes, CanvasProps } from "../../types";
+import { CanvasProps, StatePostTypes } from "../../types";
 import { Avatar } from "../avatar";
 import { Items } from "./styles";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -11,16 +11,19 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
   placement,
   exitButton,
 }) => {
-  const { user } = useSelector((state: StatePostTypes) => state.root);
+  const { userLogged } = useSelector((state: StatePostTypes) => state.root);
 
   return (
     <Offcanvas show={showCanvas} onHide={handlerHide} placement={placement}>
       <Offcanvas.Header closeButton>
         <Avatar />
         <Items>
-          <strong>{user[user.length - 1].login}</strong>
+          <strong>{userLogged.login}</strong>
           <div>
-            {user[user.length - 1].firstname} {user[user.length - 1].lastname}
+            {userLogged.firstname.charAt(0).toUpperCase() +
+              userLogged.firstname.slice(1).toLowerCase()}{" "}
+            {userLogged.lastname.charAt(0).toUpperCase() +
+              userLogged.lastname.slice(1).toLowerCase()}
           </div>
         </Items>
       </Offcanvas.Header>

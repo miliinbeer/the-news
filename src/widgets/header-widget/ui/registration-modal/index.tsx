@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { requestUsers } from "../../../../app/api";
+import { requestUsers, setUserLogged } from "../../../../app/api";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegistration } from "../../../../shared/ui/modal/schema/schema";
@@ -24,6 +24,7 @@ export const RegistrationModal: FunctionComponent = () => {
 
   const [registrationModal, setRegistartionModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const {
     control,
@@ -53,7 +54,14 @@ export const RegistrationModal: FunctionComponent = () => {
   const registrationToAccount: SubmitHandler<
     yup.InferType<typeof schemaRegistration>
   > = (el) => {
+    const isLoginTaken = user.some((user: any) => user.login === el.login);
+    if (isLoginTaken) {
+      setRegistartionModal(!registrationModal);
+      setShowErrorPopup(true);
+      return
+    }
     dispatch(requestUsers(el));
+    dispatch(setUserLogged(el));
     setRegistartionModal(!registrationModal);
     localStorage.setItem("token", encoded);
   };
@@ -65,6 +73,17 @@ export const RegistrationModal: FunctionComponent = () => {
 
   return (
     <>
+      <ModalWindow
+        isOpened={showErrorPopup}
+        toggleModal={() => setShowErrorPopup(false)}
+        modalTitle="Ошибка"
+        modalForm={<p>Пользователь с таким логином уже существует. Попробуйте снова.</p>}
+        modalButtons={
+          <Button color="primary" onClick={() => setShowErrorPopup(false)}>
+            Выход
+          </Button>
+        }
+      />
       <ModalWindow
         modalButton={
           <Button color="primary" onClick={toggleRegistrationModal}>

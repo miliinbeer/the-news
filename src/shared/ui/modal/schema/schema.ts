@@ -41,12 +41,16 @@ export const schemaRegistration = yup.object().shape({
     .required("Обязательное поле"),
   firstname: yup
     .string()
-    .transform((value) => value.trim())
+    .transform((value) =>
+      (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
+    )
     .max(15, "Введите не более 15 символов")
     .required("Обязательное поле"),
   lastname: yup
     .string()
-    .transform((value) => value.trim())
+    .transform((value) =>
+      (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
+    )
     .max(30, "Введите не более 20 символов")
     .required("Обязательное поле"),
 });

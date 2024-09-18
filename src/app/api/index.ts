@@ -18,7 +18,7 @@ export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
 
 export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
   return await fetch("http://localhost:3000/users").then((response) =>
-    response.json()
+    response.json()    
   );
 });
 
@@ -74,7 +74,6 @@ export const searchUsers = createAsyncThunk(
         "Content-Type": "application/json",
       },
     });
-
     return await response.json();
   }
 );
@@ -84,17 +83,22 @@ export const rootReducer = createSlice({
   initialState: {
     post: [],
     user: [],
+    userLogged: [],
     loading: false,
     error: undefined,
     hasMore: true,
   },
-  reducers: {},
+  reducers: {
+    setUserLogged: (state, action) => {
+      state.userLogged = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchPosts.fulfilled, (state: any, action) => {
+      .addCase(fetchPosts.fulfilled, (state, action) => {
         state.post = action.payload;
         state.loading = false;
         if (action.payload.length < 6) {
@@ -132,7 +136,8 @@ export const rootReducer = createSlice({
       })
       .addCase(requestUsers.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        state.user.push(action.payload);
+        // state.user.push(action.payload);
+        state.user = [...state.user, action.payload];
       })
       .addCase(requestUsers.rejected, (state: StateTypes, action) => {
         state.loading = false;
@@ -141,4 +146,5 @@ export const rootReducer = createSlice({
   },
 });
 
+export const { setUserLogged } = rootReducer.actions;
 export default rootReducer.reducer;

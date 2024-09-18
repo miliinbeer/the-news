@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError} from "react-hook-form";
 import { store } from "../../app/store";
 import { OffcanvasPlacement } from "react-bootstrap/esm/Offcanvas";
 
@@ -20,7 +20,14 @@ export interface StatePostTypes {
     error: undefined;
     modal: boolean;
     hasMore: boolean
+    userLogged: UserLoggedTypes
   };
+}
+
+export interface UserLoggedTypes {
+  login: string
+  firstname: string
+  lastname: string
 }
 
 export interface PostTypes {
@@ -50,7 +57,7 @@ export interface InputTypes {
 }
 
 export interface ModalProps {
-  modalButton: ReactElement
+  modalButton?: ReactElement
   isOpened: boolean;
   toggleModal: () => void;
   modalTitle: string;
@@ -62,6 +69,7 @@ export interface CanvasProps {
   showCanvas: boolean;
   handlerHide: () => void;
   placement: OffcanvasPlacement;
+  canvasItems: ReactElement
   exitButton: ReactElement;
 }
 
