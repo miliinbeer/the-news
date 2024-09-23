@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { requestUsers, setUserLogged } from "../../../../app/api";
@@ -16,10 +16,11 @@ import {
   Password,
   Eye,
 } from "../../styles";
+import base64 from "base-64";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 
-export const RegistrationModal: FunctionComponent = () => {
+export const RegistrationModal: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [registrationModal, setRegistartionModal] = useState(false);
@@ -38,33 +39,26 @@ export const RegistrationModal: FunctionComponent = () => {
 
   const { user } = useSelector((state: StatePostTypes) => state.root);
 
-  const encodeToBase64 = (str: string) => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(str);
-    let binaryString = "";
-    for (let i = 0; i < data.length; i++) {
-      binaryString += String.fromCharCode(data[i]);
-    }
-    return btoa(binaryString);
-  };
-
-  const userJSON = JSON.stringify(user);
-  const encoded = require("base-64").encode(encodeToBase64(userJSON));
+  // const userJSON = JSON.stringify(user);
+  // const encoded = require("base-64").encode( userJSON);
+  // const decoded = require("base-64").decode(encoded);
 
   const registrationToAccount: SubmitHandler<
     yup.InferType<typeof schemaRegistration>
   > = (el) => {
-    const isLoginTaken = user.some((user: any) => user.login === el.login);
+    const isLoginTaken = user.find((user) => user.login === el.login);
+
     if (isLoginTaken) {
       setRegistartionModal(!registrationModal);
       setShowErrorPopup(true);
-      return
+      return;
     }
     dispatch(requestUsers(el));
-    dispatch(setUserLogged(el));
     setRegistartionModal(!registrationModal);
-    localStorage.setItem("token", encoded);
-  };
+    const token = base64.encode(JSON.stringify(el));
+    localStorage.setItem("token", token);
+    dispatch(setUserLogged(el));
+    };
 
   const toggleRegistrationModal = () => {
     setRegistartionModal(!registrationModal);
@@ -77,7 +71,9 @@ export const RegistrationModal: FunctionComponent = () => {
         isOpened={showErrorPopup}
         toggleModal={() => setShowErrorPopup(false)}
         modalTitle="Ошибка"
-        modalForm={<p>Пользователь с таким логином уже существует. Попробуйте снова.</p>}
+        modalForm={
+          <p>Пользователь с таким логином уже существует. Попробуйте снова.</p>
+        }
         modalButtons={
           <Button color="primary" onClick={() => setShowErrorPopup(false)}>
             Выход

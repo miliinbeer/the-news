@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { CanvasProps, StatePostTypes } from "../../types";
 import { Avatar } from "../avatar";
 import { Items } from "./styles";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export const Canvas: FunctionComponent<CanvasProps> = ({
+export const Canvas: FC<CanvasProps> = ({
   showCanvas,
   handlerHide,
   placement,

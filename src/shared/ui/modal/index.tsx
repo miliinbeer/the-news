@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { ModalProps } from "../../types/index";
 import {
   Modal,
@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 import { ModalFooter } from "./styles";
 
-export const ModalWindow: FunctionComponent<ModalProps> = ({
+export const ModalWindow: FC<ModalProps> = ({
   modalButton,
   isOpened,
   toggleModal,

@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { Container, Reload } from "./styles";
 
-export const Loader: FunctionComponent = () => {
+export const Loader: FC = () => {
   return (
     <Container>
       <Reload />

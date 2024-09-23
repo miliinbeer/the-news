@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FC} from "react";
 import { PostTypes } from "../../../shared/types";
 import { Card, CardBody, CardText } from "reactstrap";
 import { CardLink, CardTitle, CardImage } from "./styles";
 
-export const CardWidget: FunctionComponent<PostTypes> = ({
+export const CardWidget: FC<PostTypes> = ({
   id,
   image,
   title,

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, searchUsers, setUserLogged } from "../../../../app/api";
@@ -16,10 +16,11 @@ import {
   Input,
   Password,
 } from "../../styles";
+import base64 from "base-64";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 
-export const EntranceModal: FunctionComponent = () => {
+export const EntranceModal: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [entranceModal, setEntranceModal] = useState(false);
@@ -27,7 +28,9 @@ export const EntranceModal: FunctionComponent = () => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { user } = useSelector((state: StatePostTypes) => state.root);
+  const { user, userLogged } = useSelector(
+    (state: StatePostTypes) => state.root
+  );
 
   const {
     control,
@@ -44,41 +47,41 @@ export const EntranceModal: FunctionComponent = () => {
     reset();
   };
 
-  const encodeToBase64 = (str: string) => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(str);
-    let binaryString = "";
-    for (let i = 0; i < data.length; i++) {
-      binaryString += String.fromCharCode(data[i]);
-    }
-    return btoa(binaryString);
-  };
+  // const encodeToBase64 = (str: string) => {
+  //   const encoder = new TextEncoder().encode(str);
+  //   let binaryString = "";
+  //   for (let i = 0; i < encoder.length; i++) {
+  //     binaryString += String.fromCharCode(encoder[i]);
+  //   }
+  //   return btoa(binaryString);
+  // };
 
-  const userJSON = JSON.stringify(user);
-  const encoded = require("base-64").encode(encodeToBase64(userJSON));
+  // const userJSON = JSON.stringify(user);
+  // const encoded = require("base-64").encode(encodeToBase64(userJSON));
 
   const loginToAccount: SubmitHandler<
     yup.InferType<typeof schemaEntrance>
   > = async (el) => {
     await dispatch(fetchUsers());
 
-    const foundLogin = user.find((user) => user.login === el.login);
-    const foundPassword = user.find((user) => user.password === el.password);
+    const foundUser = user.find((user) => user.login === el.login);
 
-    if (!foundLogin) {
+    if (!foundUser) {
       toggleEntranceModal();
       setShowErrorPopup(true);
       setErrorMessage("Такого пользователя нет");
     } else {
-      if (!foundPassword) {
+      if (foundUser.password !== el.password) {
         toggleEntranceModal();
         setShowErrorPopup(true);
         setErrorMessage("Неверный пароль");
+        return;
       } else {
-        dispatch(searchUsers(foundLogin));
-        localStorage.setItem("token", encoded);
+        dispatch(searchUsers(foundUser));
+        const token = base64.encode(JSON.stringify(foundUser));
+        localStorage.setItem("token", token);
+        dispatch(setUserLogged(foundUser));
         toggleEntranceModal();
-        dispatch(setUserLogged(foundLogin));
       }
     }
   };

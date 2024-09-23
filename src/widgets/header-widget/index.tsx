@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { fetchUsers, requestPosts } from "../../app/api";
+import { fetchUsers, requestPosts, setUserLogged } from "../../app/api";
 import { schemaPost } from "../../shared/ui/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui/modal";
@@ -22,12 +22,15 @@ import {
   ErrorMessage,
   Description,
 } from "./styles";
+import base64 from "base-64";
 import icon from "../../shared/icons/favicon.webp";
 
-export const HeaderWidget: FunctionComponent = () => {
+export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user } = useSelector((state: StatePostTypes) => state.root);
+  const { user } = useSelector(
+    (state: StatePostTypes) => state.root
+  );
 
   const [showCanvas, setShowCanvas] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
@@ -39,7 +42,13 @@ export const HeaderWidget: FunctionComponent = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      setIsLogged(true);
+      try {
+        const tokenContent = base64.decode(token);
+        dispatch(setUserLogged(JSON.parse(tokenContent)));
+        setIsLogged(true);
+      } catch (err) {
+        console.error("Ошибка", err);
+      }
     }
   }, [dispatch]);
 
@@ -47,6 +56,7 @@ export const HeaderWidget: FunctionComponent = () => {
     localStorage.removeItem("token");
     setIsLogged(false);
   };
+
 
   const {
     reset,

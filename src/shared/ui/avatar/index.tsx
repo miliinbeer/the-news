@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { StatePostTypes, AvatarProps } from "../../types";
 import { Root } from "./styles";
 
-export const Avatar: FunctionComponent<AvatarProps> = ({ handleAvatar }) => {
+export const Avatar: FC<AvatarProps> = ({ handleAvatar }) => {
   const { userLogged } = useSelector((state: StatePostTypes) => state.root);
 
   return (

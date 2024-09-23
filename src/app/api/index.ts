@@ -7,18 +7,9 @@ export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
   );
 });
 
-// export const fetchPosts = createAsyncThunk(
-//   "post/fetchPosts",
-//   async (page: number) => {
-//     return await fetch(
-//       `http://localhost:3000/posts?_page=${page}&_limit=10`
-//     ).then((response) => response.json());
-//   }
-// );
-
 export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
   return await fetch("http://localhost:3000/users").then((response) =>
-    response.json()    
+    response.json()
   );
 });
 
@@ -83,10 +74,10 @@ export const rootReducer = createSlice({
   initialState: {
     post: [],
     user: [],
-    userLogged: [],
+    userLogged: {},
     loading: false,
     error: undefined,
-    hasMore: true,
+    hasNextPage: true,
   },
   reducers: {
     setUserLogged: (state, action) => {
@@ -101,15 +92,12 @@ export const rootReducer = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.post = action.payload;
         state.loading = false;
-        if (action.payload.length < 6) {
-          state.hasMore = false;
-        }
       })
       .addCase(fetchPosts.rejected, (state: StateTypes, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(requestPosts.pending, (state: StateTypes, action) => {
+      .addCase(requestPosts.pending, (state: StateTypes) => {
         state.loading = true;
       })
       .addCase(requestPosts.fulfilled, (state: StateTypes, action) => {
@@ -136,8 +124,8 @@ export const rootReducer = createSlice({
       })
       .addCase(requestUsers.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        // state.user.push(action.payload);
-        state.user = [...state.user, action.payload];
+        state.user.push(action.payload);
+        // state.user = [...state.user, action.payload];
       })
       .addCase(requestUsers.rejected, (state: StateTypes, action) => {
         state.loading = false;

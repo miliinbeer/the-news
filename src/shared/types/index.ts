@@ -19,8 +19,7 @@ export interface StatePostTypes {
     loading: boolean;
     error: undefined;
     modal: boolean;
-    hasMore: boolean
-    userLogged: UserLoggedTypes
+    userLogged: UserLoggedTypes;
   };
 }
 
