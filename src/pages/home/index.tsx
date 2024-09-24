@@ -42,7 +42,7 @@ export const Home: FC = () => {
         <Error>{error}</Error>
       </ErrorContainer>
     );
-
+  
   return (
     <>
       <HeaderWidget />
@@ -59,6 +59,7 @@ export const Home: FC = () => {
                 date={el.date}
                 link={el.link}
                 source={el.source}
+                author={el.author}
               />
             );
           })}

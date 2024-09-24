@@ -39,10 +39,6 @@ export const RegistrationModal: FC = () => {
 
   const { user } = useSelector((state: StatePostTypes) => state.root);
 
-  // const userJSON = JSON.stringify(user);
-  // const encoded = require("base-64").encode( userJSON);
-  // const decoded = require("base-64").decode(encoded);
-
   const registrationToAccount: SubmitHandler<
     yup.InferType<typeof schemaRegistration>
   > = (el) => {

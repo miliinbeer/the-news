@@ -9,7 +9,7 @@ export const Main = styled.div`
 export const Cards = styled.div`
   margin: 20px 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(298px, 0));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0));
   row-gap: 20px;
   justify-content: space-between;
   @media (max-width: 910px) {

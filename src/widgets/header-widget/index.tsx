@@ -28,7 +28,7 @@ import icon from "../../shared/icons/favicon.webp";
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user } = useSelector(
+  const { user, userLogged } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
@@ -57,7 +57,6 @@ export const HeaderWidget: FC = () => {
     setIsLogged(false);
   };
 
-
   const {
     reset,
     control,
@@ -68,7 +67,11 @@ export const HeaderWidget: FC = () => {
   });
 
   const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = (el) => {
-    dispatch(requestPosts(el));
+    const fullPostData = {
+      ...el,
+      author: userLogged.login,
+    };
+    dispatch(requestPosts(fullPostData));
     setAddPostModal(!addPostModal);
   };
 
@@ -97,7 +100,6 @@ export const HeaderWidget: FC = () => {
                   >
                     +
                   </Button>
-                  // TODO: Добавить сюда подсказку для кнопки
                 }
                 isOpened={addPostModal}
                 toggleModal={toggleModal}

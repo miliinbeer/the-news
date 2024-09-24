@@ -10,7 +10,7 @@ export const CardImage = styled.img`
 export const CardTitle = styled.p`
   font-size: 20px;
   font-weight: 700;
-  height: 25px;
+  height: 30px;
   overflow: hidden;
 `;
 
@@ -21,4 +21,10 @@ export const CardLink = styled.a`
   &:hover {
     transition: all 0.5s;
   }
+`;
+
+export const CardInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;

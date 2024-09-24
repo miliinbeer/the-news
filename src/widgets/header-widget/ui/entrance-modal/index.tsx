@@ -28,9 +28,7 @@ export const EntranceModal: FC = () => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { user, userLogged } = useSelector(
-    (state: StatePostTypes) => state.root
-  );
+  const { user } = useSelector((state: StatePostTypes) => state.root);
 
   const {
     control,
@@ -46,18 +44,6 @@ export const EntranceModal: FC = () => {
     setEntranceModal(!entranceModal);
     reset();
   };
-
-  // const encodeToBase64 = (str: string) => {
-  //   const encoder = new TextEncoder().encode(str);
-  //   let binaryString = "";
-  //   for (let i = 0; i < encoder.length; i++) {
-  //     binaryString += String.fromCharCode(encoder[i]);
-  //   }
-  //   return btoa(binaryString);
-  // };
-
-  // const userJSON = JSON.stringify(user);
-  // const encoded = require("base-64").encode(encodeToBase64(userJSON));
 
   const loginToAccount: SubmitHandler<
     yup.InferType<typeof schemaEntrance>

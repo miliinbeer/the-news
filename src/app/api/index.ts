@@ -15,7 +15,7 @@ export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
 
 export const requestPosts = createAsyncThunk(
   "post/requestPosts",
-  async ({ title, image, content, link }: PostTypes) => {
+  async ({ title, image, content, link, author }: PostTypes) => {
     const newPost = {
       id: Date.now(),
       title: title,
@@ -24,6 +24,7 @@ export const requestPosts = createAsyncThunk(
       date: new Date().toISOString().slice(0, 10),
       link: link,
       source: new URL(link).hostname,
+      author: author,
     };
     return await fetch("http://localhost:3000/posts", {
       method: "POST",
@@ -124,8 +125,7 @@ export const rootReducer = createSlice({
       })
       .addCase(requestUsers.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        state.user.push(action.payload);
-        // state.user = [...state.user, action.payload];
+        state.user = [...state.user, action.payload];
       })
       .addCase(requestUsers.rejected, (state: StateTypes, action) => {
         state.loading = false;
