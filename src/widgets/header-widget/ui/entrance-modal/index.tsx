@@ -53,10 +53,9 @@ export const EntranceModal: FC = () => {
     const foundUser = user.find((user) => user.login === el.login);
 
     if (!foundUser) {
-      toggleEntranceModal();
       toast.error("Такого пользователя нет. Попробуйте снова.", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -68,7 +67,7 @@ export const EntranceModal: FC = () => {
       if (foundUser.password !== el.password) {
         toast.error("Неверный пароль. Попробуйте снова.", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

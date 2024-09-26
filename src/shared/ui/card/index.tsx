@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { PostTypes } from "../../../shared/types";
-import { Card, CardBody, CardText } from "reactstrap";
-import { CardLink, CardTitle, CardImage, CardInfo } from "./styles";
+import { Root, Image, Title, Content, Source, Info } from "./styles";
 
 export const CardWidget: FC<PostTypes> = ({
   id,
@@ -14,34 +13,17 @@ export const CardWidget: FC<PostTypes> = ({
   author,
 }) => {
   return (
-    <Card id={id}>
-      <CardLink href={link}>
-        <CardBody>
-          <CardTitle>{title}</CardTitle>
-          <CardImage src={image} />
-          <CardText
-            style={{
-              marginTop: "1rem",
-              height: "70px",
-              overflow: "hidden",
-            }}
-          >
-            {content}
-          </CardText>
-          <CardText
-            style={{
-              height: "25px",
-              overflow: "hidden",
-            }}
-          >
-            <strong>{source}</strong>
-          </CardText>
-          <CardInfo>
-            <div>{author}</div>
-            <small className="text-muted">{date}</small>
-          </CardInfo>
-        </CardBody>
-      </CardLink>
-    </Card>
+    <Root id={id}>
+      <a href={link}>
+        <Image src={image} alt={title} />
+        <Title>{title}</Title>
+        <Content>{content}</Content>
+        <Source>{source}</Source>
+        <Info>
+          <div>{author}</div>
+          <small className="text-muted">{date}</small>
+        </Info>
+      </a>
+    </Root>
   );
 };

@@ -3,11 +3,9 @@ import styled from "styled-components";
 export const Main = styled.div`
   max-width: 940px;
   margin: 0 auto;
-  padding: 20px 0 0 0;
 `;
 
 export const Cards = styled.div`
-  margin: 20px 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 0));
   row-gap: 20px;
@@ -32,4 +30,10 @@ export const ErrorContainer = styled.div`
 export const Error = styled.div`
   padding: 20px;
   border: 4px red solid;
+`;
+
+export const ScrollLoader = styled.div`
+  padding: 10px 0;
+  font-weight: 600;
+  font-size: 20px;
 `;

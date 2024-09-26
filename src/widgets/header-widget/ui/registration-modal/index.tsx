@@ -9,7 +9,7 @@ import { schemaRegistration } from "../../../../shared/ui/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import {
   Description,
   Descriptions,
@@ -48,7 +48,7 @@ export const RegistrationModal: FC = () => {
     if (isLoginTaken) {
       toast.error("Такой пользователь уже существует. Попробуйте снова.", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -72,7 +72,6 @@ export const RegistrationModal: FC = () => {
 
   return (
     <>
-      <ToastContainer />
       <ModalWindow
         modalButton={
           <Button color="primary" onClick={toggleRegistrationModal}>

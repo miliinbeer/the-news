@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { fetchUsers, requestPosts, setUserLogged } from "../../app/api";
 import { schemaPost } from "../../shared/ui/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../shared/types";
+import base64 from "base-64";
 import { ModalWindow } from "../../shared/ui/modal";
 import { EntranceModal } from "./ui/entrance-modal";
 import { RegistrationModal } from "./ui/registration-modal";
@@ -14,7 +15,8 @@ import { Canvas } from "../../shared/ui/canvas";
 import { Button } from "reactstrap";
 import {
   Root,
-  Image,
+  Logotype,
+  Icon,
   UserPanel,
   Buttons,
   Descriptions,
@@ -22,7 +24,6 @@ import {
   ErrorMessage,
   Description,
 } from "./styles";
-import base64 from "base-64";
 import icon from "../../shared/icons/favicon.webp";
 
 export const HeaderWidget: FC = () => {
@@ -81,157 +82,163 @@ export const HeaderWidget: FC = () => {
   };
 
   return (
-    <Root>
-      <a href="/">
-        <Image src={icon} alt="icon" />
-      </a>
-      {isLogged ? (
-        <>
-          {user.length > 0 ? (
-            <UserPanel>
-              <ModalWindow
-                modalButton={
-                  <Button
-                    data-toplint="someValue"
-                    color="primary"
-                    data-tooltip="Добавить новость"
-                    outline
-                    onClick={toggleModal}
-                  >
-                    +
-                  </Button>
-                }
-                isOpened={addPostModal}
-                toggleModal={toggleModal}
-                modalTitle="Добавить новую новость"
-                modalForm={
-                  <>
-                    <Controller
-                      control={control}
-                      name="title"
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            value={field.value}
-                            onChange={field.onChange}
-                            placeholder="Заголовок"
-                          />
-                        );
-                      }}
-                    />
-                    <Descriptions>
-                      {errors.title ? (
-                        <ErrorMessage>
-                          {errors.title.message?.toString()}
-                        </ErrorMessage>
-                      ) : (
-                        <Description>
-                          Ввведите название вашей новости
-                        </Description>
-                      )}
-                    </Descriptions>
-                    <Controller
-                      control={control}
-                      name="image"
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            value={field.value}
-                            onChange={field.onChange}
-                            placeholder="Изображение"
-                          />
-                        );
-                      }}
-                    />
-                    <Descriptions>
-                      {errors.image ? (
-                        <ErrorMessage>
-                          {errors.image.message?.toString()}
-                        </ErrorMessage>
-                      ) : (
-                        <Description>Добавьте URL изображения</Description>
-                      )}
-                    </Descriptions>
-                    <Controller
-                      control={control}
-                      name="content"
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            value={field.value}
-                            onChange={field.onChange}
-                            placeholder="Контент"
-                          />
-                        );
-                      }}
-                    />
-                    <Descriptions>
-                      {errors.content ? (
-                        <ErrorMessage>
-                          {errors.content.message?.toString()}
-                        </ErrorMessage>
-                      ) : (
-                        <Description>
-                          Введите краткое описание новости
-                        </Description>
-                      )}
-                    </Descriptions>
-                    <Controller
-                      control={control}
-                      name="link"
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            value={field.value}
-                            onChange={field.onChange}
-                            placeholder="Ссылка"
-                          />
-                        );
-                      }}
-                    />
-                    <Descriptions>
-                      {errors.link ? (
-                        <ErrorMessage>
-                          {errors.link.message?.toString()}
-                        </ErrorMessage>
-                      ) : (
-                        <Description>Добавьте ссылку на новость</Description>
-                      )}
-                    </Descriptions>
-                  </>
-                }
-                modalButtons={
-                  <>
-                    <Button color="primary" onClick={handleSubmit(addPost)}>
-                      Добавить
+    <>
+      {" "}
+      <Root>
+        <Logotype href="/">
+          <Icon src={icon} alt="icon" />
+          <div>
+            <span>/ THE</span> NEWS
+          </div>
+        </Logotype>
+        {isLogged ? (
+          <>
+            {user.length > 0 ? (
+              <UserPanel>
+                <ModalWindow
+                  modalButton={
+                    <Button
+                      data-toplint="someValue"
+                      color="primary"
+                      data-tooltip="Добавить новость"
+                      outline
+                      onClick={toggleModal}
+                    >
+                      +
                     </Button>
-                    <Button color="secondary" onClick={toggleModal}>
-                      Отмена
+                  }
+                  isOpened={addPostModal}
+                  toggleModal={toggleModal}
+                  modalTitle="Добавить новую новость"
+                  modalForm={
+                    <>
+                      <Controller
+                        control={control}
+                        name="title"
+                        render={({ field }) => {
+                          return (
+                            <Input
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Заголовок"
+                            />
+                          );
+                        }}
+                      />
+                      <Descriptions>
+                        {errors.title ? (
+                          <ErrorMessage>
+                            {errors.title.message?.toString()}
+                          </ErrorMessage>
+                        ) : (
+                          <Description>
+                            Ввведите название вашей новости
+                          </Description>
+                        )}
+                      </Descriptions>
+                      <Controller
+                        control={control}
+                        name="image"
+                        render={({ field }) => {
+                          return (
+                            <Input
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Изображение"
+                            />
+                          );
+                        }}
+                      />
+                      <Descriptions>
+                        {errors.image ? (
+                          <ErrorMessage>
+                            {errors.image.message?.toString()}
+                          </ErrorMessage>
+                        ) : (
+                          <Description>Добавьте URL изображения</Description>
+                        )}
+                      </Descriptions>
+                      <Controller
+                        control={control}
+                        name="content"
+                        render={({ field }) => {
+                          return (
+                            <Input
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Контент"
+                            />
+                          );
+                        }}
+                      />
+                      <Descriptions>
+                        {errors.content ? (
+                          <ErrorMessage>
+                            {errors.content.message?.toString()}
+                          </ErrorMessage>
+                        ) : (
+                          <Description>
+                            Введите краткое описание новости
+                          </Description>
+                        )}
+                      </Descriptions>
+                      <Controller
+                        control={control}
+                        name="link"
+                        render={({ field }) => {
+                          return (
+                            <Input
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Ссылка"
+                            />
+                          );
+                        }}
+                      />
+                      <Descriptions>
+                        {errors.link ? (
+                          <ErrorMessage>
+                            {errors.link.message?.toString()}
+                          </ErrorMessage>
+                        ) : (
+                          <Description>Добавьте ссылку на новость</Description>
+                        )}
+                      </Descriptions>
+                    </>
+                  }
+                  modalButtons={
+                    <>
+                      <Button color="primary" onClick={handleSubmit(addPost)}>
+                        Добавить
+                      </Button>
+                      <Button color="secondary" onClick={toggleModal}>
+                        Отмена
+                      </Button>
+                    </>
+                  }
+                />
+                <Avatar handleAvatar={() => setShowCanvas(true)} />
+                <Canvas
+                  showCanvas={showCanvas}
+                  handlerHide={() => setShowCanvas(false)}
+                  placement="end"
+                  canvasItems={<></>}
+                  exitButton={
+                    <Button color="primary" onClick={handleLogout}>
+                      Выход
                     </Button>
-                  </>
-                }
-              />
-              <Avatar handleAvatar={() => setShowCanvas(true)} />
-              <Canvas
-                showCanvas={showCanvas}
-                handlerHide={() => setShowCanvas(false)}
-                placement="end"
-                canvasItems={<></>}
-                exitButton={
-                  <Button color="primary" onClick={handleLogout}>
-                    Выход
-                  </Button>
-                }
-              />
-            </UserPanel>
-          ) : null}
-        </>
-      ) : (
-        <Buttons>
-          <EntranceModal />
-          <RegistrationModal />
-        </Buttons>
-      )}
-    </Root>
+                  }
+                />
+              </UserPanel>
+            ) : null}
+          </>
+        ) : (
+          <Buttons>
+            <EntranceModal />
+            <RegistrationModal />
+          </Buttons>
+        )}
+      </Root>
+    </>
   );
 };

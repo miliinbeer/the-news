@@ -1,16 +1,32 @@
 import styled from "styled-components";
 
 export const Root = styled.div`
-  padding: 1%;
+  margin: 20px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px rgba(0, 0, 0, 0.175) solid;
+  border: 1px rgba(0, 0, 0, 0.175) solid;
+  border-radius: 20px;
+  background-color: white;
 `;
 
-export const Image = styled.img`
-  width: 50px;
-  height: 50px;
+export const Logotype = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ff6c15;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 30px;
+  span {
+    color: #4c7aff;
+  }
+`;
+
+export const Icon = styled.img`
+  width: 45px;
+  height: 45px;
 `;
 
 export const UserPanel = styled.div`

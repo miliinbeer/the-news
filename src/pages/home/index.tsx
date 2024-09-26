@@ -2,11 +2,11 @@ import React, { useEffect, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../app/api/index";
 import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
+import useInfiniteScroll from "react-infinite-scroll-hook";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { CardWidget } from "../../shared/ui/card";
 import { Loader } from "../../shared/ui/loader";
-import { Main, Cards, ErrorContainer, Error } from "./styles";
-import useInfiniteScroll from "react-infinite-scroll-hook";
+import { Main, Cards, ErrorContainer, Error, ScrollLoader } from "./styles";
 
 export const Home: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -42,7 +42,7 @@ export const Home: FC = () => {
         <Error>{error}</Error>
       </ErrorContainer>
     );
-  
+
   return (
     <>
       <HeaderWidget />
@@ -65,7 +65,7 @@ export const Home: FC = () => {
           })}
         </Cards>
         <div ref={infiniteRef}>
-          {hasMorePosts && <strong>Загрузка...</strong>}
+          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
         </div>
       </Main>
     </>
