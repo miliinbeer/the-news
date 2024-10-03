@@ -19,10 +19,9 @@ import {
   Icon,
   UserPanel,
   Buttons,
-  Descriptions,
+  Inputs,
+  Label,
   Input,
-  ErrorMessage,
-  Description,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
@@ -83,7 +82,6 @@ export const HeaderWidget: FC = () => {
 
   return (
     <>
-      {" "}
       <Root>
         <Logotype href="/">
           <Icon src={icon} alt="icon" />
@@ -111,100 +109,92 @@ export const HeaderWidget: FC = () => {
                   toggleModal={toggleModal}
                   modalTitle="Добавить новую новость"
                   modalForm={
-                    <>
+                    <Inputs>
                       <Controller
                         control={control}
                         name="title"
                         render={({ field }) => {
+                          const isError = !!errors.title;
                           return (
-                            <Input
-                              value={field.value}
-                              onChange={field.onChange}
-                              placeholder="Заголовок"
-                            />
+                            <Label>
+                              <p>
+                                Заголовок <span>*</span>
+                              </p>
+                              <Input
+                                {...field}
+                                placeholder={
+                                  isError ? errors?.title?.message : ""
+                                }
+                                isError={isError}
+                              />
+                            </Label>
                           );
                         }}
                       />
-                      <Descriptions>
-                        {errors.title ? (
-                          <ErrorMessage>
-                            {errors.title.message?.toString()}
-                          </ErrorMessage>
-                        ) : (
-                          <Description>
-                            Ввведите название вашей новости
-                          </Description>
-                        )}
-                      </Descriptions>
                       <Controller
                         control={control}
                         name="image"
                         render={({ field }) => {
+                          const isError = !!errors.image;
                           return (
-                            <Input
-                              value={field.value}
-                              onChange={field.onChange}
-                              placeholder="Изображение"
-                            />
+                            <Label>
+                              <p>
+                                Изображение <span>*</span>
+                              </p>
+                              <Input
+                                {...field}
+                                placeholder={
+                                  isError ? errors?.image?.message : ""
+                                }
+                                isError={isError}
+                              />
+                            </Label>
                           );
                         }}
                       />
-                      <Descriptions>
-                        {errors.image ? (
-                          <ErrorMessage>
-                            {errors.image.message?.toString()}
-                          </ErrorMessage>
-                        ) : (
-                          <Description>Добавьте URL изображения</Description>
-                        )}
-                      </Descriptions>
                       <Controller
                         control={control}
                         name="content"
                         render={({ field }) => {
+                          const isError = !!errors.content;
                           return (
-                            <Input
-                              value={field.value}
-                              onChange={field.onChange}
-                              placeholder="Контент"
-                            />
+                            <Label>
+                              <p>
+                                Контент <span>*</span>
+                              </p>
+                              <Input
+                                {...field}
+                                placeholder={
+                                  isError ? errors?.content?.message : ""
+                                }
+                                isError={isError}
+                              />
+                            </Label>
                           );
                         }}
                       />
-                      <Descriptions>
-                        {errors.content ? (
-                          <ErrorMessage>
-                            {errors.content.message?.toString()}
-                          </ErrorMessage>
-                        ) : (
-                          <Description>
-                            Введите краткое описание новости
-                          </Description>
-                        )}
-                      </Descriptions>
                       <Controller
                         control={control}
                         name="link"
                         render={({ field }) => {
+                          const isError = !!errors.link;
                           return (
-                            <Input
-                              value={field.value}
-                              onChange={field.onChange}
-                              placeholder="Ссылка"
-                            />
+                            <Label>
+                              <p>
+                                Ссылка на источник <span>*</span>
+                              </p>
+                              <Input
+                                {...field}
+                                placeholder={
+                                  isError ? errors?.link?.message : ""
+                                }
+                                isError={isError}
+                              />
+                            </Label>
                           );
                         }}
                       />
-                      <Descriptions>
-                        {errors.link ? (
-                          <ErrorMessage>
-                            {errors.link.message?.toString()}
-                          </ErrorMessage>
-                        ) : (
-                          <Description>Добавьте ссылку на новость</Description>
-                        )}
-                      </Descriptions>
-                    </>
+                    </Inputs>
                   }
                   modalButtons={
                     <>

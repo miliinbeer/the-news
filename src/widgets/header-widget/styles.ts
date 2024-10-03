@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledInputProps } from "../../shared/types";
 
 export const Root = styled.div`
   margin: 20px;
@@ -43,32 +44,41 @@ export const Buttons = styled.div`
 `;
 
 export const Inputs = styled.div`
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 `;
 
-export const Descriptions = styled.div`
-  margin: 5px 0 15px 10px;
-  font-size: 13px;
+export const Items = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  span {
+    color: red;
+  }
 `;
 
-export const ErrorMessage = styled.div`
-  color: red;
-`;
-
-export const Description = styled.div`
-  color: #0d6efd;
-`;
-
-export const Input = styled.input`
+export const Input = styled.input<StyledInputProps>`
   padding: 10px 15px;
-  width: 100%;
+  border-radius: 10px;
+  border: 2px solid ${({ isError }) => (isError ? "red" : "#6c757d")};
+  background-color: ${({ isError }) => (isError ? "pink" : "white")};
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: red;
+  }
 `;
-
 export const Password = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
 `;
 
 export const Eye = styled.img`

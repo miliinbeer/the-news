@@ -20,7 +20,7 @@ export const CardWidget: FC<PostTypes> = ({
         <Content>{content}</Content>
         <Source>{source}</Source>
         <Info>
-          <div>{author}</div>
+          <p>{author}</p>
           <small className="text-muted">{date}</small>
         </Info>
       </a>

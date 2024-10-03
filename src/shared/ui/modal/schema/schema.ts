@@ -6,14 +6,13 @@ export const schemaPost = yup.object().shape({
     .transform((value) =>
       (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
     )
-    .min(3, "Введите не менее 3 символов")
-    .max(20, "Введите не более 20 символов")
-    .required("Обязательное поле"),
+    .min(3, "Ввведите не менее 3 символов")
+    .required("Ввведите не менее 3 символов"),
   image: yup
     .string()
     .transform((value) => value.trim())
     .url("Допускаются только ссылки")
-    .required("Обязательное поле"),
+    .required("Добавьте URL изображения"),
   content: yup
     .string()
     .transform((value) =>
@@ -26,7 +25,7 @@ export const schemaPost = yup.object().shape({
     .string()
     .transform((value) => value.trim())
     .url("Допускаются только ссылки")
-    .required("Обязательное поле"),
+    .required("Добавьте ссылку на источник"),
 });
 
 export const schemaRegistration = yup.object().shape({

@@ -10,14 +10,7 @@ import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
 import { toast } from "react-toastify";
-import {
-  Description,
-  Descriptions,
-  ErrorMessage,
-  Input,
-  Password,
-  Eye,
-} from "../../styles";
+import { Inputs, Password, Label, Input, Eye } from "../../styles";
 import "react-toastify/dist/ReactToastify.css";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
@@ -82,104 +75,96 @@ export const RegistrationModal: FC = () => {
         toggleModal={toggleRegistrationModal}
         modalTitle="Регистрация"
         modalForm={
-          <>
+          <Inputs>
             <Controller
               control={control}
               name="login"
               render={({ field }) => {
+                const isError = !!errors.login;
                 return (
-                  <Input
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Логин"
-                  />
+                  <Label>
+                    <p>
+                      Логин <span>*</span>
+                    </p>
+                    <Input
+                      {...field}
+                      placeholder={isError ? errors?.login?.message : ""}
+                      isError={isError}
+                    />
+                  </Label>
                 );
               }}
             />
-            <Descriptions>
-              {errors.login ? (
-                <ErrorMessage>{errors.login.message?.toString()}</ErrorMessage>
-              ) : (
-                <Description>Введите ваш логин</Description>
-              )}
-            </Descriptions>
             <Controller
               control={control}
               name="password"
               render={({ field }) => {
+                const isError = !!errors.password;
                 return (
                   <Password>
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Пароль"
-                    />
-                    <div onMouseDown={() => setShowPassword(!showPassword)}>
-                      {showPassword ? (
-                        <Eye src={eye_crossed} />
-                      ) : (
-                        <Eye src={eye} />
-                      )}
-                    </div>
+                    <Label>
+                      <p>
+                        Пароль <span>*</span>
+                      </p>
+                      <Password>
+                        <Input
+                          {...field}
+                          placeholder={isError ? errors?.password?.message : ""}
+                          type={showPassword ? "text" : "password"}
+                          isError={isError}
+                        />
+                        <div onMouseDown={() => setShowPassword(!showPassword)}>
+                          {showPassword ? (
+                            <Eye src={eye_crossed} />
+                          ) : (
+                            <Eye src={eye} />
+                          )}
+                        </div>
+                      </Password>
+                    </Label>
                   </Password>
                 );
               }}
             />
-            <Descriptions>
-              {errors.password ? (
-                <ErrorMessage>
-                  {errors.password.message?.toString()}
-                </ErrorMessage>
-              ) : (
-                <Description>Введите пароль</Description>
-              )}
-            </Descriptions>
             <Controller
               control={control}
               name="firstname"
               render={({ field }) => {
+                const isError = !!errors.firstname;
                 return (
-                  <Input
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Имя"
-                  />
+                  <Label>
+                    <p>
+                      Имя <span>*</span>
+                    </p>
+                    <Input
+                      {...field}
+                      placeholder={isError ? errors?.firstname?.message : ""}
+                      isError={isError}
+                    />
+                  </Label>
                 );
               }}
             />
-            <Descriptions>
-              {errors.firstname ? (
-                <ErrorMessage>
-                  {errors.firstname.message?.toString()}
-                </ErrorMessage>
-              ) : (
-                <Description>Введите ваше имя</Description>
-              )}
-            </Descriptions>
             <Controller
               control={control}
               name="lastname"
               render={({ field }) => {
+                const isError = !!errors.lastname;
                 return (
-                  <Input
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Фамилия"
-                  />
+                  <Label>
+                    <p>
+                      Фамилия <span>*</span>
+                    </p>
+                    <Input
+                      {...field}
+                      placeholder={isError ? errors?.lastname?.message : ""}
+                      isError={isError}
+                    />
+                  </Label>
                 );
               }}
             />
-            <Descriptions>
-              {errors.lastname ? (
-                <ErrorMessage>
-                  {errors.lastname.message?.toString()}
-                </ErrorMessage>
-              ) : (
-                <Description>Введите вашу фамилию</Description>
-              )}
-            </Descriptions>
-          </>
+          </Inputs>
         }
         modalButtons={
           <>

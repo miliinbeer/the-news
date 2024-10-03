@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Root = styled.div`
+  max-width: 300px;
   padding: 20px;
   border: 1px rgba(0, 0, 0, 0.175) solid;
   border-radius: 15px;
@@ -25,19 +26,18 @@ export const Image = styled.img`
 `;
 
 export const Title = styled.p`
-  margin: 0 auto;
   padding: 0.5rem 0;
   font-size: 20px;
   font-weight: 600;
   overflow: hidden;
 `;
 
-export const Content = styled.div`
+export const Content = styled.p`
   height: 70px;
   overflow: hidden;
 `;
 
-export const Source = styled.div`
+export const Source = styled.p`
   padding: 0.5rem 0;
   color: #4c7aff;
 `;

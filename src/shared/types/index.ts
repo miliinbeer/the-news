@@ -76,3 +76,11 @@ export interface CanvasProps {
 export interface AvatarProps {
   handleAvatar?: () => void;
 }
+
+export interface ErrorProps {
+  message: string;
+}
+
+export interface StyledInputProps {
+  isError: boolean;
+}

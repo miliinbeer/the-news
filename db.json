@@ -1,4 +1,107 @@
 {
-  "users": [],
-  "posts": []
+  "users": [
+    {
+      "id": "1727443262285",
+      "login": "test",
+      "password": "test",
+      "firstname": "Test",
+      "lastname": "Testovich"
+    },
+    {
+      "id": "1727443336799",
+      "login": "miliinwine",
+      "password": "02022000",
+      "firstname": "Milena",
+      "lastname": "Sydykbekova"
+    },
+    {
+      "id": "1727952562731",
+      "login": "mila",
+      "password": "mila",
+      "firstname": "Mila",
+      "lastname": "Mila"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1727443290155",
+      "title": "Title",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "content": "Dhbcjhfdnakcmkldamck",
+      "date": "2024-09-27",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "test"
+    },
+    {
+      "id": "1727443345433",
+      "title": "Ufdhjvuindfs",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "content": "Fekjmnvkjndfskjv",
+      "date": "2024-09-27",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "miliinwine"
+    },
+    {
+      "id": "1727443872250",
+      "title": "Fkjcvmfdskvf",
+      "image": "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+      "content": "Https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpghttps://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpghttps://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_pho",
+      "date": "2024-09-27",
+      "link": "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+      "source": "dfstudio-d420.kxcdn.com",
+      "author": "miliinwine"
+    },
+    {
+      "id": "1727881781625",
+      "title": "Fdvkmdfksmv",
+      "image": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "content": "Fdsvlfmdsl;bmv;lfgsd",
+      "date": "2024-10-02",
+      "link": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "source": "gratisography.com",
+      "author": "miliinwine"
+    },
+    {
+      "id": "1727882339425",
+      "title": "Fdsjknvlkjfs dbjkl",
+      "image": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "content": "Fdlksmvklfsndmbklv",
+      "date": "2024-10-02",
+      "link": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "source": "gratisography.com",
+      "author": "miliinwine"
+    },
+    {
+      "id": "1727882349484",
+      "title": "Fdms nvbjfns klb",
+      "image": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "content": "Darkmvkfjldsnb",
+      "date": "2024-10-02",
+      "link": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "source": "gratisography.com",
+      "author": "miliinwine"
+    },
+    {
+      "id": "1727951274711",
+      "title": "123",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
+      "content": "Lollollollol",
+      "date": "2024-10-03",
+      "link": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
+      "source": "upload.wikimedia.org",
+      "author": "miliinwine"
+    },
+    {
+      "id": 1727956185788,
+      "title": "Fdkvkmfdv",
+      "image": "https://www.adobe.com/creativecloud/photography/discover/media_131179edca5f92db203e2b78cb8a308605afbc958.png?width=750&format=png&optimize=medium",
+      "content": "Kdsfvjnfsd",
+      "date": "2024-10-03",
+      "link": "https://www.adobe.com/creativecloud/photography/discover/media_131179edca5f92db203e2b78cb8a308605afbc958.png?width=750&format=png&optimize=medium",
+      "source": "www.adobe.com",
+      "author": "mila"
+    }
+  ]
 }

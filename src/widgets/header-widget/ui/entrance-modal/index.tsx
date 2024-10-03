@@ -10,14 +10,7 @@ import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
-import {
-  Description,
-  Descriptions,
-  ErrorMessage,
-  Eye,
-  Input,
-  Password,
-} from "../../styles";
+import { Inputs, Label, Input, Password, Eye } from "../../styles";
 import "react-toastify/dist/ReactToastify.css";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
@@ -99,64 +92,58 @@ export const EntranceModal: FC = () => {
         toggleModal={toggleEntranceModal}
         modalTitle="Вход"
         modalForm={
-          <>
+          <Inputs>
             <Controller
               control={control}
               name="login"
               render={({ field }) => {
+                const isError = !!errors.login;
                 return (
-                  <Input
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Логин"
-                  />
+                  <Label>
+                    <p>
+                      Логин <span>*</span>
+                    </p>
+                    <Input
+                      {...field}
+                      placeholder={isError ? errors?.login?.message : ""}
+                      isError={isError}
+                    />
+                  </Label>
                 );
               }}
             />
-            <Descriptions>
-              {errors.login ? (
-                <>
-                  <ErrorMessage>
-                    {errors.login.message?.toString()}
-                  </ErrorMessage>
-                </>
-              ) : (
-                <Description>Введите логин</Description>
-              )}
-            </Descriptions>
             <Controller
               control={control}
               name="password"
               render={({ field }) => {
+                const isError = !!errors.password;
                 return (
                   <Password>
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Пароль"
-                    />
-                    <div onMouseDown={() => setShowPassword(!showPassword)}>
-                      {showPassword ? (
-                        <Eye src={eye_crossed} />
-                      ) : (
-                        <Eye src={eye} />
-                      )}
-                    </div>
+                    <Label>
+                      <p>
+                        Пароль <span>*</span>
+                      </p>
+                      <Password>
+                        <Input
+                          {...field}
+                          placeholder={isError ? errors?.password?.message : ""}
+                          type={showPassword ? "text" : "password"}
+                          isError={isError}
+                        />
+                        <div onMouseDown={() => setShowPassword(!showPassword)}>
+                          {showPassword ? (
+                            <Eye src={eye_crossed} />
+                          ) : (
+                            <Eye src={eye} />
+                          )}
+                        </div>
+                      </Password>
+                    </Label>
                   </Password>
                 );
               }}
             />
-            <Descriptions>
-              {errors.password ? (
-                <ErrorMessage>
-                  {errors.password.message?.toString()}
-                </ErrorMessage>
-              ) : (
-                <Description>Введите пароль</Description>
-              )}
-            </Descriptions>
-          </>
+          </Inputs>
         }
         modalButtons={
           <>

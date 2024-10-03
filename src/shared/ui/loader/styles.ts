@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Reload = styled.div`
   border-width: 0.6rem;
   border-style: solid;
-  border-color: #1986ec;
+  border-color: #0d6efd;
   width: 5.625rem;
   height: 5.625rem;
   border-radius: 50%;
@@ -24,7 +24,7 @@ export const Reload = styled.div`
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    background: #1986ec;
+    background: #0d6efd;
     position: absolute;
     left: 0.125rem;
   }
