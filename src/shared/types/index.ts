@@ -30,14 +30,22 @@ export interface UserLoggedTypes {
 }
 
 export interface PostTypes {
-  id?: string;
   image: string;
   title: string;
   content: string;
   link: string;
-  date?: string;
-  source?: string;
   author?: string;
+}
+
+export interface CardProps {
+  id: string | undefined;
+  image: string;
+  title: string | undefined;
+  content: string | undefined;
+  link: string;
+  date: string;
+  source: string;
+  author: string;
 }
 
 export interface UserTypes {
@@ -60,9 +68,9 @@ export interface ModalProps {
   modalButton?: ReactElement;
   isOpened: boolean;
   toggleModal: () => void;
-  modalTitle: string;
+  modalTitle?: string;
   modalForm: ReactElement;
-  modalButtons: ReactElement;
+  modalButtons?: ReactElement;
 }
 
 export interface CanvasProps {

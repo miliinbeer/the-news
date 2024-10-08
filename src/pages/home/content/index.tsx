@@ -2,11 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../../app/api";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import { AppDispatch, PostTypes, StatePostTypes } from "../../../shared/types";
+import { AppDispatch, StatePostTypes } from "../../../shared/types";
 import { HeaderWidget } from "../../../widgets/header-widget";
-import { Card } from "../../../shared/ui/card";
+import { CardWidget } from "../../../shared/ui/card";
 import { Loader } from "../../../shared/ui/loader";
 import { Main, Cards, ScrollLoader } from "./styles";
+import { CardProps } from "reactstrap";
 
 export const Content: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -40,9 +41,9 @@ export const Content: FC = () => {
       <HeaderWidget />
       <Main>
         <Cards>
-          {post.slice(0, displayCount).map((el: PostTypes) => {
+          {post.slice(0, displayCount).map((el: CardProps) => {
             return (
-              <Card
+              <CardWidget
                 key={el.id}
                 id={el.id}
                 title={el.title}

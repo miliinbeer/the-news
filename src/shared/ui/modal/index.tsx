@@ -1,10 +1,6 @@
 import React, { FC } from "react";
 import { ModalProps } from "../../types/index";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-} from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { ModalFooter } from "./styles";
 
 export const ModalWindow: FC<ModalProps> = ({
@@ -18,8 +14,14 @@ export const ModalWindow: FC<ModalProps> = ({
   return (
     <>
       {modalButton}
-      <Modal style={{marginTop: "7rem"}} isOpen={isOpened} toggle={toggleModal}>
-        <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>
+      <Modal
+        style={{ marginTop: "7rem" }}
+        isOpen={isOpened}
+        toggle={toggleModal}
+      >
+        <ModalHeader toggle={toggleModal} style={{ border: "none" }}>
+          {modalTitle}
+        </ModalHeader>
         <ModalBody>
           <>{modalForm}</>
           <ModalFooter>{modalButtons}</ModalFooter>
