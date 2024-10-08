@@ -5,3 +5,7 @@ export const Items = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const Buttons = styled.div`
+  margin: 10px 0;
+`;

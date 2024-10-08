@@ -6,10 +6,10 @@ import base64 from "base-64";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegistration } from "../../../../shared/ui/modal/schema/schema";
+import { showToast } from "../../../../shared/helpers";
 import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
-import { toast } from "react-toastify";
 import { Inputs, Password, Label, Input, Eye } from "../../styles";
 import "react-toastify/dist/ReactToastify.css";
 import eye from "../../../../shared/icons/eye.svg";
@@ -38,16 +38,7 @@ export const RegistrationModal: FC = () => {
     const isLoginTaken = user.find((user) => user.login === el.login);
 
     if (isLoginTaken) {
-      toast.error("Такой пользователь уже существует. Попробуйте снова.", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      showToast("Такой пользователь уже существует. Попробуйте снова.");
       return;
     }
     dispatch(requestUsers(el));

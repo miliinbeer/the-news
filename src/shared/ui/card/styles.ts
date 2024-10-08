@@ -33,8 +33,14 @@ export const Title = styled.p`
 `;
 
 export const Content = styled.p`
+  width: 100%;
   height: 70px;
-  overflow: hidden;
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 `;
 
 export const Source = styled.p`

@@ -22,6 +22,7 @@ import {
   Inputs,
   Label,
   Input,
+  Textarea,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
@@ -116,7 +117,7 @@ export const HeaderWidget: FC = () => {
                         render={({ field }) => {
                           const isError = !!errors.title;
                           return (
-                            <Label>
+                            <Label htmlFor="title">
                               <p>
                                 Заголовок <span>*</span>
                               </p>
@@ -126,6 +127,7 @@ export const HeaderWidget: FC = () => {
                                   isError ? errors?.title?.message : ""
                                 }
                                 isError={isError}
+                                name="title"
                               />
                             </Label>
                           );
@@ -137,7 +139,7 @@ export const HeaderWidget: FC = () => {
                         render={({ field }) => {
                           const isError = !!errors.image;
                           return (
-                            <Label>
+                            <Label htmlFor="image">
                               <p>
                                 Изображение <span>*</span>
                               </p>
@@ -147,6 +149,7 @@ export const HeaderWidget: FC = () => {
                                   isError ? errors?.image?.message : ""
                                 }
                                 isError={isError}
+                                name="image"
                               />
                             </Label>
                           );
@@ -158,16 +161,18 @@ export const HeaderWidget: FC = () => {
                         render={({ field }) => {
                           const isError = !!errors.content;
                           return (
-                            <Label>
+                            <Label htmlFor="content">
                               <p>
                                 Контент <span>*</span>
                               </p>
-                              <Input
+                              <Textarea
                                 {...field}
                                 placeholder={
                                   isError ? errors?.content?.message : ""
                                 }
                                 isError={isError}
+                                rows={4}
+                                name="content"
                               />
                             </Label>
                           );
@@ -179,7 +184,7 @@ export const HeaderWidget: FC = () => {
                         render={({ field }) => {
                           const isError = !!errors.link;
                           return (
-                            <Label>
+                            <Label htmlFor="link">
                               <p>
                                 Ссылка на источник <span>*</span>
                               </p>
@@ -189,6 +194,7 @@ export const HeaderWidget: FC = () => {
                                   isError ? errors?.link?.message : ""
                                 }
                                 isError={isError}
+                                name="link"
                               />
                             </Label>
                           );

@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "1728383232684",
+      "login": "test",
+      "password": "test",
+      "firstname": "Test",
+      "lastname": "Test"
+    }
+  ],
   "posts": [
     {
       "id": "1727443290155",
@@ -72,7 +80,7 @@
       "author": "miliinwine"
     },
     {
-      "id": 1727956185788,
+      "id": "1727956185788",
       "title": "Fdkvkmfdv",
       "image": "https://www.adobe.com/creativecloud/photography/discover/media_131179edca5f92db203e2b78cb8a308605afbc958.png?width=750&format=png&optimize=medium",
       "content": "Kdsfvjnfsd",
@@ -82,7 +90,7 @@
       "author": "mila"
     },
     {
-      "id": 1728317218929,
+      "id": "1728317218929",
       "title": "Овыатмолватм",
       "image": "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg",
       "content": "Авипаыипыаи",
@@ -90,6 +98,46 @@
       "link": "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg",
       "source": "www.simplilearn.com",
       "author": "miliinbeer"
+    },
+    {
+      "id": 1728397408077,
+      "title": "Title",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSimEtPETyjcf7d6lLiYWlycjTLSIobmoobPA&s",
+      "content": "Fdjnvjkfdn",
+      "date": "2024-10-08",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSimEtPETyjcf7d6lLiYWlycjTLSIobmoobPA&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "test"
+    },
+    {
+      "id": 1728397985103,
+      "title": "Kfjsdvnfdkjnvdfs",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s",
+      "content": "Edkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjnedkjcjkdnascjkndjndasjncjn",
+      "date": "2024-10-08",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "test"
+    },
+    {
+      "id": 1728398015869,
+      "title": "Lkmfdsaklvmfkdla",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-thsyY7pcpafX5U5CN_fkREa_Bmrvak0sRg&s",
+      "content": "Fdkamv klfmdaklmv afdklm klfamdvjnfdajh nvjhfnakjd jfnajkvifjndavjnfjkanvkjafd jfnadvjnjfanvjkafnv fjndavjnfjanv. djasncjkndjasvcjkdnsajcn",
+      "date": "2024-10-08",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-thsyY7pcpafX5U5CN_fkREa_Bmrvak0sRg&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "test"
+    },
+    {
+      "id": 1728398605165,
+      "title": "Dksjvakjfnd",
+      "image": "https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp",
+      "content": "Where does it come from?\ncontrary to popular belief, lorem ipsum is not simply random text. it has roots in a piece of classical latin literature from 45 bc, making it over 2000 years old. richard mcclintock, a latin professor at hampden-sydney college in virginia, looked up one of the more obscure latin words, consectetur, from a lorem ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. lorem ipsum comes from sections 1.10.32 and 1.10.33 of \"de finibus bonorum et malorum\" (the extremes of good and evil) by cicero, written in 45 bc. this book is a treatise on the theory of ethics, very popular during the renaissance. the first line of lorem ipsum, \"lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n\nthe standard chunk of lorem ipsum used since the 1500s is reproduced below for those interested. sections 1.10.32 and 1.10.33 from \"de finibus bonorum et malorum\" by cicero are also reproduced in their exact original form, accompanied by english versions from the 1914 translation by h. rackham.",
+      "date": "2024-10-08",
+      "link": "https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp",
+      "source": "platinumlist.net",
+      "author": "test"
     }
   ]
 }

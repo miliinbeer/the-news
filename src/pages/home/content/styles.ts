@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
+export const Main = styled.main`
+  max-width: 960px;
+  margin: 0 auto;
+`;
+
 export const Cards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 300px);
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px;
-  @media (max-width: 1000px) {
-    display: flex;
-    flex-wrap: wrap;
+
+  @media (max-width: 940px) {
+    justify-content: center;
   }
 `;
 

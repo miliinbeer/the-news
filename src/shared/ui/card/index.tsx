@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { PostTypes } from "../../../shared/types";
 import { Root, Image, Title, Content, Source, Info } from "./styles";
 
-export const CardWidget: FC<PostTypes> = ({
+export const Card: FC<PostTypes> = ({
   id,
   image,
   title,
@@ -17,7 +17,9 @@ export const CardWidget: FC<PostTypes> = ({
       <a href={link}>
         <Image src={image} alt={title} />
         <Title>{title}</Title>
-        <Content>{content}</Content>
+        <Content>
+          <p>{content}</p>
+        </Content>
         <Source>{source}</Source>
         <Info>
           <p>{author}</p>

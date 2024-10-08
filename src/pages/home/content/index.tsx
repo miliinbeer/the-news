@@ -4,9 +4,9 @@ import { fetchPosts } from "../../../app/api";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { AppDispatch, PostTypes, StatePostTypes } from "../../../shared/types";
 import { HeaderWidget } from "../../../widgets/header-widget";
-import { CardWidget } from "../../../shared/ui/card";
+import { Card } from "../../../shared/ui/card";
 import { Loader } from "../../../shared/ui/loader";
-import { Cards, ScrollLoader } from "./styles";
+import { Main, Cards, ScrollLoader } from "./styles";
 
 export const Content: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -38,26 +38,28 @@ export const Content: FC = () => {
   return (
     <>
       <HeaderWidget />
-      <Cards>
-        {post.slice(0, displayCount).map((el: PostTypes) => {
-          return (
-            <CardWidget
-              key={el.id}
-              id={el.id}
-              title={el.title}
-              image={el.image}
-              content={el.content}
-              date={el.date}
-              link={el.link}
-              source={el.source}
-              author={el.author}
-            />
-          );
-        })}
-      </Cards>
-      <div ref={infiniteRef}>
-        {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
-      </div>
+      <Main>
+        <Cards>
+          {post.slice(0, displayCount).map((el: PostTypes) => {
+            return (
+              <Card
+                key={el.id}
+                id={el.id}
+                title={el.title}
+                image={el.image}
+                content={el.content}
+                date={el.date}
+                link={el.link}
+                source={el.source}
+                author={el.author}
+              />
+            );
+          })}
+        </Cards>
+        <div ref={infiniteRef}>
+          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
+        </div>
+      </Main>
     </>
   );
 };

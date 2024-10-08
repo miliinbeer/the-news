@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { CanvasProps, StatePostTypes } from "../../types";
 import { Avatar } from "../avatar";
-import { Items } from "./styles";
+import { Items, Buttons } from "./styles";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 export const Canvas: FC<CanvasProps> = ({
@@ -34,7 +34,7 @@ export const Canvas: FC<CanvasProps> = ({
           quos eligendi pariatur dolore velit quaerat voluptates, sapiente
           error?
         </p>
-        {exitButton}
+        <Buttons>{exitButton}</Buttons>
       </Offcanvas.Body>
     </Offcanvas>
   );

@@ -18,8 +18,6 @@ export const schemaPost = yup.object().shape({
     .transform((value) =>
       (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
     )
-    .min(10, "Введите более 10 символов")
-    .max(300, "Введите не более 300 символов")
     .required("Обязательное поле"),
   link: yup
     .string()

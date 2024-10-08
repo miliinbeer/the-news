@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledInputProps } from "../../shared/types";
+import { IsErrorType } from "../../shared/types";
 
 export const Root = styled.div`
   margin: 20px;
@@ -22,6 +22,9 @@ export const Logotype = styled.a`
   font-size: 30px;
   span {
     color: #4c7aff;
+  }
+  @media (max-width: 750px) {
+    font-size: 20px;
   }
 `;
 
@@ -63,18 +66,26 @@ export const Label = styled.label`
   }
 `;
 
-export const Input = styled.input<StyledInputProps>`
+export const Input = styled.input<IsErrorType>`
   padding: 10px 15px;
   border-radius: 10px;
   border: 2px solid ${({ isError }) => (isError ? "#ff6c15" : "#6c757d")};
   background-color: ${({ isError }) => (isError ? "pink" : "white")};
-  &:focus {
-    outline: none;
-  }
   &::placeholder {
     color: #ff6c15;
   }
 `;
+
+export const Textarea = styled.textarea<IsErrorType>`
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid ${({ isError }) => (isError ? "#ff6c15" : "#6c757d")};
+  background-color: ${({ isError }) => (isError ? "pink" : "white")};
+  &::placeholder {
+    color: #ff6c15;
+  }
+`;
+
 export const Password = styled.div`
   position: relative;
   display: flex;

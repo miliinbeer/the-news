@@ -80,6 +80,6 @@ export interface ErrorProps {
   message: string;
 }
 
-export interface StyledInputProps {
+export interface IsErrorType {
   isError: boolean;
 }
