@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { requestUsers, setUserLogged } from "../../../../app/api";
@@ -20,7 +20,7 @@ export const RegistrationModal: FC = () => {
 
   const { user } = useSelector((state: StatePostTypes) => state.root);
 
-  const [registrationModal, setRegistartionModal] = useState(false);
+  const [registrationModal, setRegistrationModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -30,7 +30,6 @@ export const RegistrationModal: FC = () => {
     formState: { errors },
   } = useForm<yup.InferType<typeof schemaRegistration>>({
     resolver: yupResolver(schemaRegistration),
-    defaultValues: {},
   });
 
   const registrationToAccount: SubmitHandler<
@@ -52,14 +51,14 @@ export const RegistrationModal: FC = () => {
       return;
     }
     dispatch(requestUsers(el));
-    setRegistartionModal(!registrationModal);
+    setRegistrationModal(!registrationModal);
     const token = base64.encode(JSON.stringify(el));
     localStorage.setItem("token", token);
     dispatch(setUserLogged(el));
   };
 
   const toggleRegistrationModal = () => {
-    setRegistartionModal(!registrationModal);
+    setRegistrationModal(!registrationModal);
     reset();
   };
 

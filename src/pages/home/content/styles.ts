@@ -5,6 +5,10 @@ export const Cards = styled.div`
   grid-template-columns: repeat(3, 300px);
   justify-content: center;
   gap: 20px;
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 
 export const ScrollLoader = styled.p`

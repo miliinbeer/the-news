@@ -59,20 +59,20 @@ export const Label = styled.label`
   flex-direction: column;
   gap: 5px;
   span {
-    color: red;
+    color: #ff6c15;
   }
 `;
 
 export const Input = styled.input<StyledInputProps>`
   padding: 10px 15px;
   border-radius: 10px;
-  border: 2px solid ${({ isError }) => (isError ? "red" : "#6c757d")};
+  border: 2px solid ${({ isError }) => (isError ? "#ff6c15" : "#6c757d")};
   background-color: ${({ isError }) => (isError ? "pink" : "white")};
   &:focus {
     outline: none;
   }
   &::placeholder {
-    color: red;
+    color: #ff6c15;
   }
 `;
 export const Password = styled.div`

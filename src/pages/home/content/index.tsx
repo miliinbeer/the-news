@@ -1,18 +1,17 @@
 import React, { FC, useEffect, useState } from "react";
-import { AppDispatch, PostTypes, StatePostTypes } from "../../../shared/types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../../app/api";
 import useInfiniteScroll from "react-infinite-scroll-hook";
+import { AppDispatch, PostTypes, StatePostTypes } from "../../../shared/types";
+import { HeaderWidget } from "../../../widgets/header-widget";
+import { CardWidget } from "../../../shared/ui/card";
 import { Loader } from "../../../shared/ui/loader";
 import { Cards, ScrollLoader } from "./styles";
-import { CardWidget } from "../../../shared/ui/card";
 
 export const Content: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { post, loading, error } = useSelector(
-    (state: StatePostTypes) => state.root
-  );
+  const { post, loading } = useSelector((state: StatePostTypes) => state.root);
 
   const [displayCount, setDisplayCount] = useState(6);
 
@@ -38,6 +37,7 @@ export const Content: FC = () => {
 
   return (
     <>
+      <HeaderWidget />
       <Cards>
         {post.slice(0, displayCount).map((el: PostTypes) => {
           return (

@@ -1,27 +1,5 @@
 {
-  "users": [
-    {
-      "id": "1727443262285",
-      "login": "test",
-      "password": "test",
-      "firstname": "Test",
-      "lastname": "Testovich"
-    },
-    {
-      "id": "1727443336799",
-      "login": "miliinwine",
-      "password": "02022000",
-      "firstname": "Milena",
-      "lastname": "Sydykbekova"
-    },
-    {
-      "id": "1727952562731",
-      "login": "mila",
-      "password": "mila",
-      "firstname": "Mila",
-      "lastname": "Mila"
-    }
-  ],
+  "users": [],
   "posts": [
     {
       "id": "1727443290155",
@@ -102,6 +80,16 @@
       "link": "https://www.adobe.com/creativecloud/photography/discover/media_131179edca5f92db203e2b78cb8a308605afbc958.png?width=750&format=png&optimize=medium",
       "source": "www.adobe.com",
       "author": "mila"
+    },
+    {
+      "id": 1728317218929,
+      "title": "Овыатмолватм",
+      "image": "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg",
+      "content": "Авипаыипыаи",
+      "date": "2024-10-07",
+      "link": "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg",
+      "source": "www.simplilearn.com",
+      "author": "miliinbeer"
     }
   ]
 }

@@ -212,7 +212,6 @@ export const HeaderWidget: FC = () => {
                   showCanvas={showCanvas}
                   handlerHide={() => setShowCanvas(false)}
                   placement="end"
-                  canvasItems={<></>}
                   exitButton={
                     <Button color="primary" onClick={handleLogout}>
                       Выход

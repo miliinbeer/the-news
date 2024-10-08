@@ -69,7 +69,6 @@ export interface CanvasProps {
   showCanvas: boolean;
   handlerHide: () => void;
   placement: OffcanvasPlacement;
-  canvasItems: ReactElement;
   exitButton: ReactElement;
 }
 

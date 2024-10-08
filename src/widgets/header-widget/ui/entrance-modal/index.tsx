@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, searchUsers, setUserLogged } from "../../../../app/api";
@@ -18,7 +18,9 @@ import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 export const EntranceModal: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user } = useSelector((state: StatePostTypes) => state.root);
+  const { user } = useSelector(
+    (state: StatePostTypes) => state.root
+  );
 
   const [entranceModal, setEntranceModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +32,6 @@ export const EntranceModal: FC = () => {
     formState: { errors },
   } = useForm<yup.InferType<typeof schemaEntrance>>({
     resolver: yupResolver(schemaEntrance),
-    defaultValues: {},
   });
 
   const toggleEntranceModal = () => {
@@ -40,9 +41,7 @@ export const EntranceModal: FC = () => {
 
   const loginToAccount: SubmitHandler<
     yup.InferType<typeof schemaEntrance>
-  > = async (el) => {
-    await dispatch(fetchUsers());
-
+  > = (el) => {
     const foundUser = user.find((user) => user.login === el.login);
 
     if (!foundUser) {
