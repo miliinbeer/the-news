@@ -23,6 +23,7 @@ import {
   Label,
   Input,
   Textarea,
+  Description,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 
@@ -123,12 +124,12 @@ export const HeaderWidget: FC = () => {
                               </p>
                               <Input
                                 {...field}
-                                placeholder={
-                                  isError ? errors?.title?.message : ""
-                                }
                                 isError={isError}
                                 name="title"
                               />
+                              <Description>
+                                {isError ? errors?.title?.message : null}
+                              </Description>
                             </Label>
                           );
                         }}
@@ -145,12 +146,12 @@ export const HeaderWidget: FC = () => {
                               </p>
                               <Input
                                 {...field}
-                                placeholder={
-                                  isError ? errors?.image?.message : ""
-                                }
                                 isError={isError}
                                 name="image"
                               />
+                              <Description>
+                                {isError ? errors?.image?.message : null}
+                              </Description>
                             </Label>
                           );
                         }}
@@ -167,13 +168,13 @@ export const HeaderWidget: FC = () => {
                               </p>
                               <Textarea
                                 {...field}
-                                placeholder={
-                                  isError ? errors?.content?.message : ""
-                                }
                                 isError={isError}
                                 rows={4}
                                 name="content"
                               />
+                              <Description>
+                                {isError ? errors?.content?.message : null}
+                              </Description>
                             </Label>
                           );
                         }}
@@ -188,14 +189,10 @@ export const HeaderWidget: FC = () => {
                               <p>
                                 Ссылка на источник <span>*</span>
                               </p>
-                              <Input
-                                {...field}
-                                placeholder={
-                                  isError ? errors?.link?.message : ""
-                                }
-                                isError={isError}
-                                name="link"
-                              />
+                              <Input {...field} isError={isError} name="link" />
+                              <Description>
+                                {isError ? errors?.link?.message : null}
+                              </Description>
                             </Label>
                           );
                         }}

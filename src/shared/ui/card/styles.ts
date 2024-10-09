@@ -55,16 +55,22 @@ export const Source = styled.a`
 `;
 
 export const Info = styled.div`
-  ${({ theme }) => css`${theme.flex.contentBetween}`}
+  ${({ theme }) =>
+    css`
+      ${theme.flex.contentBetween}
+    `}
 `;
 
 export const Author = styled.p`
   cursor: pointer;
   transition: 0.3s all;
-
-  &:hover {
-    color: ${theme.colors.secondary};
-    transition: 0.3s all;
+  a {
+    color: ${theme.colors.font};
+    text-decoration: none;
+    &:hover {
+      color: ${theme.colors.secondary};
+      transition: 0.3s all;
+    }
   }
 `;
 

@@ -14,6 +14,7 @@ import {
 } from "./styles";
 import { ModalWindow } from "../modal";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const CardWidget: FC<CardProps> = ({
   id,
@@ -62,7 +63,9 @@ export const CardWidget: FC<CardProps> = ({
           <FormText>{content}</FormText>
           <Source href={link}>{source}</Source>
           <Info>
-            <Author onClick={handleAuthorClick}>{author}</Author>
+            <Author onClick={handleAuthorClick}>
+              <Link to="user">{author}</Link>
+            </Author>
             <small className="text-muted">{date}</small>
           </Info>
         </Form>

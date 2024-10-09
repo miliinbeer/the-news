@@ -1,19 +1,70 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
-import { theme } from "../../shared/helpers";
-import { StatePostTypes } from "../../shared/types";
-import { Error } from "./error";
-import { Content } from "./content";
-import { ThemeProvider } from "styled-components";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, StatePostTypes } from "../../shared/types";
+import { Error } from "../error";
+import { HeaderWidget } from "../../widgets/header-widget";
+import { Cards, Main, ScrollLoader } from "./styles";
+import { CardWidget } from "../../shared/ui/card";
+import { CardProps } from "reactstrap";
+import { fetchPosts } from "../../app/api";
+import useInfiniteScroll from "react-infinite-scroll-hook";
+import { Loader } from "../../shared/ui/loader";
 
 export const Home: FC = () => {
-  const { error } = useSelector((state: StatePostTypes) => state.root);
+  const dispatch: AppDispatch = useDispatch();
 
+  const { post, loading, error } = useSelector(
+    (state: StatePostTypes) => state.root
+  );
+
+  const [displayCount, setDisplayCount] = useState(6);
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
+
+  const hasMorePosts = displayCount < post.length;
+
+  const [infiniteRef] = useInfiniteScroll({
+    loading,
+    hasNextPage: hasMorePosts,
+    onLoadMore: () => {
+      if (hasMorePosts) {
+        setTimeout(() => {
+          setDisplayCount((prevCount) => prevCount + 9);
+        }, 1000);
+      }
+    },
+  });
+
+  if (loading) return <Loader />;
   if (error) return <Error message={error} />;
 
   return (
-    <ThemeProvider theme={theme}>
-      <Content />
-    </ThemeProvider>
+    <>
+      <HeaderWidget />
+      <Main>
+        <Cards>
+          {post.slice(0, displayCount).map((el: CardProps) => {
+            return (
+              <CardWidget
+                key={el.id}
+                id={el.id}
+                title={el.title}
+                image={el.image}
+                content={el.content}
+                date={el.date}
+                link={el.link}
+                source={el.source}
+                author={el.author}
+              />
+            );
+          })}
+        </Cards>
+        <div ref={infiniteRef}>
+          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
+        </div>
+      </Main>
+    </>
   );
 };

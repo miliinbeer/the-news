@@ -6,9 +6,9 @@ export const schemaPost = yup.object().shape({
     .transform((value) =>
       (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
     )
-    .min(3, "Ввведите не менее 3 символов")
-    .max(100, "Ввведите не более 100 символов")
-    .required("Ввведите не менее 3 символов"),
+    .min(3, "Введите не менее 3 символов")
+    .max(100, "Введите не более 100 символов")
+    .required("Введите не менее 3 символов"),
   image: yup
     .string()
     .transform((value) => value.trim())
@@ -19,7 +19,7 @@ export const schemaPost = yup.object().shape({
     .transform((value) =>
       (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
     )
-    .required("Обязательное поле"),
+    .required("Введите текст"),
   link: yup
     .string()
     .transform((value) => value.trim())
@@ -30,25 +30,17 @@ export const schemaPost = yup.object().shape({
 export const schemaRegistration = yup.object().shape({
   login: yup
     .string()
-    .matches(/[A-Za-z]/, "Введите на английском")
+    .matches(/[A-Za-z]/, "Допускаются символы только на латинице")
     .transform((value) => value.trim())
     .min(3, "Введите не менее 3 символов")
     .max(30, "Введите не более 30 символов")
-    .required("Обязательное поле"),
+    .required("Введите логин"),
   password: yup
     .string()
     .transform((value) => value.trim())
     .min(3, "Введите не менее 3 символов")
     .max(30, "Введите не более 30 символов")
-    .required("Обязательное поле"),
-  firstname: yup
-    .string()
-    .transform((value) =>
-      (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
-    )
-    .min(3, "Введите не менее 3 символов")
-    .max(30, "Введите не более 30 символов")
-    .required("Обязательное поле"),
+    .required("Введите пароль"),
   lastname: yup
     .string()
     .transform((value) =>
@@ -56,7 +48,15 @@ export const schemaRegistration = yup.object().shape({
     )
     .min(3, "Введите не менее 3 символов")
     .max(30, "Введите не более 20 символов")
-    .required("Обязательное поле"),
+    .required("Укажите Вашу фамилию"),
+  firstname: yup
+    .string()
+    .transform((value) =>
+      (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim()
+    )
+    .min(3, "Введите не менее 3 символов")
+    .max(30, "Введите не более 30 символов")
+    .required("Укажите Ваше имя"),
 });
 
 export const schemaEntrance = yup.object().shape({

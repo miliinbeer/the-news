@@ -1,4 +1,23 @@
 {
-  "users": [],
-  "posts": []
+  "users": [
+    {
+      "id": 1728474425969,
+      "login": "test",
+      "password": "test",
+      "firstname": "Test",
+      "lastname": "Test"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1728474455056,
+      "title": "Fdkjnvkjndfs",
+      "image": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
+      "content": "Fkmvklmdfsklmvf",
+      "date": "2024-10-09",
+      "link": "https://gratisography.com/",
+      "source": "gratisography.com",
+      "author": "test"
+    }
+  ]
 }

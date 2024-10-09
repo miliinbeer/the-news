@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Root, Items, Icon, Message } from "./styles";
-import { ErrorProps } from "../../../shared/types";
-import icon from "../../../shared/icons/favicon.webp";
+import { ErrorProps } from "../../shared/types";
+import icon from "../../shared/icons/favicon.webp";
 
 export const Error: FC<ErrorProps> = ({ message }) => {
   return (

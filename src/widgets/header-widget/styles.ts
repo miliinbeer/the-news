@@ -53,7 +53,7 @@ export const Inputs = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const Items = styled.div`
@@ -67,7 +67,6 @@ export const Label = styled.label`
     css`
       ${theme.flex.directionColumn}
     `}
-  gap: 5px;
   span {
     color: ${theme.colors.error};
   }
@@ -96,6 +95,13 @@ export const Textarea = styled.textarea<IsErrorType>`
   &::placeholder {
     color: ${theme.colors.error};
   }
+`;
+
+export const Description = styled.div`
+  padding-left: 10px;
+  height: 20px;
+  color: ${theme.colors.error};
+  font-size: 15px;
 `;
 
 export const Password = styled.div`

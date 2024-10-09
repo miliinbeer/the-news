@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { requestUsers, setUserLogged } from "../../../../app/api";
@@ -10,7 +10,7 @@ import { showToast } from "../../../../shared/helpers";
 import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
-import { Inputs, Password, Label, Input, Eye } from "../../styles";
+import { Inputs, Password, Label, Input, Description, Eye } from "../../styles";
 import "react-toastify/dist/ReactToastify.css";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
@@ -72,15 +72,14 @@ export const RegistrationModal: FC = () => {
               render={({ field }) => {
                 const isError = !!errors.login;
                 return (
-                  <Label>
+                  <Label htmlFor="login">
                     <p>
                       Логин <span>*</span>
                     </p>
-                    <Input
-                      {...field}
-                      placeholder={isError ? errors?.login?.message : ""}
-                      isError={isError}
-                    />
+                    <Input {...field} isError={isError} name="login" />
+                    <Description>
+                      {isError ? errors?.login?.message : null}
+                    </Description>
                   </Label>
                 );
               }}
@@ -92,18 +91,18 @@ export const RegistrationModal: FC = () => {
                 const isError = !!errors.password;
                 return (
                   <Password>
-                    <Label>
+                    <Label htmlFor="password">
                       <p>
                         Пароль <span>*</span>
                       </p>
                       <Password>
                         <Input
                           {...field}
-                          placeholder={isError ? errors?.password?.message : ""}
                           type={showPassword ? "text" : "password"}
                           isError={isError}
+                          name="password"
                         />
-                        <div onMouseDown={() => setShowPassword(!showPassword)}>
+                        <div onClick={() => setShowPassword(!showPassword)}>
                           {showPassword ? (
                             <Eye src={eye_crossed} />
                           ) : (
@@ -111,27 +110,11 @@ export const RegistrationModal: FC = () => {
                           )}
                         </div>
                       </Password>
+                      <Description>
+                        {isError ? errors?.password?.message : null}
+                      </Description>
                     </Label>
                   </Password>
-                );
-              }}
-            />
-            <Controller
-              control={control}
-              name="firstname"
-              render={({ field }) => {
-                const isError = !!errors.firstname;
-                return (
-                  <Label>
-                    <p>
-                      Имя <span>*</span>
-                    </p>
-                    <Input
-                      {...field}
-                      placeholder={isError ? errors?.firstname?.message : ""}
-                      isError={isError}
-                    />
-                  </Label>
                 );
               }}
             />
@@ -141,15 +124,32 @@ export const RegistrationModal: FC = () => {
               render={({ field }) => {
                 const isError = !!errors.lastname;
                 return (
-                  <Label>
+                  <Label htmlFor="lastname">
                     <p>
                       Фамилия <span>*</span>
                     </p>
-                    <Input
-                      {...field}
-                      placeholder={isError ? errors?.lastname?.message : ""}
-                      isError={isError}
-                    />
+                    <Input {...field} isError={isError} name="lastname" />
+                    <Description>
+                      {isError ? errors?.lastname?.message : null}
+                    </Description>
+                  </Label>
+                );
+              }}
+            />
+            <Controller
+              control={control}
+              name="firstname"
+              render={({ field }) => {
+                const isError = !!errors.firstname;
+                return (
+                  <Label htmlFor="firstname">
+                    <p>
+                      Имя <span>*</span>
+                    </p>
+                    <Input {...field} isError={isError} name="firstname" />
+                    <Description>
+                      {isError ? errors?.firstname?.message : null}
+                    </Description>
                   </Label>
                 );
               }}

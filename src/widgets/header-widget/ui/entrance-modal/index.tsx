@@ -11,7 +11,7 @@ import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui/modal";
 import { Button } from "reactstrap";
 import { ToastContainer } from "react-toastify";
-import { Inputs, Label, Input, Password, Eye } from "../../styles";
+import { Inputs, Label, Input, Password, Eye, Description } from "../../styles";
 import "react-toastify/dist/ReactToastify.css";
 import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
@@ -79,15 +79,14 @@ export const EntranceModal: FC = () => {
               render={({ field }) => {
                 const isError = !!errors.login;
                 return (
-                  <Label>
+                  <Label htmlFor="login">
                     <p>
                       Логин <span>*</span>
                     </p>
-                    <Input
-                      {...field}
-                      placeholder={isError ? errors?.login?.message : ""}
-                      isError={isError}
-                    />
+                    <Input {...field} isError={isError} name="login" />
+                    <Description>
+                      {isError ? errors?.login?.message : null}
+                    </Description>
                   </Label>
                 );
               }}
@@ -99,18 +98,18 @@ export const EntranceModal: FC = () => {
                 const isError = !!errors.password;
                 return (
                   <Password>
-                    <Label>
+                    <Label htmlFor="password">
                       <p>
                         Пароль <span>*</span>
                       </p>
                       <Password>
                         <Input
                           {...field}
-                          placeholder={isError ? errors?.password?.message : ""}
                           type={showPassword ? "text" : "password"}
                           isError={isError}
+                          name="password"
                         />
-                        <div onMouseDown={() => setShowPassword(!showPassword)}>
+                        <div onClick={() => setShowPassword(!showPassword)}>
                           {showPassword ? (
                             <Eye src={eye_crossed} />
                           ) : (
@@ -118,6 +117,9 @@ export const EntranceModal: FC = () => {
                           )}
                         </div>
                       </Password>
+                      <Description>
+                        {isError ? errors?.password?.message : null}
+                      </Description>
                     </Label>
                   </Password>
                 );
