@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { IsErrorType } from "../../shared/types";
+import { theme } from "../../shared/helpers";
 
 export const Root = styled.div`
   margin: 20px;
   padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px rgba(0, 0, 0, 0.175) solid;
+  ${({ theme }) =>
+    css`
+      ${theme.flex.contentBetween}
+    `}
+  border: 1px ${theme.colors.secondary} solid;
   border-radius: 20px;
   background-color: white;
 `;
@@ -16,12 +18,12 @@ export const Logotype = styled.a`
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #ff6c15;
+  color: ${theme.colors.error};
   text-decoration: none;
   font-weight: 700;
   font-size: 30px;
   span {
-    color: #4c7aff;
+    color: ${theme.colors.primary};
   }
   @media (max-width: 750px) {
     font-size: 20px;
@@ -40,9 +42,10 @@ export const UserPanel = styled.div`
 `;
 
 export const Buttons = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${({ theme }) =>
+    css`
+      ${theme.flex.contentBetween}
+    `}
   gap: 5px;
 `;
 
@@ -54,42 +57,53 @@ export const Inputs = styled.div`
 `;
 
 export const Items = styled.div`
-  display: flex;
-  justify-content: space-between;
+  ${({ theme }) =>
+    css`
+      ${theme.flex.contentBetween}
+    `}
 `;
 export const Label = styled.label`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) =>
+    css`
+      ${theme.flex.directionColumn}
+    `}
   gap: 5px;
   span {
-    color: #ff6c15;
+    color: ${theme.colors.error};
   }
 `;
 
 export const Input = styled.input<IsErrorType>`
   padding: 10px 15px;
   border-radius: 10px;
-  border: 2px solid ${({ isError }) => (isError ? "#ff6c15" : "#6c757d")};
-  background-color: ${({ isError }) => (isError ? "pink" : "white")};
+  border: 2px solid
+    ${({ isError }) =>
+      isError ? `${theme.colors.error}` : `${theme.colors.secondary}`};
   &::placeholder {
-    color: #ff6c15;
+    color: ${theme.colors.error};
+  }
+  &:focus {
+    outline: none;
   }
 `;
 
 export const Textarea = styled.textarea<IsErrorType>`
   padding: 10px 15px;
   border-radius: 10px;
-  border: 2px solid ${({ isError }) => (isError ? "#ff6c15" : "#6c757d")};
-  background-color: ${({ isError }) => (isError ? "pink" : "white")};
+  border: 2px solid
+    ${({ isError }) =>
+      isError ? `${theme.colors.error}` : `${theme.colors.secondary}`};
   &::placeholder {
-    color: #ff6c15;
+    color: ${theme.colors.error};
   }
 `;
 
 export const Password = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) =>
+    css`
+      ${theme.flex.directionColumn}
+    `}
 `;
 
 export const Eye = styled.img`

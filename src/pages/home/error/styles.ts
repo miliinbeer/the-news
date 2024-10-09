@@ -1,19 +1,17 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { theme } from "../../../shared/helpers";
 
 export const Root = styled.div`
   height: 100vh;
-  color: #4c7aff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: ${theme.colors.primary};
+  ${({ theme }) => css`${theme.flex.contentCenter}`}
   span {
-    color: #ff6c15;
+    color: ${theme.colors.error};
   }
 `;
 
 export const Items = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => css`${theme.flex.itemsCenter}`}
   gap: 20px;
 `;
 

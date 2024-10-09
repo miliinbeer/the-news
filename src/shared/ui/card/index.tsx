@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { CardProps } from "../../../shared/types";
+import { CardProps, StatePostTypes } from "../../../shared/types";
 import {
   Card,
   Image,
@@ -7,11 +7,13 @@ import {
   Content,
   Source,
   Info,
+  Author,
   Form,
   FormTitle,
   FormText,
 } from "./styles";
 import { ModalWindow } from "../modal";
+import { useSelector } from "react-redux";
 
 export const CardWidget: FC<CardProps> = ({
   id,
@@ -19,13 +21,20 @@ export const CardWidget: FC<CardProps> = ({
   title,
   content,
   date,
+  link,
   source,
   author,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
 
+  const { user } = useSelector((state: StatePostTypes) => state.root);
+
   const toggleModal = () => {
     setIsOpened(!isOpened);
+  };
+
+  const handleAuthorClick = () => {
+    console.log(`${author}`);
   };
 
   return (
@@ -37,7 +46,7 @@ export const CardWidget: FC<CardProps> = ({
           <Content>
             <p>{content}</p>
           </Content>
-          <Source>{source}</Source>
+          <Source href={link}>{source}</Source>
           <Info>
             <p>{author}</p>
             <small className="text-muted">{date}</small>
@@ -51,11 +60,11 @@ export const CardWidget: FC<CardProps> = ({
           <FormTitle>{title}</FormTitle>
           <Image src={image} alt={title} />
           <FormText>{content}</FormText>
-          <Source>{source}</Source>
-          <div>
-            <p>{author}</p>
+          <Source href={link}>{source}</Source>
+          <Info>
+            <Author onClick={handleAuthorClick}>{author}</Author>
             <small className="text-muted">{date}</small>
-          </div>
+          </Info>
         </Form>
       }
     />

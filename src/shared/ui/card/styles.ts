@@ -1,16 +1,18 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { theme } from "../../helpers";
 
 export const Card = styled.div`
   cursor: pointer;
   max-width: 300px;
   padding: 20px;
-  border: 1px rgba(0, 0, 0, 0.175) solid;
+  color: ${theme.colors.font};
+  border: 1px ${theme.colors.secondary} solid;
   border-radius: 15px;
   background-color: #fff;
   transition: 0.3s all;
 
   &:hover {
-    border: 1px #4c7aff solid;
+    border: 1px ${theme.colors.primary} solid;
     transition: 0.3s all;
   }
 `;
@@ -42,15 +44,28 @@ export const Content = styled.p`
   }
 `;
 
-export const Source = styled.p`
+export const Source = styled.a`
+  cursor: pointer;
   padding: 0.5rem 0;
-  color: #4c7aff;
+  color: ${theme.colors.primary};
+  text-decoration: none;
+  &:hover {
+    color: ${theme.colors.primary_hover};
+  }
 `;
 
 export const Info = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${({ theme }) => css`${theme.flex.contentBetween}`}
+`;
+
+export const Author = styled.p`
+  cursor: pointer;
+  transition: 0.3s all;
+
+  &:hover {
+    color: ${theme.colors.secondary};
+    transition: 0.3s all;
+  }
 `;
 
 export const Form = styled.div`

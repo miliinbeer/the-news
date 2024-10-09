@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { theme } from "../../helpers";
 
 export const Container = styled.div`
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => css`${theme.flex.contentCenter}`}
+  
 `;
 
 export const Reload = styled.div`
   border-width: 0.6rem;
   border-style: solid;
-  border-color: #0d6efd;
+  border-color: ${theme.colors.primary};
   width: 5.625rem;
   height: 5.625rem;
   border-radius: 50%;
@@ -24,7 +24,7 @@ export const Reload = styled.div`
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    background: #0d6efd;
+    background: ${theme.colors.primary};
     position: absolute;
     left: 0.125rem;
   }
