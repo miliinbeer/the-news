@@ -7,11 +7,14 @@ export const GlobalStyles = createGlobalStyle`
      margin: 0;
      padding: 0;
   }
+  a {
+    text-decoration: none;
+  }
  }
 `;
 
 export const Container = styled.div`
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 0 10px;
 `;

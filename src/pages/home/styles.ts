@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-export const Main = styled.main`
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 5px;
-`;
-
 export const Cards = styled.div`
   display: flex;
   flex-wrap: wrap;

@@ -7,7 +7,7 @@ export const Card = styled.div`
   padding: 20px;
   color: ${theme.colors.font};
   border: 1px ${theme.colors.secondary} solid;
-  border-radius: 15px;
+  border-radius: 20px;
   background-color: #fff;
   transition: 0.3s all;
 
@@ -64,13 +64,11 @@ export const Info = styled.div`
 export const Author = styled.p`
   cursor: pointer;
   transition: 0.3s all;
-  a {
-    color: ${theme.colors.font};
-    text-decoration: none;
-    &:hover {
-      color: ${theme.colors.secondary};
-      transition: 0.3s all;
-    }
+  color: ${theme.colors.font};
+
+  &:hover {
+    color: ${theme.colors.secondary};
+    transition: 0.3s all;
   }
 `;
 

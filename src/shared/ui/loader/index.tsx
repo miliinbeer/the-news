@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { Container, Reload } from "./styles";
+import { Root, Reload } from "./styles";
 
-export const Loader: FC = () => {
+export const LoaderWidget: FC = () => {
   return (
-    <Container>
+    <Root>
       <Reload />
-    </Container>
+    </Root>
   );
 };

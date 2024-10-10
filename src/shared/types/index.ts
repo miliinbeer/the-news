@@ -30,21 +30,13 @@ export interface UserLoggedTypes {
 }
 
 export interface PostTypes {
+  id?: string;
   image: string;
   title: string;
   content: string;
   link: string;
-  author?: string;
-}
-
-export interface CardProps {
-  id: string | undefined;
-  image: string;
-  title: string | undefined;
-  content: string | undefined;
-  link: string;
-  date: string;
-  source: string;
+  date?: string;
+  source?: string;
   author: string;
 }
 
@@ -82,10 +74,6 @@ export interface CanvasProps {
 
 export interface AvatarProps {
   handleAvatar?: () => void;
-}
-
-export interface ErrorProps {
-  message: string;
 }
 
 export interface IsErrorType {

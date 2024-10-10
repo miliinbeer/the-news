@@ -1,9 +1,11 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import { StatePostTypes } from "../../shared/types";
 import { Root, Items, Icon, Message } from "./styles";
-import { ErrorProps } from "../../shared/types";
 import icon from "../../shared/icons/favicon.webp";
 
-export const Error: FC<ErrorProps> = ({ message }) => {
+export const ErrorPage: FC = () => {
+  const { error } = useSelector((state: StatePostTypes) => state.root);
   return (
     <Root>
       <Items>
@@ -12,7 +14,7 @@ export const Error: FC<ErrorProps> = ({ message }) => {
           <h1>
             404. <span>That's an error</span>
           </h1>
-          <Message>{message}</Message>
+          <Message>{error}</Message>
         </div>
       </Items>
     </Root>

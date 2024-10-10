@@ -3,7 +3,7 @@ import { IsErrorType } from "../../shared/types";
 import { theme } from "../../shared/helpers";
 
 export const Root = styled.div`
-  margin: 20px;
+  margin: 20px 0;
   padding: 10px;
   ${({ theme }) =>
     css`

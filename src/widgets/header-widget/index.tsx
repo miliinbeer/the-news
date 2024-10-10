@@ -10,8 +10,8 @@ import base64 from "base-64";
 import { ModalWindow } from "../../shared/ui/modal";
 import { EntranceModal } from "./ui/entrance-modal";
 import { RegistrationModal } from "./ui/registration-modal";
-import { Avatar } from "../../shared/ui/avatar";
-import { Canvas } from "../../shared/ui/canvas";
+import { AvatarWidget } from "../../shared/ui/avatar";
+import { CanvasWidget } from "../../shared/ui/canvas";
 import { Button } from "reactstrap";
 import {
   Root,
@@ -26,6 +26,7 @@ import {
   Description,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
+import { Link } from "react-router-dom";
 
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -85,12 +86,14 @@ export const HeaderWidget: FC = () => {
   return (
     <>
       <Root>
-        <Logotype href="/">
-          <Icon src={icon} alt="icon" />
-          <div>
-            <span>/ THE</span> NEWS
-          </div>
-        </Logotype>
+        <Link to="/">
+          <Logotype>
+            <Icon src={icon} alt="icon" />
+            <div>
+              <span>/ THE</span> NEWS
+            </div>
+          </Logotype>
+        </Link>
         {isLogged ? (
           <>
             {user.length > 0 ? (
@@ -210,8 +213,8 @@ export const HeaderWidget: FC = () => {
                     </>
                   }
                 />
-                <Avatar handleAvatar={() => setShowCanvas(true)} />
-                <Canvas
+                <AvatarWidget handleAvatar={() => setShowCanvas(true)} />
+                <CanvasWidget
                   showCanvas={showCanvas}
                   handlerHide={() => setShowCanvas(false)}
                   placement="end"

@@ -1,16 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, StatePostTypes } from "../../shared/types";
-import { Error } from "../error";
-import { HeaderWidget } from "../../widgets/header-widget";
-import { Cards, Main, ScrollLoader } from "./styles";
-import { CardWidget } from "../../shared/ui/card";
-import { CardProps } from "reactstrap";
-import { fetchPosts } from "../../app/api";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import { Loader } from "../../shared/ui/loader";
+import { fetchPosts } from "../../app/api";
+import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
+import { ErrorPage } from "../error";
+import { HeaderWidget } from "../../widgets/header-widget";
+import { CardWidget } from "../../shared/ui/card";
+import { LoaderWidget } from "../../shared/ui/loader";
+import { Cards, ScrollLoader } from "./styles";
 
-export const Home: FC = () => {
+export const HomePage: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const { post, loading, error } = useSelector(
@@ -37,34 +36,32 @@ export const Home: FC = () => {
     },
   });
 
-  if (loading) return <Loader />;
-  if (error) return <Error message={error} />;
+  if (loading) return <LoaderWidget />;
+  if (error) return <ErrorPage />;
 
   return (
     <>
       <HeaderWidget />
-      <Main>
-        <Cards>
-          {post.slice(0, displayCount).map((el: CardProps) => {
-            return (
-              <CardWidget
-                key={el.id}
-                id={el.id}
-                title={el.title}
-                image={el.image}
-                content={el.content}
-                date={el.date}
-                link={el.link}
-                source={el.source}
-                author={el.author}
-              />
-            );
-          })}
-        </Cards>
-        <div ref={infiniteRef}>
-          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
-        </div>
-      </Main>
+      <Cards>
+        {post.slice(0, displayCount).map((el: PostTypes) => {
+          return (
+            <CardWidget
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              image={el.image}
+              content={el.content}
+              date={el.date}
+              link={el.link}
+              source={el.source}
+              author={el.author}
+            />
+          );
+        })}
+      </Cards>
+      <div ref={infiniteRef}>
+        {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
+      </div>
     </>
   );
 };

@@ -1,22 +1,59 @@
 {
   "users": [
     {
-      "id": 1728474425969,
+      "id": 1728498870689,
       "login": "test",
       "password": "test",
       "firstname": "Test",
       "lastname": "Test"
+    },
+    {
+      "id": 1728498892790,
+      "login": "mila",
+      "password": "mila",
+      "firstname": "Mila",
+      "lastname": "Mila"
     }
   ],
   "posts": [
     {
-      "id": 1728474455056,
+      "id": "1728474455056",
       "title": "Fdkjnvkjndfs",
       "image": "https://gratisography.com/wp-content/uploads/2024/03/gratisography-funflower-800x525.jpg",
       "content": "Fkmvklmdfsklmvf",
       "date": "2024-10-09",
       "link": "https://gratisography.com/",
       "source": "gratisography.com",
+      "author": "test"
+    },
+    {
+      "id": 1728493298661,
+      "title": "Lkfdmvjkl",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGK3diR3Zi-mnOXEaj-3ewmFyRYVxGzVzZw&s",
+      "content": "Kvdfljvjnfjnv",
+      "date": "2024-10-09",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGK3diR3Zi-mnOXEaj-3ewmFyRYVxGzVzZw&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "test"
+    },
+    {
+      "id": 1728493307605,
+      "title": "Vfdmklmv",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGK3diR3Zi-mnOXEaj-3ewmFyRYVxGzVzZw&s",
+      "content": "Fkmvlkfdmvk",
+      "date": "2024-10-09",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGK3diR3Zi-mnOXEaj-3ewmFyRYVxGzVzZw&s",
+      "source": "encrypted-tbn0.gstatic.com",
+      "author": "test"
+    },
+    {
+      "id": 1728493316656,
+      "title": "Kfmdvkmfv",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGK3diR3Zi-mnOXEaj-3ewmFyRYVxGzVzZw&s",
+      "content": "Vfdmkfm",
+      "date": "2024-10-09",
+      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGK3diR3Zi-mnOXEaj-3ewmFyRYVxGzVzZw&s",
+      "source": "encrypted-tbn0.gstatic.com",
       "author": "test"
     }
   ]

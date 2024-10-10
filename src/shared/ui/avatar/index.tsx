@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { StatePostTypes, AvatarProps } from "../../types";
 import { Root } from "./styles";
 
-export const Avatar: FC<AvatarProps> = ({ handleAvatar }) => {
+export const AvatarWidget: FC<AvatarProps> = ({ handleAvatar }) => {
   const { userLogged } = useSelector((state: StatePostTypes) => state.root);
 
   return (

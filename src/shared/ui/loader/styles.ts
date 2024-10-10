@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../helpers";
 
-export const Container = styled.div`
+export const Root = styled.div`
   height: 100vh;
   ${({ theme }) => css`${theme.flex.contentCenter}`}
   

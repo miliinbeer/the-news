@@ -2,21 +2,21 @@ import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home } from "../pages/home";
-import { GlobalStyles, Container } from "./styles";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { User } from "../pages/user";
+import { HomePage } from "../pages/home";
+import { UserPage } from "../pages/user";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../shared/helpers";
+import { GlobalStyles, Container } from "./styles";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "user",
-    element: <User />,
+    element: <UserPage />,
   },
 ]);
 
