@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { PostTypes } from "../../../shared/types";
+import { PostTypes } from "../../types";
 import { ModalWindow } from "../modal";
 import {
   Card,
@@ -42,7 +42,7 @@ export const CardWidget: FC<PostTypes> = ({
           </Content>
           <Source href={link}>{source}</Source>
           <Info>
-            <Link to="user">
+            <Link to={`user/${author}`}>
               <Author>{author}</Author>
             </Link>
             <small className="text-muted">{date}</small>
@@ -58,7 +58,7 @@ export const CardWidget: FC<PostTypes> = ({
           <FormText>{content}</FormText>
           <Source href={link}>{source}</Source>
           <Info>
-            <Link to="user">
+            <Link to={`user/${author}`}>
               <Author>{author}</Author>
             </Link>
             <small className="text-muted">{date}</small>

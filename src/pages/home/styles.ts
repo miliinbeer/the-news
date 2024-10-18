@@ -10,6 +10,7 @@ export const Cards = styled.div`
   }
 `;
 
+
 export const ScrollLoader = styled.p`
   padding: 10px 0;
   font-weight: 600;

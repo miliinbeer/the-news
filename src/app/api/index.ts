@@ -13,6 +13,27 @@ export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
   );
 });
 
+export const fetchUserInfo = createAsyncThunk("user/fetchUsers", async () => {
+  const users = await fetch("http://localhost:3000/users").then((response) =>
+    response.json()
+  );
+
+  const posts = await fetch("http://localhost:3000/posts").then((response) =>
+    response.json()
+  );
+
+  const addUserPostCount = users.map((user: UserTypes) => {
+    const userPosts = posts.filter(
+      (post: PostTypes) => post.author === user.login
+    );
+    return {
+      ...user,
+      userPosts: userPosts,
+    };
+  });
+  return addUserPostCount;
+});
+
 export const requestPosts = createAsyncThunk(
   "post/requestPosts",
   async ({ title, image, content, link, author }: PostTypes) => {
@@ -26,7 +47,7 @@ export const requestPosts = createAsyncThunk(
       source: new URL(link).hostname,
       author: author,
     };
-    return await fetch("http://localhost:3000/posts", {
+    return await fetch(`http://localhost:3000/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,23 +57,27 @@ export const requestPosts = createAsyncThunk(
   }
 );
 
-export const requestUsers = createAsyncThunk(
+export const requestUser = createAsyncThunk(
   "user/requestUsers",
-  async ({ login, password, firstname, lastname }: UserTypes) => {
+  async ({ login, password, firstname, lastname, userPosts }: UserTypes) => {
     const newUser = {
       id: Date.now(),
-      login: login,
-      password: password,
-      firstname: firstname,
-      lastname: lastname,
+      login,
+      password,
+      firstname,
+      lastname,
+      userPosts,
     };
-    return await fetch("http://localhost:3000/users", {
+
+    const response = await fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUser),
-    }).then((response) => response.json());
+    });
+
+    return response.json();
   }
 );
 
@@ -65,16 +90,16 @@ export const searchUsers = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
       },
-    });
-    return await response.json();
+    }).then((response: any) => response.json()[0]);
+    return response;
   }
 );
 
 export const rootReducer = createSlice({
   name: "data",
   initialState: {
-    post: [],
-    user: [],
+    posts: [],
+    user: {},
     userLogged: {},
     loading: false,
     error: undefined,
@@ -91,7 +116,7 @@ export const rootReducer = createSlice({
         state.loading = true;
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.post = action.payload;
+        state.posts = action.payload;
         state.loading = false;
       })
       .addCase(fetchPosts.rejected, (state: StateTypes, action) => {
@@ -103,7 +128,7 @@ export const rootReducer = createSlice({
       })
       .addCase(requestPosts.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        state.post.push(action.payload);
+        state.posts.push(action.payload);
       })
       .addCase(requestPosts.rejected, (state: StateTypes, action) => {
         state.loading = false;
@@ -120,14 +145,14 @@ export const rootReducer = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(requestUsers.pending, (state: StateTypes) => {
+      .addCase(requestUser.pending, (state: StateTypes) => {
         state.loading = true;
       })
-      .addCase(requestUsers.fulfilled, (state: StateTypes, action) => {
+      .addCase(requestUser.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        state.user = [...state.user, action.payload];
+        state.user = action.payload;
       })
-      .addCase(requestUsers.rejected, (state: StateTypes, action) => {
+      .addCase(requestUser.rejected, (state: StateTypes, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

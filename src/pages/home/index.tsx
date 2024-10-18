@@ -5,14 +5,14 @@ import { fetchPosts } from "../../app/api";
 import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
 import { ErrorPage } from "../error";
 import { HeaderWidget } from "../../widgets/header-widget";
-import { CardWidget } from "../../shared/ui/card";
-import { LoaderWidget } from "../../shared/ui/loader";
+import { CardWidget } from "../../shared/ui-kit/card";
+import { LoaderWidget } from "../../shared/ui-kit/loader";
 import { Cards, ScrollLoader } from "./styles";
 
 export const HomePage: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { post, loading, error } = useSelector(
+  const { posts, loading, error, user } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
@@ -22,7 +22,7 @@ export const HomePage: FC = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  const hasMorePosts = displayCount < post.length;
+  const hasMorePosts = displayCount < posts.length;
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -43,7 +43,7 @@ export const HomePage: FC = () => {
     <>
       <HeaderWidget />
       <Cards>
-        {post.slice(0, displayCount).map((el: PostTypes) => {
+        {posts.slice(0, displayCount).map((el: PostTypes) => {
           return (
             <CardWidget
               key={el.id}

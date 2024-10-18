@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { CanvasProps, StatePostTypes } from "../../types";
-import { AvatarWidget } from "../avatar";
-import { Items, Buttons } from "./styles";
+import { Items, Buttons, Avatar } from "./styles";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 export const CanvasWidget: FC<CanvasProps> = ({
@@ -16,7 +15,10 @@ export const CanvasWidget: FC<CanvasProps> = ({
   return (
     <Offcanvas show={showCanvas} onHide={handlerHide} placement={placement}>
       <Offcanvas.Header closeButton>
-        <AvatarWidget />
+        <Avatar>
+          {userLogged.firstname.slice(0, 1)}
+          {userLogged.lastname.slice(0, 1)}
+        </Avatar>
         <Items>
           <strong>{userLogged.login}</strong>
           <div>

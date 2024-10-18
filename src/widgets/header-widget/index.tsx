@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { fetchUsers, requestPosts, setUserLogged } from "../../app/api";
-import { schemaPost } from "../../shared/ui/modal/schema/schema";
+import { requestPosts } from "../../app/api";
+import { schemaPost } from "../../shared/ui-kit/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../shared/types";
-import base64 from "base-64";
-import { ModalWindow } from "../../shared/ui/modal";
+import { ModalWindow } from "../../shared/ui-kit/modal";
 import { EntranceModal } from "./ui/entrance-modal";
 import { RegistrationModal } from "./ui/registration-modal";
-import { AvatarWidget } from "../../shared/ui/avatar";
-import { CanvasWidget } from "../../shared/ui/canvas";
+import { CanvasWidget } from "../../shared/ui-kit/canvas";
 import { Button } from "reactstrap";
 import {
   Root,
@@ -24,9 +22,9 @@ import {
   Input,
   Textarea,
   Description,
+  Avatar,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
-import { Link } from "react-router-dom";
 
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -40,18 +38,10 @@ export const HeaderWidget: FC = () => {
   const [addPostModal, setAddPostModal] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchUsers());
-
     const token = localStorage.getItem("token");
 
     if (token) {
-      try {
-        const tokenContent = base64.decode(token);
-        dispatch(setUserLogged(JSON.parse(tokenContent)));
-        setIsLogged(true);
-      } catch (err) {
-        console.error("Ошибка", err);
-      }
+      setIsLogged(true);
     }
   }, [dispatch]);
 
@@ -86,17 +76,15 @@ export const HeaderWidget: FC = () => {
   return (
     <>
       <Root>
-        <Link to="/">
-          <Logotype>
-            <Icon src={icon} alt="icon" />
-            <div>
-              <span>/ THE</span> NEWS
-            </div>
-          </Logotype>
-        </Link>
+        <Logotype href="/">
+          <Icon src={icon} alt="icon" />
+          <div>
+            <span>/ THE</span> NEWS
+          </div>
+        </Logotype>
         {isLogged ? (
           <>
-            {user.length > 0 ? (
+            {user ? (
               <UserPanel>
                 <ModalWindow
                   modalButton={
@@ -213,7 +201,10 @@ export const HeaderWidget: FC = () => {
                     </>
                   }
                 />
-                <AvatarWidget handleAvatar={() => setShowCanvas(true)} />
+                <Avatar onClick={() => setShowCanvas(true)}>
+                  {userLogged.firstname.slice(0, 1)}
+                  {userLogged.lastname.slice(0, 1)}
+                </Avatar>
                 <CanvasWidget
                   showCanvas={showCanvas}
                   handlerHide={() => setShowCanvas(false)}

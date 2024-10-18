@@ -31,7 +31,7 @@ export const Title = styled.p`
   overflow: hidden;
 `;
 
-export const Content = styled.p`
+export const Content = styled.div`
   width: 100%;
   height: 70px;
   word-break: break-all;

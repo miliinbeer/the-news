@@ -6,20 +6,21 @@ import { OffcanvasPlacement } from "react-bootstrap/esm/Offcanvas";
 export type AppDispatch = typeof store.dispatch;
 
 export interface StateTypes {
-  post: Array<Object>;
-  user: Array<Object>;
+  posts: Array<Object>;
+  user: Object;
   loading: boolean;
   error: undefined | string;
 }
 
 export interface StatePostTypes {
   root: {
-    post: PostTypes[];
-    user: UserTypes[];
+    posts: PostTypes[];
+    user: UserTypes;
     loading: boolean;
     error: undefined;
     modal: boolean;
     userLogged: UserLoggedTypes;
+    userPosts: any;
   };
 }
 
@@ -37,7 +38,7 @@ export interface PostTypes {
   link: string;
   date?: string;
   source?: string;
-  author: string;
+  author?: string;
 }
 
 export interface UserTypes {
@@ -46,6 +47,7 @@ export interface UserTypes {
   password: string;
   firstname?: string;
   lastname?: string;
+  userPosts: Array<PostTypes>
 }
 
 export interface InputTypes {
@@ -74,6 +76,7 @@ export interface CanvasProps {
 
 export interface AvatarProps {
   handleAvatar?: () => void;
+  avatar: ReactElement
 }
 
 export interface IsErrorType {

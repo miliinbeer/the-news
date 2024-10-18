@@ -118,3 +118,12 @@ export const Eye = styled.img`
   top: 13px;
   right: 20px;
 `;
+
+export const Avatar = styled.button`
+  color: #fff;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: ${theme.colors.primary};
+`;

@@ -1,14 +1,14 @@
 import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { requestUsers, setUserLogged } from "../../../../app/api";
+import { requestUser, setUserLogged } from "../../../../app/api";
 import base64 from "base-64";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaRegistration } from "../../../../shared/ui/modal/schema/schema";
+import { schemaRegistration } from "../../../../shared/ui-kit/modal/schema/schema";
 import { showToast } from "../../../../shared/helpers";
 import { AppDispatch, StatePostTypes } from "../../../../shared/types";
-import { ModalWindow } from "../../../../shared/ui/modal";
+import { ModalWindow } from "../../../../shared/ui-kit/modal";
 import { Button } from "reactstrap";
 import { Inputs, Password, Label, Input, Description, Eye } from "../../styles";
 import "react-toastify/dist/ReactToastify.css";
@@ -34,14 +34,14 @@ export const RegistrationModal: FC = () => {
 
   const registrationToAccount: SubmitHandler<
     yup.InferType<typeof schemaRegistration>
-  > = (el) => {
-    const isLoginTaken = user.find((user) => user.login === el.login);
+  > = (el: any) => {
+    // const isLoginTaken = user.find((user) => user.login === el.login);
 
-    if (isLoginTaken) {
+    if (user.login) {
       showToast("Такой пользователь уже существует. Попробуйте снова.");
       return;
     }
-    dispatch(requestUsers(el));
+    dispatch(requestUser(el));
     setRegistrationModal(!registrationModal);
     const token = base64.encode(JSON.stringify(el));
     localStorage.setItem("token", token);

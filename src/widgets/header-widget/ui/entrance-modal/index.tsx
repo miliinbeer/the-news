@@ -1,14 +1,14 @@
-import React, { FC,  useState } from "react";
+import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers, setUserLogged } from "../../../../app/api";
 import base64 from "base-64";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaEntrance } from "../../../../shared/ui/modal/schema/schema";
+import { schemaEntrance } from "../../../../shared/ui-kit/modal/schema/schema";
 import { showToast } from "../../../../shared/helpers";
 import { AppDispatch, StatePostTypes } from "../../../../shared/types";
-import { ModalWindow } from "../../../../shared/ui/modal";
+import { ModalWindow } from "../../../../shared/ui-kit/modal";
 import { Button } from "reactstrap";
 import { ToastContainer } from "react-toastify";
 import { Inputs, Label, Input, Password, Eye, Description } from "../../styles";
@@ -41,19 +41,19 @@ export const EntranceModal: FC = () => {
   const loginToAccount: SubmitHandler<yup.InferType<typeof schemaEntrance>> = (
     el
   ) => {
-    const foundUser = user.find((user) => user.login === el.login);
+    // const foundUser = user.find((user) => user.login === el.login);
 
-    if (!foundUser) {
+    if (!user.login) {
       showToast("Такого пользователя нет. Попробуйте снова.");
     } else {
-      if (foundUser.password !== el.password) {
+      if (user.password !== el.password) {
         showToast("Неверный пароль. Попробуйте снова.");
         return;
       } else {
-        dispatch(searchUsers(foundUser));
-        const token = base64.encode(JSON.stringify(foundUser));
+        dispatch(searchUsers(user));
+        const token = base64.encode(JSON.stringify(user));
         localStorage.setItem("token", token);
-        dispatch(setUserLogged(foundUser));
+        dispatch(setUserLogged(user));
         toggleEntranceModal();
       }
     }
