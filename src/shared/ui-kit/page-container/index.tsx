@@ -1,5 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
+import { Root } from "./styles";
 
-export const PageContainer: FC = () => {
-  return <div>PageContainer: FC</div>;
+interface Props {
+  children: React.ReactNode;
+}
+
+export const PageContainer: FC<Props> = ({ children }) => {
+  return <Root>{children}</Root>;
 };

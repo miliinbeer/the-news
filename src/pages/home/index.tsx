@@ -5,6 +5,7 @@ import { fetchPosts } from "../../app/api";
 import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
 import { ErrorPage } from "../error";
 import { HeaderWidget } from "../../widgets/header-widget";
+import { PageContainer } from "../../shared/ui-kit/page-container";
 import { CardWidget } from "../../shared/ui-kit/card";
 import { LoaderWidget } from "../../shared/ui-kit/loader";
 import { Cards, ScrollLoader } from "./styles";
@@ -40,7 +41,7 @@ export const HomePage: FC = () => {
   if (error) return <ErrorPage />;
 
   return (
-    <>
+    <PageContainer>
       <HeaderWidget />
       <Cards>
         {posts.slice(0, displayCount).map((el: PostTypes) => {
@@ -62,6 +63,6 @@ export const HomePage: FC = () => {
       <div ref={infiniteRef}>
         {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
       </div>
-    </>
+    </PageContainer>
   );
 };

@@ -13,6 +13,8 @@ import {
   ScrollLoader,
 } from "./styles";
 import { fetchUserInfo } from "../../app/api";
+import { PageContainer } from "../../shared/ui-kit/page-container";
+
 import { CardWidget } from "../../shared/ui-kit/card";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
@@ -23,6 +25,7 @@ export const UserPage: FC = () => {
   const { user, posts, loading } = useSelector(
     (state: StatePostTypes) => state.root
   );
+
 
   // const authorInfo = user.filter((el) => el.login === param.authorLogin);
 
@@ -51,25 +54,26 @@ export const UserPage: FC = () => {
 
   return (
     <Root>
-      <Link to="/">← Назад</Link>
-      <Items>
-        <Item>
-          <div>
-            <Avatar>
-              {user?.firstname?.slice(0, 1)}
-              {user?.lastname?.slice(0, 1)}
-            </Avatar>
-          </div>
-          <Info>
-            <Login>{user?.login}</Login>
-            {user?.firstname} {user?.lastname}
-            <p>
-              Колличество постов: <strong>{user?.userPosts?.length}</strong>
-            </p>
-          </Info>
-        </Item>
-        <Cards>
-          {/* {user?.userPosts.map((el) => (
+      <PageContainer>
+        <Link to="/">← Назад</Link>
+        <Items>
+          <Item>
+            <div>
+              <Avatar>
+                {user?.firstname?.slice(0, 1)}
+                {user?.lastname?.slice(0, 1)}
+              </Avatar>
+            </div>
+            <Info>
+              <Login>{user?.login}</Login>
+              {user?.firstname} {user?.lastname}
+              <p>
+                Колличество постов: <strong>{user?.userPosts?.length}</strong>
+              </p>
+            </Info>
+          </Item>
+          <Cards>
+            {/* {user?.userPosts.map((el) => (
             <CardWidget
               key={el.id}
               id={el.id}
@@ -81,11 +85,12 @@ export const UserPage: FC = () => {
               source={el.source}
             />
           ))} */}
-        </Cards>
-      </Items>
-      <div ref={infiniteRef}>
-        {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
-      </div>
+          </Cards>
+        </Items>
+        <div ref={infiniteRef}>
+          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
+        </div>
+      </PageContainer>
     </Root>
   );
 };

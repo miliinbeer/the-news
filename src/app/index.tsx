@@ -9,7 +9,7 @@ import { AppDispatch } from "../shared/types";
 import { HomePage } from "../pages/home";
 import { UserPage } from "../pages/user";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles, Container } from "./styles";
+import { GlobalStyles } from "./styles";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
@@ -44,9 +44,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Container>
-        <RouterProvider router={router} />
-      </Container>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
