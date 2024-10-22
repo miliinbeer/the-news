@@ -10,7 +10,6 @@ import { showToast } from "../../../../shared/helpers";
 import {
   AppDispatch,
   StatePostTypes,
-  UserTypes,
 } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui-kit/modal";
 import { Button } from "reactstrap";

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { fetchUsers, requestPost, setUserLogged } from "../../app/api";
+import { fetchUsers, requestPost } from "../../app/api";
 import { schemaPost } from "../../shared/ui-kit/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui-kit/modal";
