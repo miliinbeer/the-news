@@ -1,10 +1,17 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { CanvasProps, StatePostTypes } from "../../types";
+import { StatePostTypes } from "../../types";
 import { Items, Buttons, Avatar } from "./styles";
-import Offcanvas from "react-bootstrap/Offcanvas";
+import Offcanvas, { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 
-export const CanvasWidget: FC<CanvasProps> = ({
+interface Props {
+  showCanvas: boolean;
+  handlerHide: () => void;
+  placement: OffcanvasPlacement;
+  exitButton: ReactElement;
+}
+
+export const CanvasWidget: FC<Props> = ({
   showCanvas,
   handlerHide,
   placement,
@@ -16,16 +23,16 @@ export const CanvasWidget: FC<CanvasProps> = ({
     <Offcanvas show={showCanvas} onHide={handlerHide} placement={placement}>
       <Offcanvas.Header closeButton>
         <Avatar>
-          {userLogged.firstname.slice(0, 1)}
-          {userLogged.lastname.slice(0, 1)}
+          {userLogged?.firstname.slice(0, 1)}
+          {userLogged?.lastname.slice(0, 1)}
         </Avatar>
         <Items>
-          <strong>{userLogged.login}</strong>
+          <strong>{userLogged?.login}</strong>
           <div>
-            {userLogged.firstname.charAt(0).toUpperCase() +
-              userLogged.firstname.slice(1).toLowerCase()}{" "}
-            {userLogged.lastname.charAt(0).toUpperCase() +
-              userLogged.lastname.slice(1).toLowerCase()}
+            {userLogged?.firstname.charAt(0).toUpperCase() +
+              userLogged?.firstname.slice(1).toLowerCase()}{" "}
+            {userLogged?.lastname.charAt(0).toUpperCase() +
+              userLogged?.lastname.slice(1).toLowerCase()}
           </div>
         </Items>
       </Offcanvas.Header>

@@ -7,7 +7,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegistration } from "../../../../shared/ui-kit/modal/schema/schema";
 import { showToast } from "../../../../shared/helpers";
-import { AppDispatch, StatePostTypes } from "../../../../shared/types";
+import {
+  AppDispatch,
+  StatePostTypes,
+  UserTypes,
+} from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui-kit/modal";
 import { Button } from "reactstrap";
 import { Inputs, Password, Label, Input, Description, Eye } from "../../styles";
@@ -18,7 +22,7 @@ import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 export const RegistrationModal: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user } = useSelector((state: StatePostTypes) => state.root);
+  const { users } = useSelector((state: StatePostTypes) => state.root);
 
   const [registrationModal, setRegistrationModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -34,10 +38,9 @@ export const RegistrationModal: FC = () => {
 
   const registrationToAccount: SubmitHandler<
     yup.InferType<typeof schemaRegistration>
+    // TODO Исправить тип
   > = (el: any) => {
-    // const isLoginTaken = user.find((user) => user.login === el.login);
-
-    if (user.login) {
+    if (users.login) {
       showToast("Такой пользователь уже существует. Попробуйте снова.");
       return;
     }

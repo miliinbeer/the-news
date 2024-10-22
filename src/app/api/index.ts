@@ -7,13 +7,13 @@ export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
   );
 });
 
-export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
-  return await fetch("http://localhost:3000/users").then((response) =>
-    response.json()
-  );
-});
+// export const fetchUsers = createAsyncThunk("user/fetchUser", async () => {
+//   return await fetch("http://localhost:3000/users").then((response) =>
+//     response.json()
+//   );
+// });
 
-export const fetchUserInfo = createAsyncThunk("user/fetchUsers", async () => {
+export const fetchUsers = createAsyncThunk("user/fetchUserInfo", async () => {
   const users = await fetch("http://localhost:3000/users").then((response) =>
     response.json()
   );
@@ -22,7 +22,7 @@ export const fetchUserInfo = createAsyncThunk("user/fetchUsers", async () => {
     response.json()
   );
 
-  const addUserPostCount = users.map((user: UserTypes) => {
+  const addUserPostsCount = users.map((user: UserTypes) => {
     const userPosts = posts.filter(
       (post: PostTypes) => post.author === user.login
     );
@@ -31,10 +31,10 @@ export const fetchUserInfo = createAsyncThunk("user/fetchUsers", async () => {
       userPosts: userPosts,
     };
   });
-  return addUserPostCount;
+  return addUserPostsCount;
 });
 
-export const requestPosts = createAsyncThunk(
+export const requestPost = createAsyncThunk(
   "post/requestPosts",
   async ({ title, image, content, link, author }: PostTypes) => {
     const newPost = {
@@ -99,7 +99,7 @@ export const rootReducer = createSlice({
   name: "data",
   initialState: {
     posts: [],
-    user: {},
+    users: {},
     userLogged: {},
     loading: false,
     error: undefined,
@@ -123,14 +123,14 @@ export const rootReducer = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(requestPosts.pending, (state: StateTypes) => {
+      .addCase(requestPost.pending, (state: StateTypes) => {
         state.loading = true;
       })
-      .addCase(requestPosts.fulfilled, (state: StateTypes, action) => {
+      .addCase(requestPost.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
         state.posts.push(action.payload);
       })
-      .addCase(requestPosts.rejected, (state: StateTypes, action) => {
+      .addCase(requestPost.rejected, (state: StateTypes, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
@@ -139,7 +139,7 @@ export const rootReducer = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state: StateTypes, action) => {
         state.loading = false;
@@ -150,7 +150,7 @@ export const rootReducer = createSlice({
       })
       .addCase(requestUser.fulfilled, (state: StateTypes, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.users = action.payload;
       })
       .addCase(requestUser.rejected, (state: StateTypes, action) => {
         state.loading = false;

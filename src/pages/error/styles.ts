@@ -19,6 +19,11 @@ export const Items = styled.div`
       ${theme.flex.itemsCenter}
     `}
   gap: 20px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 export const Icon = styled.img`

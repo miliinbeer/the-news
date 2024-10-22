@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers, setUserLogged } from "../../../../app/api";
@@ -19,7 +19,9 @@ import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 export const EntranceModal: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user } = useSelector((state: StatePostTypes) => state.root);
+  const { users, userLogged } = useSelector(
+    (state: StatePostTypes) => state.root
+  );
 
   const [entranceModal, setEntranceModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -41,12 +43,12 @@ export const EntranceModal: FC = () => {
   const loginToAccount: SubmitHandler<yup.InferType<typeof schemaEntrance>> = (
     el
   ) => {
-    // const foundUser = user.find((user) => user.login === el.login);
+    const user = Object.values(users).find((user) => user.login === el.login);
 
-    if (!user.login) {
+    if (!user) {
       showToast("Такого пользователя нет. Попробуйте снова.");
     } else {
-      if (user.password !== el.password) {
+      if (user?.password !== el.password) {
         showToast("Неверный пароль. Попробуйте снова.");
         return;
       } else {
@@ -58,6 +60,8 @@ export const EntranceModal: FC = () => {
       }
     }
   };
+
+  console.log(userLogged);
 
   return (
     <>

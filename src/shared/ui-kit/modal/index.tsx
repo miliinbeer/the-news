@@ -1,9 +1,17 @@
-import React, { FC } from "react";
-import { ModalProps } from "../../types/index";
+import React, { FC, ReactElement } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { ModalFooter } from "./styles";
 
-export const ModalWindow: FC<ModalProps> = ({
+interface Props {
+  modalButton: ReactElement;
+  isOpened: boolean;
+  toggleModal: () => void;
+  modalTitle?: string;
+  modalForm: ReactElement;
+  modalButtons?: ReactElement;
+}
+
+export const ModalWindow: FC<Props> = ({
   modalButton,
   isOpened,
   toggleModal,

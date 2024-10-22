@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { requestPosts } from "../../app/api";
+import { fetchUsers, requestPost, setUserLogged } from "../../app/api";
 import { schemaPost } from "../../shared/ui-kit/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../shared/types";
 import { ModalWindow } from "../../shared/ui-kit/modal";
@@ -29,7 +29,7 @@ import icon from "../../shared/icons/favicon.webp";
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user, userLogged } = useSelector(
+  const { users, userLogged } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
@@ -38,6 +38,8 @@ export const HeaderWidget: FC = () => {
   const [addPostModal, setAddPostModal] = useState(false);
 
   useEffect(() => {
+    dispatch(fetchUsers());
+
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -64,7 +66,7 @@ export const HeaderWidget: FC = () => {
       ...el,
       author: userLogged.login,
     };
-    dispatch(requestPosts(fullPostData));
+    dispatch(requestPost(fullPostData));
     setAddPostModal(!addPostModal);
   };
 
@@ -84,7 +86,7 @@ export const HeaderWidget: FC = () => {
         </Logotype>
         {isLogged ? (
           <>
-            {user ? (
+            {users ? (
               <UserPanel>
                 <ModalWindow
                   modalButton={
@@ -202,8 +204,8 @@ export const HeaderWidget: FC = () => {
                   }
                 />
                 <Avatar onClick={() => setShowCanvas(true)}>
-                  {userLogged.firstname.slice(0, 1)}
-                  {userLogged.lastname.slice(0, 1)}
+                  {userLogged?.firstname.slice(0, 1)}
+                  {userLogged?.lastname.slice(0, 1)}
                 </Avatar>
                 <CanvasWidget
                   showCanvas={showCanvas}

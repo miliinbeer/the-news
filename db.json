@@ -1,120 +1,23 @@
 {
   "users": [
     {
-      "id": 1729271166203,
+      "id": 1729600193259,
       "login": "test",
       "password": "test",
       "firstname": "Test",
       "lastname": "Test"
-    },
-    {
-      "id": 1729271248174,
-      "login": "lol",
-      "password": "lol",
-      "firstname": "Lol",
-      "lastname": "Lol"
     }
   ],
   "posts": [
     {
-      "id": "1729166816953",
-      "title": "Test",
-      "image": "https://media.istockphoto.com/id/1487894858/photo/candlestick-chart-and-data-of-financial-market.jpg?s=612x612&w=0&k=20&c=wZ6vVmbm4BV2JOePSnNNz-0aFVOJZ0P9nhdeOMGUg5I=",
-      "content": "Test",
-      "date": "2024-10-17",
-      "link": "https://media.istockphoto.com/id/1465618017/photo/businessmen-investor-think-before-buying-stock-market-investment-using-smartphone-to-analyze.jpg?s=612x612&w=0&k=20&c=YNEkfoME1jbz6FUJImxCQtaGZZntrf7u-Byxmgk4pOY=",
-      "source": "media.istockphoto.com",
-      "author": "test"
-    },
-    {
-      "id": "1729166897518",
-      "title": "Test",
-      "image": "https://media.istockphoto.com/id/1487894858/photo/candlestick-chart-and-data-of-financial-market.jpg?s=612x612&w=0&k=20&c=wZ6vVmbm4BV2JOePSnNNz-0aFVOJZ0P9nhdeOMGUg5I=",
-      "content": "Test",
-      "date": "2024-10-17",
+      "id": 1729600315738,
+      "title": "Title",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
+      "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. tempore vel rerum ullam quos? non fuga voluptas quo deserunt quam exercitationem, in officia quis temporibus vel, reprehenderit debitis pariatur dignissimos assumenda!",
+      "date": "2024-10-22",
       "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
       "source": "encrypted-tbn0.gstatic.com",
       "author": "test"
-    },
-    {
-      "id": "1729166941187",
-      "title": "Test",
-      "image": "https://cdn.vectorstock.com/img/icons/vectorstock-fb-logo.png",
-      "content": "Tets",
-      "date": "2024-10-17",
-      "link": "https://media.istockphoto.com/id/1487894858/photo/candlestick-chart-and-data-of-financial-market.jpg?s=612x612&w=0&k=20&c=wZ6vVmbm4BV2JOePSnNNz-0aFVOJZ0P9nhdeOMGUg5I=",
-      "source": "media.istockphoto.com",
-      "author": "test"
-    },
-    {
-      "id": "1729167543007",
-      "title": "Test",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "content": "Dksmfkv",
-      "date": "2024-10-17",
-      "link": "https://media.istockphoto.com/id/1465618017/photo/businessmen-investor-think-before-buying-stock-market-investment-using-smartphone-to-analyze.jpg?s=612x612&w=0&k=20&c=YNEkfoME1jbz6FUJImxCQtaGZZntrf7u-Byxmgk4pOY=",
-      "source": "media.istockphoto.com",
-      "author": "test"
-    },
-    {
-      "id": "1729167577785",
-      "title": "Fdl,v",
-      "image": "https://media.istockphoto.com/id/1487894858/photo/candlestick-chart-and-data-of-financial-market.jpg?s=612x612&w=0&k=20&c=wZ6vVmbm4BV2JOePSnNNz-0aFVOJZ0P9nhdeOMGUg5I=",
-      "content": "Dfbgf",
-      "date": "2024-10-17",
-      "link": "https://cdn.vectorstock.com/img/icons/vectorstock-fb-logo.png",
-      "source": "cdn.vectorstock.com",
-      "author": "lol"
-    },
-    {
-      "id": "1729168099176",
-      "title": "Fdbgf",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "content": "Gf bgf",
-      "date": "2024-10-17",
-      "link": "https://media.istockphoto.com/id/1465618017/photo/businessmen-investor-think-before-buying-stock-market-investment-using-smartphone-to-analyze.jpg?s=612x612&w=0&k=20&c=YNEkfoME1jbz6FUJImxCQtaGZZntrf7u-Byxmgk4pOY=",
-      "source": "media.istockphoto.com",
-      "author": "lol"
-    },
-    {
-      "id": "1729170057967",
-      "title": "Fgdbg",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "content": "Gfbgf",
-      "date": "2024-10-17",
-      "link": "https://media.istockphoto.com/id/1487894858/photo/candlestick-chart-and-data-of-financial-market.jpg?s=612x612&w=0&k=20&c=wZ6vVmbm4BV2JOePSnNNz-0aFVOJZ0P9nhdeOMGUg5I=",
-      "source": "media.istockphoto.com",
-      "author": "lol"
-    },
-    {
-      "id": "1729177441807",
-      "title": "Gbgfb",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "content": "Gfbgfb",
-      "date": "2024-10-17",
-      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "source": "encrypted-tbn0.gstatic.com",
-      "author": "test"
-    },
-    {
-      "id": "1729177460871",
-      "title": "Fgbgfb",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&sg",
-      "content": "Fbgfdb",
-      "date": "2024-10-17",
-      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "source": "encrypted-tbn0.gstatic.com",
-      "author": "test"
-    },
-    {
-      "id": "1729177654093",
-      "title": "Lol",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "content": "Lol",
-      "date": "2024-10-17",
-      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "source": "encrypted-tbn0.gstatic.com",
-      "author": "lol"
     }
   ]
 }

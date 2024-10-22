@@ -12,7 +12,7 @@ export const ErrorPage: FC = () => {
         <Icon src={icon} />
         <div>
           <h1>
-            404. <span>That's an error</span>
+            <span>Ooops...</span> That's an error.
           </h1>
           <Message>{error}</Message>
         </div>

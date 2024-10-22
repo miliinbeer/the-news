@@ -13,7 +13,7 @@ import { Cards, ScrollLoader } from "./styles";
 export const HomePage: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { posts, loading, error, user } = useSelector(
+  const { posts, loading, error } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
@@ -41,28 +41,30 @@ export const HomePage: FC = () => {
   if (error) return <ErrorPage />;
 
   return (
-    <PageContainer>
-      <HeaderWidget />
-      <Cards>
-        {posts.slice(0, displayCount).map((el: PostTypes) => {
-          return (
-            <CardWidget
-              key={el.id}
-              id={el.id}
-              title={el.title}
-              image={el.image}
-              content={el.content}
-              date={el.date}
-              link={el.link}
-              source={el.source}
-              author={el.author}
-            />
-          );
-        })}
-      </Cards>
-      <div ref={infiniteRef}>
-        {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
-      </div>
-    </PageContainer>
+    <>
+      <PageContainer>
+        <HeaderWidget />
+        <Cards>
+          {posts.slice(0, displayCount).map((el: PostTypes) => {
+            return (
+              <CardWidget
+                key={el.id}
+                id={el.id}
+                title={el.title}
+                image={el.image}
+                content={el.content}
+                date={el.date}
+                link={el.link}
+                source={el.source}
+                author={el.author}
+              />
+            );
+          })}
+        </Cards>
+        <div ref={infiniteRef}>
+          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
+        </div>
+      </PageContainer>
+    </>
   );
 };
