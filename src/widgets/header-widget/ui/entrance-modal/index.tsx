@@ -19,9 +19,7 @@ import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 export const EntranceModal: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { users, userLogged } = useSelector(
-    (state: StatePostTypes) => state.root
-  );
+  const { users } = useSelector((state: StatePostTypes) => state.root);
 
   const [entranceModal, setEntranceModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -60,8 +58,6 @@ export const EntranceModal: FC = () => {
       }
     }
   };
-
-  console.log(userLogged);
 
   return (
     <>

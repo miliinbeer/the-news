@@ -1,23 +1,12 @@
 {
   "users": [
     {
-      "id": 1729600193259,
+      "id": "09335d1c-67ce-4a4c-a21f-0673c3850fc4",
       "login": "test",
       "password": "test",
       "firstname": "Test",
       "lastname": "Test"
     }
   ],
-  "posts": [
-    {
-      "id": 1729600315738,
-      "title": "Title",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. tempore vel rerum ullam quos? non fuga voluptas quo deserunt quam exercitationem, in officia quis temporibus vel, reprehenderit debitis pariatur dignissimos assumenda!",
-      "date": "2024-10-22",
-      "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-      "source": "encrypted-tbn0.gstatic.com",
-      "author": "test"
-    }
-  ]
+  "posts": []
 }

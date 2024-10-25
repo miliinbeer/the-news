@@ -24,7 +24,7 @@ export const UserPage: FC = () => {
 
   const param = useParams<{ authorLogin: string }>();
 
-  const { posts, loading, users, error } = useSelector(
+  const { loading, users, error, newPosts } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
@@ -39,7 +39,8 @@ export const UserPage: FC = () => {
 
   const [displayCount, setDisplayCount] = useState(6);
 
-  const hasMorePosts = displayCount < posts.length;
+  // TODO Исправлен из posts на newPosts
+  const hasMorePosts = displayCount < newPosts.length;
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -56,6 +57,7 @@ export const UserPage: FC = () => {
   if (loading) return <LoaderWidget />;
   if (error) return <ErrorPage />;
 
+  // TODO Не отображается колличество постов пользователя
   return (
     <Root>
       <PageContainer>

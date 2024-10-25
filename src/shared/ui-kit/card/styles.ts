@@ -64,10 +64,10 @@ export const Info = styled.div`
 export const Author = styled.p`
   cursor: pointer;
   transition: 0.3s all;
-  color: ${theme.colors.font};
+  color: ${theme.colors.primary};
 
   &:hover {
-    color: ${theme.colors.secondary};
+    color: ${theme.colors.primary_hover};
     transition: 0.3s all;
   }
 `;

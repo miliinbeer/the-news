@@ -16,6 +16,7 @@ export interface StatePostTypes {
     loading: boolean;
     error: undefined;
     userLogged: UserLoggedTypes;
+    newPosts: PostTypes[]
   };
 }
 

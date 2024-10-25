@@ -2,9 +2,15 @@ import styled, { css } from "styled-components";
 import { theme } from "../../helpers";
 
 export const Root = styled.div`
-  height: 100vh;
-  ${({ theme }) => css`${theme.flex.contentCenter}`}
-  
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  ${({ theme }) =>
+    css`
+      ${theme.flex.contentCenter}
+    `}
 `;
 
 export const Reload = styled.div`

@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { fetchUsers, requestPost } from "../../app/api";
+import { fetchUsers } from "../../app/api";
 import { schemaPost } from "../../shared/ui-kit/modal/schema/schema";
 import { AppDispatch, StatePostTypes } from "../../shared/types";
+import { v4 as uuidv4 } from "uuid";
 import { ModalWindow } from "../../shared/ui-kit/modal";
 import { EntranceModal } from "./ui/entrance-modal";
 import { RegistrationModal } from "./ui/registration-modal";
@@ -25,6 +26,8 @@ import {
   Avatar,
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
+import { database } from "../../app/firebase";
+import { ref, set } from "firebase/database";
 
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -61,14 +64,35 @@ export const HeaderWidget: FC = () => {
     resolver: yupResolver(schemaPost),
   });
 
-  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = (el) => {
+  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = async (
+    el
+  ) => {
     const fullPostData = {
       ...el,
       author: userLogged.login,
     };
-    dispatch(requestPost(fullPostData));
+    const postsRef = ref(database, "posts/" + uuidv4());
+
+    try {
+      await set(postsRef, fullPostData);
+    } catch (error) {
+      console.error("Пост не удалось добавить, возникла ошибка:", error);
+    }
     setAddPostModal(!addPostModal);
+    // dispatch(requestPost(fullPostData));
   };
+
+  // TODO Старый код
+  // const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = async (
+  //   el
+  // ) => {
+  //   const fullPostData = {
+  //     ...el,
+  //     author: userLogged.login,
+  //   };
+  //   dispatch(requestPost(fullPostData));
+  //   setAddPostModal(!addPostModal);
+  // };
 
   const toggleModal = () => {
     setAddPostModal(!addPostModal);

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import base64 from "base-64";
-// import { firebaseApp } from "./firebase";
 import { fetchUsers, setUserLogged } from "./api";
 import { theme } from "../shared/helpers";
 import { AppDispatch } from "../shared/types";
@@ -22,6 +21,7 @@ const router = createBrowserRouter([
     element: <UserPage />,
   },
 ]);
+
 
 function App() {
   const dispatch: AppDispatch = useDispatch();

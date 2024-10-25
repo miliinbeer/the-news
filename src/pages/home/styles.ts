@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const Cards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 
-  @media (max-width: 950px) {
+  @media (max-width: 960px) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 0));
     justify-content: center;
   }
 `;
