@@ -7,10 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegistration } from "../../../../shared/ui-kit/modal/schema/schema";
 import { showToast } from "../../../../shared/helpers";
-import {
-  AppDispatch,
-  StatePostTypes,
-} from "../../../../shared/types";
+import { AppDispatch, StatePostTypes } from "../../../../shared/types";
 import { ModalWindow } from "../../../../shared/ui-kit/modal";
 import { Button } from "reactstrap";
 import { Inputs, Password, Label, Input, Description, Eye } from "../../styles";

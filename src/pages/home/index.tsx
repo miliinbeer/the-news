@@ -28,6 +28,7 @@ export const HomePage: FC = () => {
 
   // TODO Переенсен из HeaderWidget
   useEffect(() => {
+    // TODO Перенести в api
     const postsRef = ref(database, "posts");
 
     onValue(postsRef, (snapshot) => {

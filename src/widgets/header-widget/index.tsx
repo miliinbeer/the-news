@@ -27,7 +27,7 @@ import {
 } from "./styles";
 import icon from "../../shared/icons/favicon.webp";
 import { database } from "../../app/firebase";
-import { ref, set } from "firebase/database";
+import { onValue, ref, set } from "firebase/database";
 
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -72,7 +72,7 @@ export const HeaderWidget: FC = () => {
       author: userLogged.login,
     };
     const postsRef = ref(database, "posts/" + uuidv4());
-
+    // TODO СДЕЛАТЬ МАССИВОМ
     try {
       await set(postsRef, fullPostData);
     } catch (error) {

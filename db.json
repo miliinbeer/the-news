@@ -1,12 +1,4 @@
 {
-  "users": [
-    {
-      "id": "09335d1c-67ce-4a4c-a21f-0673c3850fc4",
-      "login": "test",
-      "password": "test",
-      "firstname": "Test",
-      "lastname": "Test"
-    }
-  ],
+  "users": [],
   "posts": []
 }

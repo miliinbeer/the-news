@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 //   );
 // });
 
-export const fetchUsers = createAsyncThunk("user/fetchUserInfo", async () => {
+export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
   const users = await fetch("http://localhost:3000/users").then((response) =>
     response.json()
   );
@@ -62,7 +62,7 @@ export const fetchUsers = createAsyncThunk("user/fetchUserInfo", async () => {
 // );
 
 export const requestUser = createAsyncThunk(
-  "user/requestUsers",
+  "user/requestUser",
   async ({ login, password, firstname, lastname, userPosts }: UserTypes) => {
     const newUser = {
       id: uuidv4(),
