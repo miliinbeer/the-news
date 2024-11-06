@@ -16,3 +16,9 @@ export const ScrollLoader = styled.p`
   font-weight: 600;
   font-size: 20px;
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+`;

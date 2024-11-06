@@ -39,7 +39,6 @@ export const UserPage: FC = () => {
 
   const [displayCount, setDisplayCount] = useState(6);
 
-  // TODO Исправлен из posts на newPosts
   const hasMorePosts = displayCount < newPosts.length;
 
   const [infiniteRef] = useInfiniteScroll({

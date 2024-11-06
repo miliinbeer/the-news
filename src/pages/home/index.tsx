@@ -7,7 +7,7 @@ import { HeaderWidget } from "../../widgets/header-widget";
 import { PageContainer } from "../../shared/ui-kit/page-container";
 import { CardWidget } from "../../shared/ui-kit/card";
 import { LoaderWidget } from "../../shared/ui-kit/loader";
-import { Cards, ScrollLoader } from "./styles";
+import { Cards, ScrollLoader, LoaderContainer } from "./styles";
 import { onValue, ref } from "firebase/database";
 import { database } from "../../app/firebase";
 import { setPosts } from "../../app/api";
@@ -21,12 +21,6 @@ export const HomePage: FC = () => {
 
   const [displayCount, setDisplayCount] = useState(6);
 
-  // TODO Старый код
-  // useEffect(() => {
-  //   dispatch(fetchPosts());
-  // }, [dispatch]);
-
-  // TODO Переенсен из HeaderWidget
   useEffect(() => {
     // TODO Перенести в api
     const postsRef = ref(database, "posts");
@@ -47,7 +41,6 @@ export const HomePage: FC = () => {
     return () => {};
   }, [dispatch]);
 
-  // TODO Исправлен из posts на newPosts
   const hasMorePosts = displayCount < newPosts.length;
 
   const [infiniteRef] = useInfiniteScroll({
@@ -87,7 +80,9 @@ export const HomePage: FC = () => {
             })}
           </Cards>
         ) : (
-          <LoaderWidget />
+          <LoaderContainer>
+            <LoaderWidget />
+          </LoaderContainer>
         )}
         <div ref={infiniteRef}>
           {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}

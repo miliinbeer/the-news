@@ -2,11 +2,6 @@ import styled, { css } from "styled-components";
 import { theme } from "../../helpers";
 
 export const Root = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   ${({ theme }) =>
     css`
       ${theme.flex.contentCenter}
