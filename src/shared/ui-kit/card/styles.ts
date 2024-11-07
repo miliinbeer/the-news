@@ -3,7 +3,7 @@ import { theme } from "../../helpers";
 
 export const Card = styled.div`
   cursor: pointer;
-  max-width: 300px;
+  width: 300px;
   padding: 20px;
   color: ${theme.colors.font};
   border: 1px ${theme.colors.secondary} solid;

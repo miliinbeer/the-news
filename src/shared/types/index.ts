@@ -13,10 +13,11 @@ export interface StatePostTypes {
   root: {
     posts: PostTypes[];
     users: UserTypes;
+    user: any
     loading: boolean;
     error: undefined;
-    userLogged: UserLoggedTypes;
-    newPosts: PostTypes[]
+    // userLogged: UserLoggedTypes;
+    // newPosts: PostTypes[]
   };
 }
 

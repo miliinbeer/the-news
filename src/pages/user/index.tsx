@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchUsers } from "../../app/api";
+// import { fetchUsers } from "../../app/api";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
+import { PostTypes, StatePostTypes } from "../../shared/types";
 import { PageContainer } from "../../shared/ui-kit/page-container";
 import { ErrorPage } from "../error";
 import { CardWidget } from "../../shared/ui-kit/card";
@@ -20,26 +20,25 @@ import {
 } from "./styles";
 
 export const UserPage: FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const param = useParams<{ author: string }>();
 
-  const param = useParams<{ authorLogin: string }>();
-
-  const { loading, users, error, newPosts } = useSelector(
+  const { loading, user, error, posts } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
-  const user = Object.values(users).find(
-    (el) => el.login === param.authorLogin
-  );
+  // const user = Object.values(users).find(
+  //   (el) => el.login === param.authorLogin
+  // );
+
+  const filteredPosts = posts.filter((post) => post.author === param?.author);
 
   useEffect(() => {
-    dispatch(fetchUsers());
     window.scrollTo(0, 0);
-  }, [dispatch]);
+  }, []);
 
   const [displayCount, setDisplayCount] = useState(6);
 
-  const hasMorePosts = displayCount < newPosts.length;
+  const hasMorePosts = displayCount < posts.length;
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -56,7 +55,6 @@ export const UserPage: FC = () => {
   if (loading) return <LoaderWidget />;
   if (error) return <ErrorPage />;
 
-  // TODO Не отображается колличество постов пользователя
   return (
     <Root>
       <PageContainer>
@@ -64,21 +62,18 @@ export const UserPage: FC = () => {
         <Items>
           <Item>
             <div>
-              <Avatar>
-                {user?.firstname?.slice(0, 1)}
-                {user?.lastname?.slice(0, 1)}
-              </Avatar>
+              <Avatar>{user?.displayName?.slice(0, 1)}</Avatar>
             </div>
             <Info>
-              <Login>{user?.login}</Login>
-              {user?.firstname} {user?.lastname}
+              <Login>{user?.email?.split("@gmail.com")}</Login>
+              {user?.displayName}
               <p>
-                Колличество постов: <strong>{user?.userPosts?.length}</strong>
+                Колличество постов: <strong>{filteredPosts?.length}</strong>
               </p>
             </Info>
           </Item>
           <Cards>
-            {user?.userPosts.map((el: PostTypes) => (
+            {filteredPosts.map((el: PostTypes) => (
               <CardWidget
                 key={el.id}
                 id={el.id}
