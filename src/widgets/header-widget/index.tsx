@@ -1,14 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { schemaPost } from "../../shared/ui-kit/modal/schema/schema";
-import { StatePostTypes } from "../../shared/types";
+import { AppDispatch, StatePostTypes } from "../../shared/types";
 import { v4 as uuidv4 } from "uuid";
 import { ModalWindow } from "../../shared/ui-kit/modal";
-import { EntranceModal } from "./ui/entrance-modal";
-import { RegistrationModal } from "./ui/registration-modal";
+// import { EntranceModal } from "./ui/entrance-modal";
+// import { RegistrationModal } from "./ui/registration-modal";
 import { CanvasWidget } from "../../shared/ui-kit/canvas";
 import { Button } from "reactstrap";
 import {
@@ -27,27 +27,43 @@ import {
 import icon from "../../shared/icons/favicon.webp";
 import { database } from "../../app/firebase";
 import { ref, set } from "firebase/database";
+import { auth, provider } from "../../app/firebase";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { setUser } from "../../app/api";
 
 export const HeaderWidget: FC = () => {
-  const { userLogged } = useSelector((state: StatePostTypes) => state.root);
+  const dispatch: AppDispatch = useDispatch();
+
+  const { user } = useSelector(
+    (state: StatePostTypes) => state.root
+  );
 
   const [showCanvas, setShowCanvas] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  // const [isLogged, setIsLogged] = useState(false);
   const [addPostModal, setAddPostModal] = useState(false);
+  
 
-  useEffect(() => {
-    if (userLogged) {
-      const token = localStorage.getItem("token");
-      if (token) {
-        setIsLogged(true);
-      }
-    }
-  }, [userLogged]);
+  // useEffect(() => {
+  //   if (userLogged) {
+  //     const token = localStorage.getItem("token");
+  //     if (token) {
+  //       setIsLogged(true);
+  //     }
+  //   }
+  // }, [userLogged]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLogged(false);
-  };
+  // const userInfo = auth.currentUser;
+
+  // useEffect(() => {
+  //   if (user) {
+  //     setIsLogged(true);
+  //   }
+  // }, [user]);
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setIsLogged(false);
+  // };
 
   const {
     reset,
@@ -61,7 +77,12 @@ export const HeaderWidget: FC = () => {
   const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = async (
     el
   ) => {
-    const fullPostData = { ...el, author: userLogged.login };
+    // const fullPostData = { ...el, author: userLogged.login };
+    const fullPostData = {
+      ...el,
+      author: user?.email?.split("@gmail.com")[0]
+    };
+
     const postsRef = ref(database, "posts/" + uuidv4());
     // TODO СДЕЛАТЬ МАССИВОМ
     try {
@@ -77,16 +98,38 @@ export const HeaderWidget: FC = () => {
     reset();
   };
 
+  const signIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        // setIsLogged(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // setIsLogged(false);
+        dispatch(setUser(null))
+      })
+      .catch((error) => {
+        console.error("Ошибка", error);
+      });
+  };
+
   return (
     <>
       <Root>
         <Logotype href="/">
           <Icon src={icon} alt="icon" />
           <div>
-            <span>/ THE</span> NEWS
+            <span>/ THE</span> POSTS
           </div>
         </Logotype>
-        {isLogged ? (
+        {user ? (
           <UserPanel>
             <ModalWindow
               modalButton={
@@ -196,15 +239,14 @@ export const HeaderWidget: FC = () => {
               }
             />
             <Avatar onClick={() => setShowCanvas(true)}>
-              {userLogged?.firstname.slice(0, 1)}
-              {userLogged?.lastname.slice(0, 1)}
+              {user?.displayName?.slice(0, 1)}
             </Avatar>
             <CanvasWidget
               showCanvas={showCanvas}
               handlerHide={() => setShowCanvas(false)}
               placement="end"
               exitButton={
-                <Button color="primary" onClick={handleLogout}>
+                <Button color="primary" onClick={handleSignOut}>
                   Выход
                 </Button>
               }
@@ -212,8 +254,9 @@ export const HeaderWidget: FC = () => {
           </UserPanel>
         ) : (
           <Buttons>
-            <EntranceModal />
-            <RegistrationModal />
+            <button onClick={signIn}>Вход</button>
+            {/* <EntranceModal /> */}
+            {/* <RegistrationModal /> */}
           </Buttons>
         )}
       </Root>

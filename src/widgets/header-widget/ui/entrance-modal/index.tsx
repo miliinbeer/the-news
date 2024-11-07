@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { searchUsers, setUserLogged } from "../../../../app/api";
+// import {  setUserLogged } from "../../../../app/api";
 import base64 from "base-64";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,7 +17,7 @@ import eye from "../../../../shared/icons/eye.svg";
 import eye_crossed from "../../../../shared/icons/eye-crossed.svg";
 
 export const EntranceModal: FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  // const dispatch: AppDispatch = useDispatch();
 
   const { users } = useSelector((state: StatePostTypes) => state.root);
 
@@ -50,10 +50,10 @@ export const EntranceModal: FC = () => {
         showToast("Неверный пароль. Попробуйте снова.");
         return;
       } else {
-        dispatch(searchUsers(user));
+        // dispatch(searchUsers(user));
         const token = base64.encode(JSON.stringify(user));
         localStorage.setItem("token", token);
-        dispatch(setUserLogged(user));
+        // dispatch(setUserLogged(user));
         toggleEntranceModal();
       }
     }

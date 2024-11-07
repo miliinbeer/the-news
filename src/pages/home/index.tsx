@@ -8,40 +8,15 @@ import { PageContainer } from "../../shared/ui-kit/page-container";
 import { CardWidget } from "../../shared/ui-kit/card";
 import { LoaderWidget } from "../../shared/ui-kit/loader";
 import { Cards, ScrollLoader, LoaderContainer } from "./styles";
-import { onValue, ref } from "firebase/database";
-import { database } from "../../app/firebase";
-import { setPosts } from "../../app/api";
 
 export const HomePage: FC = () => {
-  const dispatch: AppDispatch = useDispatch();
-
-  const { loading, error, newPosts } = useSelector(
+  const { loading, error, posts } = useSelector(
     (state: StatePostTypes) => state.root
   );
 
   const [displayCount, setDisplayCount] = useState(6);
-
-  useEffect(() => {
-    // TODO Перенести в api
-    const postsRef = ref(database, "posts");
-
-    onValue(postsRef, (snapshot) => {
-      const data = snapshot.val();
-      const postsArray: Array<Object> = [];
-
-      if (data) {
-        Object.keys(data).forEach((key) => {
-          postsArray.push({ id: key, ...data[key] });
-        });
-      }
-
-      dispatch(setPosts(postsArray));
-    });
-
-    return () => {};
-  }, [dispatch]);
-
-  const hasMorePosts = displayCount < newPosts.length;
+  
+  const hasMorePosts = displayCount < posts.length;
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -61,9 +36,9 @@ export const HomePage: FC = () => {
     <>
       <PageContainer>
         <HeaderWidget />
-        {newPosts.length > 0 ? (
+        {posts.length > 0 ? (
           <Cards>
-            {newPosts.slice(0, displayCount).map((el: PostTypes) => {
+            {posts.slice(0, displayCount).map((el: PostTypes) => {
               return (
                 <CardWidget
                   key={el.id}

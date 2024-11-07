@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { requestUser, setUserLogged } from "../../../../app/api";
+import { setUserLogged } from "../../../../app/api";
 import base64 from "base-64";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -40,7 +40,7 @@ export const RegistrationModal: FC = () => {
       showToast("Такой пользователь уже существует. Попробуйте снова.");
       return;
     }
-    dispatch(requestUser(el));
+    // dispatch(requestUser(el));
     setRegistrationModal(!registrationModal);
     const token = base64.encode(JSON.stringify(el));
     localStorage.setItem("token", token);
@@ -51,7 +51,7 @@ export const RegistrationModal: FC = () => {
     setRegistrationModal(!registrationModal);
     reset();
   };
-
+  
   return (
     <>
       <ModalWindow
