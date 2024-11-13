@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FC, useState } from "react";
+import { useSelector } from "react-redux";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import { AppDispatch, PostTypes, StatePostTypes } from "../../shared/types";
+import { PostTypes, StatePostTypes } from "../../shared/types";
 import { ErrorPage } from "../error";
 import { HeaderWidget } from "../../widgets/header-widget";
 import { PageContainer } from "../../shared/ui-kit/page-container";
@@ -15,7 +15,7 @@ export const HomePage: FC = () => {
   );
 
   const [displayCount, setDisplayCount] = useState(6);
-  
+
   const hasMorePosts = displayCount < posts.length;
 
   const [infiniteRef] = useInfiniteScroll({

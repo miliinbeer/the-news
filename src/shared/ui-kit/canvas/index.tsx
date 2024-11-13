@@ -1,6 +1,4 @@
 import React, { FC, ReactElement } from "react";
-// import { useSelector } from "react-redux";
-// import { StatePostTypes } from "../../types";
 import { Items, Buttons, Avatar } from "./styles";
 import Offcanvas, { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 import { auth } from "../../../app/firebase";
@@ -25,16 +23,11 @@ export const CanvasWidget: FC<Props> = ({
       <Offcanvas.Header closeButton>
         <Avatar>
           {userInfo?.displayName?.slice(0, 1)}
-          {/* {userLogged?.lastname.slice(0, 1)} */}
         </Avatar>
         <Items>
           <strong>{userInfo?.email?.split("@gmail.com")}</strong>
           <div>
             {userInfo?.displayName}
-            {/* {userLogged?.firstname.charAt(0).toUpperCase() +
-              userLogged?.firstname.slice(1).toLowerCase()}{" "}
-            {userLogged?.lastname.charAt(0).toUpperCase() +
-              userLogged?.lastname.slice(1).toLowerCase()} */}
           </div>
         </Items>
       </Offcanvas.Header>

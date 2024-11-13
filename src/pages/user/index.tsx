@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-// import { fetchUsers } from "../../app/api";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { PostTypes, StatePostTypes } from "../../shared/types";
 import { PageContainer } from "../../shared/ui-kit/page-container";
@@ -25,11 +24,7 @@ export const UserPage: FC = () => {
   const { loading, user, error, posts } = useSelector(
     (state: StatePostTypes) => state.root
   );
-
-  // const user = Object.values(users).find(
-  //   (el) => el.login === param.authorLogin
-  // );
-
+  
   const filteredPosts = posts.filter((post) => post.author === param?.author);
 
   useEffect(() => {
