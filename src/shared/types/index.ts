@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { store } from "../../app/store";
 
 export type AppDispatch = typeof store.dispatch;
@@ -33,7 +34,10 @@ export interface PostTypes {
   link: string;
   date?: string;
   source?: string;
-  author?: string;
+  author?: string; 
+  likes?: Array<string> | undefined
+  handleLike?: () => void
+  isLiked?: ReactElement
 }
 
 export interface UserTypes {

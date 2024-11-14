@@ -19,5 +19,5 @@ export const rootReducer = createSlice({
   },
 });
 
-export const { setPosts, setUser } = rootReducer.actions;
+export const { setPosts, setUser} = rootReducer.actions;
 export default rootReducer.reducer;

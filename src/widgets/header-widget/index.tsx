@@ -32,13 +32,11 @@ import { setUser } from "../../app/api";
 export const HeaderWidget: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { user } = useSelector(
-    (state: StatePostTypes) => state.root
-  );
+  const { user } = useSelector((state: StatePostTypes) => state.root);
 
   const [showCanvas, setShowCanvas] = useState(false);
   const [addPostModal, setAddPostModal] = useState(false);
-  
+
   const {
     reset,
     control,
@@ -53,7 +51,8 @@ export const HeaderWidget: FC = () => {
   ) => {
     const fullPostData = {
       ...el,
-      author: user?.email?.split("@gmail.com")[0]
+      author: user?.email?.split("@gmail.com")[0],
+      likes: [],
     };
 
     const postsRef = ref(database, "posts/" + uuidv4());
@@ -72,13 +71,13 @@ export const HeaderWidget: FC = () => {
   };
 
   const signIn = () => {
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, provider);
   };
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        dispatch(setUser(null))
+        dispatch(setUser(null));
       })
       .catch((error) => {
         console.error("Ошибка", error);
