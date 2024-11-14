@@ -51,7 +51,7 @@ export const HeaderWidget: FC = () => {
   ) => {
     const fullPostData = {
       ...el,
-      author: user?.email?.split("@gmail.com")[0],
+      author: user?.email?.split("@gmail.com")[0].split("@umbrellait.com")[0],
       likes: [],
     };
 
