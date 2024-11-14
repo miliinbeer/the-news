@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { PostTypes } from "../../types";
 import { ModalWindow } from "../modal";
 import {
+  Like,
   Card,
   Image,
   Title,
@@ -16,6 +17,8 @@ import {
 } from "./styles";
 
 export const CardWidget: FC<PostTypes> = ({
+  handleLike,
+  isLiked,
   id,
   image,
   title,
@@ -35,6 +38,9 @@ export const CardWidget: FC<PostTypes> = ({
     <ModalWindow
       modalButton={
         <Card id={id} onClick={toggleModal}>
+          <Like onClick={handleLike}>
+            {isLiked}
+          </Like>
           <Image src={image} alt={title} />
           <Title>{title}</Title>
           <Content>

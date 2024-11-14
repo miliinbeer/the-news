@@ -1,5 +1,18 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../helpers";
+import icon from "../../icons/like.png";
+
+export const Like = styled.div`
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 50%;
+  box-shadow: 0px 6px 16px rgb(187 187 187 / 47%);
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;
 
 export const Card = styled.div`
   cursor: pointer;
