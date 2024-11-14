@@ -34,24 +34,29 @@ export const HomePage: FC = () => {
     },
   });
 
-  const handleLike = async () => {
+  const handleLike = async (postId: any) => {
     const updatedPosts = posts.map((el: PostTypes) => {
-      const isLiked = el?.likes?.find((id: any) => id === user?.uid);
+      if (el.id === postId) {
+        const isLiked = el?.likes?.find((id: any) => id === user?.uid);
+        let updatedLikes;
 
-      let updatedLikes;
-      if (isLiked) {
-        updatedLikes = el?.likes?.filter((id: any) => id !== user?.uid);
-      } else {
-        updatedLikes = el.likes ? [...el.likes, user?.uid] : [user?.uid];
+        if (isLiked) {
+          updatedLikes = el?.likes?.filter((id: any) => id !== user?.uid);
+        } else {
+          updatedLikes = el.likes ? [...el.likes, user?.uid] : [user?.uid];
+        }
+
+        return {
+          ...el,
+          likes: updatedLikes,
+        };
       }
 
-      return {
-        ...el,
-        likes: updatedLikes,
-      };
+      return el;
     });
 
     const postsRef = ref(database, "posts/");
+
     try {
       await set(postsRef, updatedPosts);
     } catch (error) {
@@ -59,6 +64,8 @@ export const HomePage: FC = () => {
     }
   };
 
+  console.log(posts);
+  
 
   if (error) return <ErrorPage />;
 
@@ -79,7 +86,7 @@ export const HomePage: FC = () => {
                       <img src={dislike} alt="dislike" />
                     )
                   }
-                  handleLike={handleLike}
+                  handleLike={()=> handleLike(el.id)}
                   key={el.id}
                   id={el.id}
                   title={el.title}
