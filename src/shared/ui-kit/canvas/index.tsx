@@ -21,14 +21,16 @@ export const CanvasWidget: FC<Props> = ({
   return (
     <Offcanvas show={showCanvas} onHide={handlerHide} placement={placement}>
       <Offcanvas.Header closeButton>
-        <Avatar>
-          {userInfo?.displayName?.slice(0, 1)}
-        </Avatar>
+        <Avatar>{userInfo?.displayName?.slice(0, 1)}</Avatar>
         <Items>
-          <strong>{userInfo?.email?.split("@gmail.com")}</strong>
-          <div>
-            {userInfo?.displayName}
-          </div>
+          <strong>
+            {
+              userInfo?.email
+                ?.split("@gmail.com")[0]
+                ?.split("@umbrellait.com")[0]
+            }
+          </strong>
+          <div>{userInfo?.displayName}</div>
         </Items>
       </Offcanvas.Header>
       <Offcanvas.Body>

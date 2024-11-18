@@ -1,26 +1,25 @@
-import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
-import useInfiniteScroll from "react-infinite-scroll-hook";
-import { PostTypes, StatePostTypes } from "../../shared/types";
-import { ErrorPage } from "../error";
-import { HeaderWidget } from "../../widgets/header-widget";
-import { PageContainer } from "../../shared/ui-kit/page-container";
-import { CardWidget } from "../../shared/ui-kit/card";
-import { LoaderWidget } from "../../shared/ui-kit/loader";
-import { Cards, ScrollLoader, LoaderContainer } from "./styles";
-import { database } from "../../app/firebase";
-import { ref, set } from "firebase/database";
-import like from "../../shared/icons/like.png";
-import dislike from "../../shared/icons/dislike.png";
+import { ref, set } from 'firebase/database'
+import React, { FC, useState } from 'react'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
+import { useSelector } from 'react-redux'
+
+import { database } from '../../app/firebase'
+import dislike from '../../shared/icons/dislike.png'
+import like from '../../shared/icons/like.png'
+import { PostTypes, StatePostTypes } from '../../shared/types'
+import { CardWidget } from '../../shared/ui-kit/card'
+import { LoaderWidget } from '../../shared/ui-kit/loader'
+import { PageContainer } from '../../shared/ui-kit/page-container'
+import { HeaderWidget } from '../../widgets/header-widget'
+import { ErrorPage } from '../error'
+import { Cards, ScrollLoader, LoaderContainer } from './styles'
 
 export const HomePage: FC = () => {
-  const { loading, error, posts, user } = useSelector(
-    (state: StatePostTypes) => state.root
-  );
+  const { loading, error, posts, user } = useSelector((state: StatePostTypes) => state.root)
 
-  const [displayCount, setDisplayCount] = useState(6);
+  const [displayCount, setDisplayCount] = useState(6)
 
-  const hasMorePosts = displayCount < posts.length;
+  const hasMorePosts = displayCount < posts.length
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -28,46 +27,45 @@ export const HomePage: FC = () => {
     onLoadMore: () => {
       if (hasMorePosts) {
         setTimeout(() => {
-          setDisplayCount((prevCount) => prevCount + 9);
-        }, 1000);
+          setDisplayCount((prevCount) => prevCount + 9)
+        }, 1000)
       }
-    },
-  });
+    }
+  })
 
   const handleLike = async (postId: any) => {
     const updatedPosts = posts.map((el: PostTypes) => {
       if (el.id === postId) {
-        const isLiked = el?.likes?.find((id: any) => id === user?.uid);
-        let updatedLikes;
+        const isLiked = el?.likes?.find((id: any) => id === user?.uid)
+        let updatedLikes
 
         if (isLiked) {
-          updatedLikes = el?.likes?.filter((id: any) => id !== user?.uid);
+          updatedLikes = el?.likes?.filter((id: any) => id !== user?.uid)
         } else {
-          updatedLikes = el.likes ? [...el.likes, user?.uid] : [user?.uid];
+          updatedLikes = el.likes ? [...el.likes, user?.uid] : [user?.uid]
         }
 
         return {
           ...el,
-          likes: updatedLikes,
-        };
+          likes: updatedLikes
+        }
       }
 
-      return el;
-    });
+      return el
+    })
 
-    const postsRef = ref(database, "posts/");
+    const postsRef = ref(database, 'posts/')
 
     try {
-      await set(postsRef, updatedPosts);
+      await set(postsRef, updatedPosts)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
-  console.log(posts);
-  
+  console.log(posts)
 
-  if (error) return <ErrorPage />;
+  if (error) return <ErrorPage />
 
   return (
     <>
@@ -76,17 +74,13 @@ export const HomePage: FC = () => {
         {posts.length > 0 ? (
           <Cards>
             {posts.slice(0, displayCount).map((el: PostTypes) => {
-              const isLiked = el.likes ? el.likes.includes(user.uid) : false;
+              const isLiked = el.likes ? el.likes.includes(user.uid) : false
               return (
                 <CardWidget
                   isLiked={
-                    isLiked ? (
-                      <img src={like} alt="like" />
-                    ) : (
-                      <img src={dislike} alt="dislike" />
-                    )
+                    isLiked ? <img src={like} alt="like" /> : <img src={dislike} alt="dislike" />
                   }
-                  handleLike={()=> handleLike(el.id)}
+                  handleLike={() => handleLike(el.id)}
                   key={el.id}
                   id={el.id}
                   title={el.title}
@@ -97,7 +91,7 @@ export const HomePage: FC = () => {
                   source={el.source}
                   author={el.author}
                 />
-              );
+              )
             })}
           </Cards>
         ) : (
@@ -105,10 +99,8 @@ export const HomePage: FC = () => {
             <LoaderWidget />
           </LoaderContainer>
         )}
-        <div ref={infiniteRef}>
-          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
-        </div>
+        <div ref={infiniteRef}>{hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}</div>
       </PageContainer>
     </>
-  );
-};
+  )
+}

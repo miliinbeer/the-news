@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth, database } from "./firebase";
-import { setPosts, setUser } from "./api";
 import { onValue, ref } from "firebase/database";
+import { onAuthStateChanged } from "firebase/auth";
+import { setPosts, setUser } from "./api";
 import { theme } from "../shared/helpers";
 import { AppDispatch, PostTypes } from "../shared/types";
 import { HomePage } from "../pages/home";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   {
     path: "user/:author",
     element: <UserPage />,
-  },
+  }
 ]);
 
 function App() {

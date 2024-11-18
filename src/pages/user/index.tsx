@@ -1,39 +1,29 @@
-import React, { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import useInfiniteScroll from "react-infinite-scroll-hook";
-import { PostTypes, StatePostTypes } from "../../shared/types";
-import { PageContainer } from "../../shared/ui-kit/page-container";
-import { ErrorPage } from "../error";
-import { CardWidget } from "../../shared/ui-kit/card";
-import { LoaderWidget } from "../../shared/ui-kit/loader";
-import {
-  Root,
-  Items,
-  Item,
-  Avatar,
-  Login,
-  Info,
-  Cards,
-  ScrollLoader,
-} from "./styles";
+import React, { FC, useEffect, useState } from 'react'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
+import { useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+
+import { PostTypes, StatePostTypes } from '../../shared/types'
+import { CardWidget } from '../../shared/ui-kit/card'
+import { LoaderWidget } from '../../shared/ui-kit/loader'
+import { PageContainer } from '../../shared/ui-kit/page-container'
+import { ErrorPage } from '../error'
+import { Root, Items, Item, Avatar, Login, Info, Cards, ScrollLoader } from './styles'
 
 export const UserPage: FC = () => {
-  const param = useParams<{ author: string }>();
+  const param = useParams<{ author: string }>()
 
-  const { loading, user, error, posts } = useSelector(
-    (state: StatePostTypes) => state.root
-  );
-  
-  const filteredPosts = posts.filter((post) => post.author === param?.author);
+  const { loading, user, error, posts } = useSelector((state: StatePostTypes) => state.root)
+
+  const filteredPosts = posts.filter((post) => post.author === param?.author)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0)
+  }, [])
 
-  const [displayCount, setDisplayCount] = useState(6);
+  const [displayCount, setDisplayCount] = useState(6)
 
-  const hasMorePosts = displayCount < posts.length;
+  const hasMorePosts = displayCount < posts.length
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -41,14 +31,14 @@ export const UserPage: FC = () => {
     onLoadMore: () => {
       if (hasMorePosts) {
         setTimeout(() => {
-          setDisplayCount((prevCount) => prevCount + 9);
-        }, 1000);
+          setDisplayCount((prevCount) => prevCount + 9)
+        }, 1000)
       }
-    },
-  });
+    }
+  })
 
-  if (loading) return <LoaderWidget />;
-  if (error) return <ErrorPage />;
+  if (loading) return <LoaderWidget />
+  if (error) return <ErrorPage />
 
   return (
     <Root>
@@ -57,11 +47,11 @@ export const UserPage: FC = () => {
         <Items>
           <Item>
             <div>
-              <Avatar>{user?.displayName?.slice(0, 1)}</Avatar>
+              <Avatar>{param?.author?.slice(0, 1)?.toUpperCase()}</Avatar>
             </div>
             <Info>
-              <Login>{user?.email?.split("@gmail.com")}</Login>
-              {user?.displayName}
+              <Login>{param?.author}</Login>
+              {user?.email?.split('@gmail.com')[0]?.split('@umbrellait.com')[0]}
               <p>
                 Колличество постов: <strong>{filteredPosts?.length}</strong>
               </p>
@@ -82,10 +72,8 @@ export const UserPage: FC = () => {
             ))}
           </Cards>
         </Items>
-        <div ref={infiniteRef}>
-          {hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}
-        </div>
+        <div ref={infiniteRef}>{hasMorePosts && <ScrollLoader>Загрузка...</ScrollLoader>}</div>
       </PageContainer>
     </Root>
-  );
-};
+  )
+}

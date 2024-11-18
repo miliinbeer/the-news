@@ -6,6 +6,7 @@ import icon from "../../shared/icons/favicon.webp";
 
 export const ErrorPage: FC = () => {
   const { error } = useSelector((state: StatePostTypes) => state.root);
+  
   return (
     <Root>
       <Items>
