@@ -32,7 +32,7 @@ export const HomePage: FC = () => {
       }
     }
   })
-  
+
   const handleLike = async (postId: string | undefined) => {
     const updatedPosts = posts.map((el: PostTypes) => {
       if (el.id === postId) {
@@ -67,12 +67,12 @@ export const HomePage: FC = () => {
 
   return (
     <>
+      <HeaderWidget />
       <PageContainer>
-        <HeaderWidget />
         {posts.length > 0 ? (
           <Cards>
             {posts.slice(0, displayCount).map((el: PostTypes) => {
-              const isLiked = el.likes ? el.likes.includes(user.uid) : false
+              const isLiked = el.likes ? el.likes.includes(user?.uid) : false
               return (
                 <CardWidget
                   isLiked={
