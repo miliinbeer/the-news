@@ -1,23 +1,7 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
-import { StatePostTypes } from "../../shared/types";
-import { Root, Items, Icon, Message } from "./styles";
-import icon from "../../shared/icons/favicon.webp";
+import React, { FC } from 'react'
+
+import { Root } from './styles'
 
 export const ErrorPage: FC = () => {
-  const { error } = useSelector((state: StatePostTypes) => state.root);
-  
-  return (
-    <Root>
-      <Items>
-        <Icon src={icon} />
-        <div>
-          <h1>
-            <span>Ooops...</span> That's an error.
-          </h1>
-          <Message>{error}</Message>
-        </div>
-      </Items>
-    </Root>
-  );
-};
+  return <Root>Что-то пошло не так...</Root>
+}

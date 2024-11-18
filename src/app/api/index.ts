@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 export const rootReducer = createSlice({
-  name: "data",
+  name: 'data',
   initialState: {
     posts: [],
     user: {},
     error: undefined,
     loading: false,
-    hasNextPage: true,
+    hasNextPage: true
   },
   reducers: {
     setPosts: (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload
     },
     setUser: (state, action) => {
-      state.user = action.payload;
-    },
-  },
-});
+      state.user = action.payload
+    }
+  }
+})
 
-export const { setPosts, setUser} = rootReducer.actions;
-export default rootReducer.reducer;
+export const { setPosts, setUser } = rootReducer.actions
+export default rootReducer.reducer

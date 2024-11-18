@@ -32,15 +32,15 @@ export const HomePage: FC = () => {
       }
     }
   })
-
-  const handleLike = async (postId: any) => {
+  
+  const handleLike = async (postId: string | undefined) => {
     const updatedPosts = posts.map((el: PostTypes) => {
       if (el.id === postId) {
-        const isLiked = el?.likes?.find((id: any) => id === user?.uid)
+        const isLiked = el?.likes?.find((id) => id === user?.uid)
         let updatedLikes
 
         if (isLiked) {
-          updatedLikes = el?.likes?.filter((id: any) => id !== user?.uid)
+          updatedLikes = el?.likes?.filter((id) => id !== user?.uid)
         } else {
           updatedLikes = el.likes ? [...el.likes, user?.uid] : [user?.uid]
         }
@@ -63,8 +63,6 @@ export const HomePage: FC = () => {
     }
   }
 
-  console.log(posts)
-
   if (error) return <ErrorPage />
 
   return (
@@ -86,7 +84,7 @@ export const HomePage: FC = () => {
                   title={el.title}
                   image={el.image}
                   content={el.content}
-                  date={new Date().toISOString().slice(0, 10)}
+                  // date={new Date().toISOString().slice(0, 10)}
                   link={el.link}
                   source={el.source}
                   author={el.author}

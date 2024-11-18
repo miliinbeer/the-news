@@ -1,36 +1,8 @@
-import styled, { css } from "styled-components";
-import { theme } from "../../shared/helpers";
+import styled from 'styled-components'
 
 export const Root = styled.div`
-  height: 100vh;
-  color: ${theme.colors.primary};
-  ${({ theme }) =>
-    css`
-      ${theme.flex.contentCenter}
-    `}
-  span {
-    color: ${theme.colors.error};
-  }
-`;
-
-export const Items = styled.div`
-  ${({ theme }) =>
-    css`
-      ${theme.flex.itemsCenter}
-    `}
-  gap: 20px;
-
-  @media (max-width: 500px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-export const Icon = styled.img`
-  width: 100px;
-  height: 100px;
-`;
-
-export const Message = styled.p`
-  font-size: 20px;
-`;
+  margin-top: 20rem;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+`
