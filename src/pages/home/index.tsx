@@ -4,18 +4,17 @@ import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { useSelector } from 'react-redux'
 
 import { database } from '../../app/firebase'
-import dislike from '../../shared/icons/dislike.png'
-import like from '../../shared/icons/like.png'
+import disliked from '../../shared/icons/disliked.webp'
+import liked from '../../shared/icons/liked.webp'
 import { PostTypes, StatePostTypes } from '../../shared/types'
 import { CardWidget } from '../../shared/ui-kit/card'
 import { LoaderWidget } from '../../shared/ui-kit/loader'
 import { PageContainer } from '../../shared/ui-kit/page-container'
 import { HeaderWidget } from '../../widgets/header-widget'
-import { ErrorPage } from '../error'
 import { Cards, ScrollLoader, LoaderContainer } from './styles'
 
 export const HomePage: FC = () => {
-  const { loading, error, posts, user } = useSelector((state: StatePostTypes) => state.root)
+  const { loading, posts, user } = useSelector((state: StatePostTypes) => state.root)
 
   const [displayCount, setDisplayCount] = useState(6)
 
@@ -59,11 +58,9 @@ export const HomePage: FC = () => {
     try {
       await set(postsRef, updatedPosts)
     } catch (error) {
-      console.error(error)
+      console.error('Возникла ошибка:', error)
     }
   }
-
-  if (error) return <ErrorPage />
 
   return (
     <>
@@ -76,7 +73,7 @@ export const HomePage: FC = () => {
               return (
                 <CardWidget
                   isLiked={
-                    isLiked ? <img src={like} alt="like" /> : <img src={dislike} alt="dislike" />
+                    isLiked ? <img src={liked} alt="liked" /> : <img src={disliked} alt="disliked" />
                   }
                   handleLike={() => handleLike(el.id)}
                   key={el.id}

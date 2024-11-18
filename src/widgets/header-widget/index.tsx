@@ -150,7 +150,7 @@ export const HeaderWidget: FC = () => {
                           <p>
                             Контент <span>*</span>
                           </p>
-                          <Textarea {...field} isError={isError} rows={4} name="content" />
+                          <Textarea {...field} isError={isError} rows={2} name="content" />
                           <Description>{isError ? errors?.content?.message : null}</Description>
                         </Label>
                       )
