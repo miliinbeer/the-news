@@ -15,8 +15,8 @@ import { auth, provider } from '../../app/firebase'
 import logotype from '../../shared/icons/logotype.webp'
 import { AppDispatch, StatePostTypes } from '../../shared/types'
 import { CanvasWidget } from '../../shared/ui-kit/canvas'
-import { schemaPost } from '../../shared/ui-kit/modal/schema/schema'
 import { PageContainer } from '../../shared/ui-kit/page-container'
+import { schemaPost } from './schema'
 import {
   Root,
   Items,

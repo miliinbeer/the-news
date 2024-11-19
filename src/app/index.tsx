@@ -1,22 +1,19 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { onAuthStateChanged } from 'firebase/auth';
-import { onValue, ref } from 'firebase/database';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { onAuthStateChanged } from 'firebase/auth'
+import { onValue, ref } from 'firebase/database'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
-
-
-import { ErrorPage } from '../pages/error';
-import { HomePage } from '../pages/home';
-import { UserPage } from '../pages/user';
-import { theme } from '../shared/helpers';
-import { AppDispatch, PostTypes } from '../shared/types';
-import { setPosts, setUser } from './api';
-import { auth, database } from './firebase';
-import { GlobalStyles } from './styles';
-
+import { ErrorPage } from '../pages/error'
+import { HomePage } from '../pages/home'
+import { UserPage } from '../pages/user'
+import { theme } from '../shared/helpers'
+import { AppDispatch, PostTypes } from '../shared/types'
+import { setPosts, setUser } from './api'
+import { auth, database } from './firebase'
+import { GlobalStyles } from './styles'
 
 const router = createBrowserRouter([
   {
