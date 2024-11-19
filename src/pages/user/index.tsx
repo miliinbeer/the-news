@@ -67,7 +67,6 @@ export const UserPage: FC = () => {
                 content={el.content}
                 date={el.date}
                 link={el.link}
-                source={el.source}
               />
             ))}
           </Cards>
