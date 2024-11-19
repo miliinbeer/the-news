@@ -1,14 +1,15 @@
-import React, { FC, ReactElement } from "react";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import { ModalFooter } from "./styles";
+import React, { FC, ReactElement } from 'react'
+import { Modal, ModalHeader, ModalBody } from 'reactstrap'
+
+import { ModalFooter } from './styles'
 
 interface Props {
-  modalButton: ReactElement;
-  isOpened: boolean;
-  toggleModal: () => void;
-  modalTitle?: string;
-  modalForm: ReactElement;
-  modalButtons?: ReactElement;
+  modalButton: ReactElement
+  isOpened: boolean
+  toggleModal: () => void
+  modalTitle?: string
+  modalForm: ReactElement
+  modalButtons?: ReactElement
 }
 
 export const ModalWindow: FC<Props> = ({
@@ -17,17 +18,13 @@ export const ModalWindow: FC<Props> = ({
   toggleModal,
   modalTitle,
   modalForm,
-  modalButtons,
+  modalButtons
 }) => {
   return (
     <>
       {modalButton}
-      <Modal
-        style={{ marginTop: "7rem" }}
-        isOpen={isOpened}
-        toggle={toggleModal}
-      >
-        <ModalHeader toggle={toggleModal} style={{ border: "none" }}>
+      <Modal style={{ marginTop: '7rem' }} isOpen={isOpened} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal} style={{ border: 'none' }}>
           {modalTitle}
         </ModalHeader>
         <ModalBody>
@@ -36,5 +33,5 @@ export const ModalWindow: FC<Props> = ({
         </ModalBody>
       </Modal>
     </>
-  );
-};
+  )
+}

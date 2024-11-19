@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 
 
 
+import { ErrorPage } from '../pages/error';
 import { HomePage } from '../pages/home';
 import { UserPage } from '../pages/user';
 import { theme } from '../shared/helpers';
@@ -15,7 +16,6 @@ import { AppDispatch, PostTypes } from '../shared/types';
 import { setPosts, setUser } from './api';
 import { auth, database } from './firebase';
 import { GlobalStyles } from './styles';
-import { ErrorPage } from '../pages/error';
 
 
 const router = createBrowserRouter([
@@ -60,7 +60,6 @@ function App() {
           postsArray.push({ id: key, ...data[key] })
         })
       }
-
       dispatch(setPosts(postsArray))
     })
 

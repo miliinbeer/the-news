@@ -1,13 +1,14 @@
-import styled from "styled-components";
-import { theme } from "../../helpers";
+import styled from 'styled-components'
+
+import { theme } from '../../helpers'
 
 export const Items = styled.div`
   margin-left: 10px;
-`;
+`
 
 export const Buttons = styled.div`
   margin: 10px 0;
-`;
+`
 
 export const Avatar = styled.button`
   color: #fff;
@@ -16,4 +17,4 @@ export const Avatar = styled.button`
   border: none;
   border-radius: 50%;
   background-color: ${theme.colors.primary};
-`;
+`
