@@ -26,10 +26,8 @@ export interface PostTypes {
   content: string
   link: string
   date?: string
-  source?: string
   author?: string
   likes?: Array<string> | undefined
-  handleLike?: () => void
   isLiked?: ReactElement
 }
 

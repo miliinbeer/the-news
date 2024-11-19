@@ -1,76 +1,61 @@
-import React, { FC, useState } from "react";
-import { Link } from "react-router-dom";
-import { PostTypes } from "../../types";
-import { ModalWindow } from "../modal";
-import {
-  Like,
-  Card,
-  Image,
-  Title,
-  Content,
-  Source,
-  Info,
-  Author,
-  Form,
-  FormTitle,
-  FormText,
-} from "./styles";
+import React, { FC, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Modal, ModalBody } from 'reactstrap'
+
+import { PostTypes } from '../../types'
+import { Card, Image, Title, Content, Source, Author, ModalTitle, ModalText } from './styles'
 
 export const CardWidget: FC<PostTypes> = ({
-  handleLike,
-  isLiked,
   id,
+  isLiked,
   image,
   title,
   content,
-  date,
   link,
-  source,
   author,
+  date
 }) => {
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(false)
 
   const toggleModal = () => {
-    setIsOpened(!isOpened);
-  };
+    setIsOpened(!isOpened)
+  }
 
   return (
-    <ModalWindow
-      modalButton={
-        <Card id={id} onClick={toggleModal}>
-          <Like onClick={handleLike}>
-            {isLiked}
-          </Like>
+    <>
+      <Card id={id}>
+        {isLiked}
+        <Image src={image} alt={title} />
+        <Title>{title}</Title>
+        <Content onClick={toggleModal}>{content}</Content>
+        <Source onClick={toggleModal}>
+          Источник:{' '}
+          <a href={`http://${link}`} target="_blank">
+            {link}
+          </a>
+        </Source>
+        <Author>
+          Автор: <Link to={`user/${author}`}>{author}</Link>
+        </Author>
+        <small className="text-muted">{date}</small>
+      </Card>
+      <Modal isOpen={isOpened} toggle={toggleModal}>
+        <ModalBody>
+          <ModalTitle>{title}</ModalTitle>
           <Image src={image} alt={title} />
-          <Title>{title}</Title>
-          <Content>
-            <p>{content}</p>
-          </Content>
-          <Source href={link}>{source}</Source>
-          <Info>
-            <Link to={`user/${author}`}>
-              <Author>{author}</Author>
-            </Link>
-            <small className="text-muted">{date}</small>
-          </Info>
-        </Card>
-      }
-      isOpened={isOpened}
-      toggleModal={toggleModal}
-      modalForm={
-        <Form>
-          <FormTitle>{title}</FormTitle>
-          <Image src={image} alt={title} />
-          <FormText>{content}</FormText>
-          <Source href={link}>{source}</Source>
-          <Info>
-            <Link to={`user/${author}`}>
-              <Author>{author}</Author>
-            </Link>
-            <small className="text-muted">{date}</small>
-          </Info>
-        </Form>
-      }
-    />
-  );
-};
+          <ModalText>{content}</ModalText>
+          <Source>
+            Источник:{' '}
+            <a href={`http://${link}`} target="_blank">
+              {link}
+            </a>
+          </Source>
+          <Author>
+            Автор: <Link to={`user/${author}`}>{author}</Link>
+          </Author>
+          <small className="text-muted">{date}</small>
+        </ModalBody>
+      </Modal>
+    </>
+  )
+}

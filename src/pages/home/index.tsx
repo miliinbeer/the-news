@@ -1,17 +1,18 @@
-import { ref, set } from 'firebase/database'
-import React, { FC, useState } from 'react'
-import useInfiniteScroll from 'react-infinite-scroll-hook'
-import { useSelector } from 'react-redux'
+import { ref, set } from 'firebase/database';
+import React, { FC, useState } from 'react';
+import useInfiniteScroll from 'react-infinite-scroll-hook';
+import { useSelector } from 'react-redux';
 
-import { database } from '../../app/firebase'
-import disliked from '../../shared/icons/disliked.webp'
-import liked from '../../shared/icons/liked.webp'
-import { PostTypes, StatePostTypes } from '../../shared/types'
-import { CardWidget } from '../../shared/ui-kit/card'
-import { LoaderWidget } from '../../shared/ui-kit/loader'
-import { PageContainer } from '../../shared/ui-kit/page-container'
-import { HeaderWidget } from '../../widgets/header-widget'
-import { Cards, ScrollLoader, LoaderContainer } from './styles'
+import { database } from '../../app/firebase';
+import disliked from '../../shared/icons/disliked.webp';
+import liked from '../../shared/icons/liked.webp';
+import { PostTypes, StatePostTypes } from '../../shared/types';
+import { CardWidget } from '../../shared/ui-kit/card';
+import { LoaderWidget } from '../../shared/ui-kit/loader';
+import { PageContainer } from '../../shared/ui-kit/page-container';
+import { HeaderWidget } from '../../widgets/header-widget';
+import { Cards, ScrollLoader, LoaderContainer, Like } from './styles';
+
 
 export const HomePage: FC = () => {
   const { loading, posts, user } = useSelector((state: StatePostTypes) => state.root)
@@ -30,7 +31,7 @@ export const HomePage: FC = () => {
         }, 1000)
       }
     }
-  })
+  })  
 
   const handleLike = async (postId: string | undefined) => {
     const updatedPosts = posts.map((el: PostTypes) => {
@@ -62,6 +63,9 @@ export const HomePage: FC = () => {
     }
   }
 
+console.log(posts);
+
+
   return (
     <>
       <HeaderWidget />
@@ -73,17 +77,18 @@ export const HomePage: FC = () => {
               return (
                 <CardWidget
                   isLiked={
-                    isLiked ? <img src={liked} alt="liked" /> : <img src={disliked} alt="disliked" />
+                    <Like onClick={() => handleLike(el.id)}>
+                      <img src={isLiked ? liked : disliked} alt="like" />
+                    </Like>
                   }
-                  handleLike={() => handleLike(el.id)}
                   key={el.id}
                   id={el.id}
                   title={el.title}
                   image={el.image}
                   content={el.content}
-                  // date={new Date().toISOString().slice(0, 10)}
-                  link={el.link}
-                  source={el.source}
+                  // TODO: Поменять дату
+                  date={new Date().toISOString().slice(0, 10)}
+                  link={new URL(el.link).hostname}
                   author={el.author}
                 />
               )

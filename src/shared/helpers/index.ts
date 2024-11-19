@@ -1,4 +1,3 @@
-import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { toast } from 'react-toastify'
 
 export const showToast = (el: string) => {
