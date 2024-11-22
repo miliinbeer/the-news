@@ -1,20 +1,17 @@
-import { ref, set } from 'firebase/database';
-import React, { FC, useState } from 'react';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
-import { useSelector } from 'react-redux';
+import { ref, set } from 'firebase/database'
+import React, { FC, useState } from 'react'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
+import { useSelector } from 'react-redux'
 
-
-
-import { database } from '../../app/firebase';
-import disliked from '../../shared/icons/disliked.webp';
-import liked from '../../shared/icons/liked.webp';
-import { PostTypes, StatePostTypes } from '../../shared/types';
-import { CardWidget } from '../../shared/ui-kit/card';
-import { LoaderWidget } from '../../shared/ui-kit/loader';
-import { PageContainer } from '../../shared/ui-kit/page-container';
-import { HeaderWidget } from '../../widgets/header-widget';
-import { Cards, ScrollLoader, LoaderContainer, Like } from './styles';
-
+import { database } from '../../app/firebase'
+import disliked from '../../shared/icons/disliked.webp'
+import liked from '../../shared/icons/liked.webp'
+import { PostTypes, StatePostTypes } from '../../shared/types'
+import { CardWidget } from '../../shared/ui-kit/card'
+import { LoaderWidget } from '../../shared/ui-kit/loader'
+import { PageContainer } from '../../shared/ui-kit/page-container'
+import { HeaderWidget } from '../../widgets/header-widget'
+import { Cards, ScrollLoader, LoaderContainer, Like } from './styles'
 
 export const HomePage: FC = () => {
   const { loading, posts, user } = useSelector((state: StatePostTypes) => state.root)
@@ -64,6 +61,8 @@ export const HomePage: FC = () => {
       console.error('Возникла ошибка:', error)
     }
   }
+  // TODO: npm run start работет по другому
+  // TODO: gh-pages отображает страницу ошибки
   // TODO: Не работает тостер
   // TODO: Посты отображаються в хаотичном порядке
   return (

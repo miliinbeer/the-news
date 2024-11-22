@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { theme } from "../../helpers";
+import { theme } from "../../constans";
 
 export const Root = styled.div`
   ${({ theme }) =>

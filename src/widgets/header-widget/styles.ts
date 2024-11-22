@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { theme } from '../../shared/helpers'
+import { theme } from '../../shared/constans'
 import { IsErrorType } from '../../shared/types'
 
 export const Root = styled.header`

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { theme } from '../../helpers';
+import { theme } from '../../constans';
 
 export const Card = styled.div`
   width: 300px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { theme } from '../../shared/helpers'
+import { theme } from '../../shared/constans'
 
 export const Root = styled.div`
   margin-top: 20rem;
