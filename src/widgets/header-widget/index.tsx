@@ -54,7 +54,7 @@ export const HeaderWidget: FC = () => {
       ...el,
       likes: [],
       author: login,
-      date: new Date().toISOString().slice(0, 10)
+      date: new Date().toISOString()
     }
 
     const postsRef = ref(database, 'posts/' + uuidv4())

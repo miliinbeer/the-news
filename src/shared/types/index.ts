@@ -25,7 +25,7 @@ export interface PostTypes {
   title: string
   content: string
   link: string
-  date?: string
+  date: string
   author?: string
   likes?: Array<string> | undefined
   isLiked?: ReactElement

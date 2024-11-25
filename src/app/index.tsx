@@ -10,25 +10,30 @@ import { ErrorPage } from '../pages/error'
 import { HomePage } from '../pages/home'
 import { UserPage } from '../pages/user'
 import { theme } from '../shared/constants'
-import { AppDispatch, PostTypes } from '../shared/types'
+import { AppDispatch } from '../shared/types'
 import { setPosts, setUser } from './api'
 import { auth, database } from './firebase'
 import { GlobalStyles } from './styles'
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <HomePage />
+    },
+    {
+      path: 'user/:author',
+      element: <UserPage />
+    },
+    {
+      path: '*',
+      element: <ErrorPage />
+    }
+  ],
   {
-    path: '/',
-    element: <HomePage />
-  },
-  {
-    path: 'user/:author',
-    element: <UserPage />
-  },
-  {
-    path: '*',
-    element: <ErrorPage />
+    basename: '/the-news'
   }
-])
+)
 
 function App() {
   const dispatch: AppDispatch = useDispatch()
@@ -50,14 +55,17 @@ function App() {
 
     onValue(postsRef, (snapshot) => {
       const data = snapshot.val()
-      const postsArray: Array<PostTypes> = []
 
       if (data) {
-        Object.keys(data).forEach((key) => {
-          postsArray.push({ id: key, ...data[key] })
-        })
+        const postsArray = Object.keys(data)
+          .map((key) => {
+            return { id: key, ...data[key] }
+          })
+          .sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime()
+          })
+        dispatch(setPosts(postsArray))
       }
-      dispatch(setPosts(postsArray))
     })
 
     return () => {}

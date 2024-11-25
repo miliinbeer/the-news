@@ -61,10 +61,7 @@ export const HomePage: FC = () => {
       console.error('Возникла ошибка:', error)
     }
   }
-  // TODO: npm run start работет по другому
-  // TODO: gh-pages отображает страницу ошибки
-  // TODO: Не работает тостер
-  // TODO: Посты отображаються в хаотичном порядке
+
   return (
     <>
       <HeaderWidget />
@@ -85,7 +82,7 @@ export const HomePage: FC = () => {
                   title={el.title}
                   image={el.image}
                   content={el.content}
-                  date={el.date}
+                  date={new Date(el.date).toLocaleDateString()}
                   link={new URL(el.link).hostname}
                   author={el.author}
                 />
