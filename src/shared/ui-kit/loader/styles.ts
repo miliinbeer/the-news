@@ -1,12 +1,13 @@
-import styled, { css } from "styled-components";
-import { theme } from "../../constans";
+import styled, { css } from 'styled-components'
+
+import { theme } from '../../constants'
 
 export const Root = styled.div`
   ${({ theme }) =>
     css`
       ${theme.flex.contentCenter}
     `}
-`;
+`
 
 export const Reload = styled.div`
   border-width: 0.6rem;
@@ -21,7 +22,7 @@ export const Reload = styled.div`
 
   &:before,
   &:after {
-    content: "";
+    content: '';
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -43,4 +44,4 @@ export const Reload = styled.div`
       transform: rotate(360deg);
     }
   }
-`;
+`

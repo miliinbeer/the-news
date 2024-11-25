@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { theme } from '../../constans'
+import { theme } from '../../constants'
 
 export const Items = styled.div`
   margin-left: 10px;
