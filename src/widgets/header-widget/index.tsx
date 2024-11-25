@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { signInWithPopup, signOut } from 'firebase/auth'
 import { ref, set } from 'firebase/database'
-import React, { FC, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'reactstrap'
@@ -47,35 +47,38 @@ export const HeaderWidget: FC = () => {
     resolver: yupResolver(schemaPost)
   })
 
-  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = async (el) => {
-    const login = user?.email?.split('@gmail.com')[0].split('@umbrellait.com')[0]
+  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = useCallback(
+    async (el) => {
+      const login = user?.email?.split('@gmail.com')[0].split('@umbrellait.com')[0]
 
-    const fullPostData = {
-      ...el,
-      likes: [],
-      author: login,
-      date: new Date().toISOString()
-    }
+      const fullPostData = {
+        ...el,
+        likes: [],
+        author: login,
+        date: new Date().toISOString()
+      }
 
-    const postsRef = ref(database, 'posts/' + uuidv4())
-    try {
-      await set(postsRef, fullPostData)
-    } catch (error) {
-      console.error('Возникла ошибка:', error)
-    }
-    setPostModal(!postModal)
-  }
+      const postsRef = ref(database, 'posts/' + uuidv4())
+      try {
+        await set(postsRef, fullPostData)
+      } catch (error) {
+        console.error('Возникла ошибка:', error)
+      }
+      setPostModal(!postModal)
+    },
+    [database, setPostModal]
+  )
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setPostModal(!postModal)
     reset()
-  }
+  }, [setPostModal, reset])
 
-  const handleSignIn = () => {
+  const handleSignIn = useCallback(() => {
     signInWithPopup(auth, provider)
-  }
+  }, [auth, provider])
 
-  const handleSignOut = () => {
+  const handleSignOut = useCallback(() => {
     signOut(auth)
       .then(() => {
         dispatch(setUser(null))
@@ -83,7 +86,7 @@ export const HeaderWidget: FC = () => {
       .catch((error) => {
         console.error('Возникла ошибка:', error)
       })
-  }
+  }, [auth, dispatch])
 
   return (
     <Root>

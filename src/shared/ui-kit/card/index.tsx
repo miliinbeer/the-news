@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Modal, ModalBody } from 'reactstrap'
 
@@ -17,9 +17,9 @@ export const CardWidget: FC<PostTypes> = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false)
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setIsOpened(!isOpened)
-  }
+  }, [setIsOpened])
 
   return (
     <>
