@@ -47,32 +47,29 @@ export const HeaderWidget: FC = () => {
     resolver: yupResolver(schemaPost)
   })
 
-  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = useCallback(
-    async (el) => {
-      const login = user?.email?.split('@gmail.com')[0].split('@umbrellait.com')[0]
+  const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = async (el) => {
+    const login = user?.email?.split('@gmail.com')[0].split('@umbrellait.com')[0]
 
-      const fullPostData = {
-        ...el,
-        likes: [],
-        author: login,
-        date: new Date().toISOString()
-      }
+    const fullPostData = {
+      ...el,
+      likes: [],
+      author: login,
+      date: new Date().toISOString()
+    }
 
-      const postsRef = ref(database, 'posts/' + uuidv4())
-      try {
-        await set(postsRef, fullPostData)
-      } catch (error) {
-        console.error('Возникла ошибка:', error)
-      }
-      setPostModal(!postModal)
-    },
-    [database, setPostModal]
-  )
+    const postsRef = ref(database, 'posts/' + uuidv4())
+    try {
+      await set(postsRef, fullPostData)
+    } catch (error) {
+      console.error('Возникла ошибка:', error)
+    }
+    setPostModal(!postModal)
+  }
 
-  const toggleModal = useCallback(() => {
+  const toggleModal = () => {
     setPostModal(!postModal)
     reset()
-  }, [setPostModal, reset])
+  }
 
   const handleSignIn = useCallback(() => {
     signInWithPopup(auth, provider)
@@ -92,7 +89,7 @@ export const HeaderWidget: FC = () => {
     <Root>
       <PageContainer>
         <Items>
-          <Logotype href="/">
+          <Logotype href="/the-news">
             <Icon src={logotype} alt="logogtype" />
             <p>
               / THE <span>NEWS</span>
