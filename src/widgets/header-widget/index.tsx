@@ -48,7 +48,7 @@ export const HeaderWidget: FC = () => {
   })
 
   const addPost: SubmitHandler<yup.InferType<typeof schemaPost>> = async (el) => {
-    const login = user?.email?.split('@gmail.com')[0].split('@umbrellait.com')[0]
+    const login = user?.email?.split('@gmail.com')[0]
 
     const fullPostData = {
       ...el,

@@ -1,5 +1,5 @@
 import { ref, set } from 'firebase/database'
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useState } from 'react'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { useSelector } from 'react-redux'
 
